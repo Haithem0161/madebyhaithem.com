@@ -23,7 +23,9 @@
   --color-ghost-white: #fffaff;
   --color-palatinate: #52154e;
   --color-eerle-black: #1e2019;
-  --font-display: "Inter", sans-serif;
+  --font-display: "Instrument Serif", serif;
+  --font-mono-label: "JetBrains Mono", monospace;
+  --font-body: "DM Sans", sans-serif;
   --font-holland: "Holland", cursive;
 }
 

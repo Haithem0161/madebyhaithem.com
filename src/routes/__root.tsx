@@ -13,7 +13,7 @@ const TanStackRouterDevtools = import.meta.env.PROD
 
 function RootLayout() {
   return (
-    <div className="font-display antialiased overflow-x-hidden min-h-screen">
+    <div className="font-body antialiased overflow-x-hidden min-h-screen">
       <FloatingNav />
       <WipeTransition />
       <Suspense>
