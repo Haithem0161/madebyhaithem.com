@@ -43,12 +43,15 @@ export function HomeCta() {
             </Link>
           </Button>
           <Button
+            asChild
             variant="outline"
             size="lg"
             className="h-14 w-full rounded-full border-white/10 bg-white/5 px-8 text-base font-medium text-white transition-all duration-200 hover:border-white/20 hover:bg-white/10 sm:w-auto"
           >
-            <span>Download CV</span>
-            <Download className="size-5" />
+            <a href="/Haithem Mustafa CV.pdf" download>
+              <span>Download CV</span>
+              <Download className="size-5" />
+            </a>
           </Button>
         </motion.div>
       </div>
