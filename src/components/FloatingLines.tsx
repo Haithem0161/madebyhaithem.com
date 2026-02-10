@@ -454,9 +454,10 @@ export default function FloatingLines({
     };
     renderLoop();
 
+    const node = containerRef.current;
     return () => {
       cancelAnimationFrame(raf);
-      if (ro && containerRef.current) {
+      if (ro && node) {
         ro.disconnect();
       }
 
@@ -486,7 +487,13 @@ export default function FloatingLines({
     bendStrength,
     mouseDamping,
     parallax,
-    parallaxStrength
+    parallaxStrength,
+    topLineCount,
+    middleLineCount,
+    bottomLineCount,
+    topLineDistance,
+    middleLineDistance,
+    bottomLineDistance
   ]);
 
   return (

@@ -1,10 +1,11 @@
 import {
-  useState,
   useRef,
   useCallback,
   useLayoutEffect,
+  useReducer,
 } from "react"
 import { Outlet, useLocation } from "@tanstack/react-router"
+import { Footer } from "./footer"
 
 const DURATION = 800
 const BLUR_BAND = 120
@@ -17,8 +18,16 @@ function easeInOutCubic(t: number) {
 export function WipeTransition() {
   const location = useLocation()
 
-  const [progress, setProgress] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
+  const [wipeState, dispatch] = useReducer(
+    (_: { progress: number; isAnimating: boolean }, action: { type: "start" } | { type: "tick"; progress: number } | { type: "reset" }) => {
+      switch (action.type) {
+        case "start": return { progress: 0, isAnimating: true }
+        case "tick": return { progress: action.progress, isAnimating: true }
+        case "reset": return { progress: 0, isAnimating: false }
+      }
+    },
+    { progress: 0, isAnimating: false },
+  )
 
   const contentRef = useRef<HTMLDivElement>(null)
   const snapshotContainerRef = useRef<HTMLDivElement>(null)
@@ -30,8 +39,7 @@ export function WipeTransition() {
     if (snapshotContainerRef.current) {
       snapshotContainerRef.current.innerHTML = ""
     }
-    setIsAnimating(false)
-    setProgress(0)
+    dispatch({ type: "reset" })
     animatingRef.current = false
   }, [])
 
@@ -59,13 +67,12 @@ export function WipeTransition() {
     prevPathRef.current = location.pathname
 
     animatingRef.current = true
-    setIsAnimating(true)
-    setProgress(0)
+    dispatch({ type: "start" })
 
     const start = performance.now()
     const animate = (now: number) => {
       const t = Math.min((now - start) / DURATION, 1)
-      setProgress(easeInOutCubic(t))
+      dispatch({ type: "tick", progress: easeInOutCubic(t) })
 
       if (t < 1) {
         rafRef.current = requestAnimationFrame(animate)
@@ -81,9 +88,9 @@ export function WipeTransition() {
     }
   }, [location.pathname, cleanupSnapshot])
 
-  const isActive = isAnimating
-  const wipePos = progress * 100
-  const blur = Math.sin(progress * Math.PI) * 28
+  const isActive = wipeState.isAnimating
+  const wipePos = wipeState.progress * 100
+  const blur = Math.sin(wipeState.progress * Math.PI) * 28
 
   return (
     <div
@@ -91,7 +98,7 @@ export function WipeTransition() {
         position: "relative",
         width: "100%",
         minHeight: "100vh",
-        overflow: "hidden",
+        overflow: isActive ? "hidden" : undefined,
       }}
     >
       {/* Snapshot container — old page sits here during transition */}
@@ -148,6 +155,7 @@ export function WipeTransition() {
         }}
       >
         <Outlet />
+        <Footer />
 
         {/* Blur band on new page side */}
         {isActive && (
@@ -208,7 +216,7 @@ export function WipeTransition() {
           <div
             style={{
               position: "absolute",
-              top: `${20 + Math.sin(progress * Math.PI * 3) * 8}%`,
+              top: `${20 + Math.sin(wipeState.progress * Math.PI * 3) * 8}%`,
               left: "50%",
               transform: "translate(-50%, -50%)",
               width: 4,
@@ -223,7 +231,7 @@ export function WipeTransition() {
           <div
             style={{
               position: "absolute",
-              top: `${80 - Math.sin(progress * Math.PI * 2.5) * 8}%`,
+              top: `${80 - Math.sin(wipeState.progress * Math.PI * 2.5) * 8}%`,
               left: "50%",
               transform: "translate(-50%, -50%)",
               width: 4,

@@ -1,5 +1,6 @@
 import { useRef } from "react"
 import { createFileRoute } from "@tanstack/react-router"
+import { projectsQueryOptions } from "@/lib/queries"
 import { motion, useScroll, useTransform } from "motion/react"
 import FloatingLines from "@/components/FloatingLines"
 import { HeroViewport } from "@/components/sections/hero-viewport"
@@ -56,5 +57,7 @@ function HomePage() {
 }
 
 export const Route = createFileRoute("/")({
+  loader: ({ context }) =>
+    context.queryClient.ensureQueryData(projectsQueryOptions),
   component: HomePage,
 })

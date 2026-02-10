@@ -76,3 +76,24 @@ export const scrollStagger: Variants = {
     },
   },
 }
+
+export const cinematicReveal: Variants = {
+  hidden: { opacity: 0, y: 80 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.0, ease: [0.25, 0.4, 0.25, 1] },
+  },
+}
+
+export const cinematicStagger: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.18,
+      delayChildren: 0.15,
+    },
+  },
+}

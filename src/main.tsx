@@ -11,6 +11,7 @@ const router = createRouter({
   routeTree,
   defaultPreload: "intent",
   defaultPreloadStaleTime: 0,
+  context: { queryClient },
 })
 
 const rootElement = document.getElementById("root")!

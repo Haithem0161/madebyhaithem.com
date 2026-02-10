@@ -12,7 +12,15 @@ const navItems = [
 
 export function FloatingNav() {
   const location = useLocation()
-  const [activeIndex, setActiveIndex] = useState(0)
+  const activeIndex = (() => {
+    const path = location.pathname
+    if (path.startsWith("/work")) {
+      const idx = navItems.findIndex((item) => item.to === "/work")
+      return idx >= 0 ? idx : 0
+    }
+    const index = navItems.findIndex((item) => item.to === path)
+    return index >= 0 ? index : 0
+  })()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [indicatorStyle, setIndicatorStyle] = useState<Record<string, string>>({})
@@ -58,18 +66,6 @@ export function FloatingNav() {
     window.addEventListener("resize", checkMobile)
     return () => window.removeEventListener("resize", checkMobile)
   }, [])
-
-  // Route sync
-  useEffect(() => {
-    const path = location.pathname
-    if (path.startsWith("/work")) {
-      const idx = navItems.findIndex((item) => item.to === "/work")
-      setActiveIndex(idx >= 0 ? idx : 0)
-      return
-    }
-    const index = navItems.findIndex((item) => item.to === path)
-    setActiveIndex(index >= 0 ? index : 0)
-  }, [location.pathname])
 
   // Scroll detection
   useEffect(() => {
@@ -167,8 +163,8 @@ export function FloatingNav() {
               padding: isScrolled ? "0.4rem" : "0.5rem",
               backdropFilter: isScrolled ? "blur(30px)" : "blur(0px)",
               backgroundColor: isScrolled
-                ? "rgba(30, 32, 25, 1.0)"
-                : "rgba(30, 32, 25, 0.5)",
+                ? "rgba(25, 16, 34, 0.95)"
+                : "rgba(25, 16, 34, 0.5)",
             }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             onAnimationComplete={() => updateIndicatorPosition()}
@@ -177,7 +173,7 @@ export function FloatingNav() {
             <AnimatePresence>
               <motion.div
                 layoutId="indicator"
-                className="absolute rounded-full bg-palatinate z-1"
+                className="absolute rounded-full bg-primary z-1"
                 initial={false}
                 animate={indicatorStyle}
                 transition={{
@@ -205,7 +201,6 @@ export function FloatingNav() {
                 <Link
                   to={item.to}
                   activeOptions={{ exact: item.to === "/" }}
-                  onClick={() => setActiveIndex(index)}
                   className={`relative z-2 flex items-center justify-center p-3.5 rounded-full transition-colors duration-200 max-md:p-3 max-sm:p-2.5 max-md:pointer-events-auto ${
                     activeIndex === index
                       ? "text-white"

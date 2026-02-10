@@ -1,7 +1,12 @@
-import { createRootRoute } from "@tanstack/react-router"
+import { createRootRouteWithContext } from "@tanstack/react-router"
 import { lazy, Suspense } from "react"
 import { FloatingNav } from "@/components/layout/floating-nav"
 import { WipeTransition } from "@/components/layout/wipe-transition"
+import type { QueryClient } from "@tanstack/react-query"
+
+export interface RouterContext {
+  queryClient: QueryClient
+}
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
@@ -13,7 +18,7 @@ const TanStackRouterDevtools = import.meta.env.PROD
 
 function RootLayout() {
   return (
-    <div className="font-body antialiased overflow-x-hidden min-h-screen">
+    <div className="font-body antialiased min-h-screen">
       <FloatingNav />
       <WipeTransition />
       <Suspense>
@@ -23,4 +28,6 @@ function RootLayout() {
   )
 }
 
-export const Route = createRootRoute({ component: RootLayout })
+export const Route = createRootRouteWithContext<RouterContext>()({
+  component: RootLayout,
+})

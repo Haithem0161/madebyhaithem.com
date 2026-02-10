@@ -1,73 +1,85 @@
 import { motion } from "motion/react"
 import { ArrowRight } from "lucide-react"
 import { Link } from "@tanstack/react-router"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import { Badge } from "@/components/ui/badge"
+import { EmptyState } from "@/components/ui/empty-state"
+import { projectsQueryOptions } from "@/lib/queries"
+import { getMediaUrl } from "@/lib/api"
 import { scrollStagger, scrollReveal } from "@/lib/variants"
+import type { Project } from "@/lib/projects"
 
-const projects = [
-  {
-    title: "Torch Business OS",
-    description:
-      "A comprehensive business management platform with HR, finance, and project modules. Built for scale with microservices architecture.",
-    tags: ["React", "Node.js", "PostgreSQL", "Prisma"],
-    gradient: "from-primary/20 to-secondary-purple/20",
-    hoverGradient: "group-hover:from-primary/30 group-hover:to-secondary-purple/30",
-  },
-  {
-    title: "The Studio",
-    description:
-      "A modern creative agency website with fluid animations, dynamic content, and a custom CMS integration.",
-    tags: ["React", "TypeScript", "Motion", "Tailwind"],
-    gradient: "from-secondary-purple/20 to-palatinate/20",
-    hoverGradient: "group-hover:from-secondary-purple/30 group-hover:to-palatinate/30",
-  },
-  {
-    title: "CLI Toolkit",
-    description:
-      "High-performance command-line tools for developer workflows. Parallel task execution, smart caching, and plugin system.",
-    tags: ["Rust", "CLI", "Performance"],
-    gradient: "from-palatinate/20 to-primary/20",
-    hoverGradient: "group-hover:from-palatinate/30 group-hover:to-primary/30",
-  },
-]
+const hoverGradients: Record<string, string> = {
+  "from-primary/20 to-secondary-purple/20":
+    "group-hover:from-primary/30 group-hover:to-secondary-purple/30",
+  "from-secondary-purple/20 to-palatinate/20":
+    "group-hover:from-secondary-purple/30 group-hover:to-palatinate/30",
+  "from-palatinate/20 to-primary/20":
+    "group-hover:from-palatinate/30 group-hover:to-primary/30",
+}
 
-function WorkCard({
-  project,
-}: {
-  project: (typeof projects)[number]
-}) {
+function WorkCard({ project }: { project: Project }) {
+  const hoverGradient = hoverGradients[project.gradient] ?? ""
+  const thumbnail = project.images?.[0]
+
   return (
-    <motion.article
-      variants={scrollReveal}
-      className="group relative cursor-pointer overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/20 hover:bg-white/[0.06]"
-    >
-      <div
-        className={`mb-6 h-48 rounded-xl bg-gradient-to-br ${project.gradient} ${project.hoverGradient} transition-colors duration-300`}
-      />
+    <Link to="/work/$slug" params={{ slug: project.slug }}>
+      <motion.article
+        variants={scrollReveal}
+        className="group relative cursor-pointer overflow-hidden rounded-2xl border border-white/5 bg-white/3 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/20 hover:bg-white/6"
+      >
+        <div
+          className={`relative mb-6 h-48 overflow-hidden rounded-xl bg-linear-to-br ${project.gradient} ${hoverGradient} transition-colors duration-300`}
+        >
+          {thumbnail && (
+            <img
+              src={getMediaUrl(thumbnail.id, { w: 600, h: 400, fit: "cover", format: "webp" })}
+              alt={thumbnail.alt ?? project.title}
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+          )}
+        </div>
 
-      <h3 className="mb-2 text-xl font-bold text-white">{project.title}</h3>
-      <p className="mb-4 text-sm leading-relaxed text-white/50">
-        {project.description}
-      </p>
+        <h3 className="mb-2 text-xl font-bold text-white">{project.title}</h3>
+        <p className="mb-4 text-sm leading-relaxed text-white/50">
+          {project.description}
+        </p>
 
-      <div className="flex flex-wrap gap-2">
-        {project.tags.map((tag) => (
-          <Badge
-            key={tag}
-            variant="outline"
-            className="border-white/10 text-xs text-white/40"
-          >
-            {tag}
-          </Badge>
-        ))}
-      </div>
+        <div className="flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <Badge
+              key={tag}
+              variant="outline"
+              className="border-white/10 text-xs text-white/40"
+            >
+              {tag}
+            </Badge>
+          ))}
+        </div>
 
-      <ArrowRight className="absolute right-8 top-8 size-5 text-white/20 transition-all group-hover:translate-x-1 group-hover:text-primary" />
-    </motion.article>
+        <ArrowRight className="absolute right-8 top-8 size-5 text-white/20 transition-all group-hover:translate-x-1 group-hover:text-primary" />
+      </motion.article>
+    </Link>
   )
 }
 
 export function FeaturedWork() {
+  const { data: allProjects } = useSuspenseQuery(projectsQueryOptions)
+
+  const featured =
+    allProjects.filter((p) => p.featured).length > 0
+      ? allProjects.filter((p) => p.featured)
+      : allProjects.slice(0, 3)
+
+  if (allProjects.length === 0) {
+    return (
+      <section className="px-6 py-20 md:px-12 md:py-28 lg:px-20 lg:py-36">
+        <EmptyState />
+      </section>
+    )
+  }
+
   return (
     <motion.section
       className="px-6 py-20 md:px-12 md:py-28 lg:px-20 lg:py-36"
@@ -101,8 +113,8 @@ export function FeaturedWork() {
         </motion.div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <WorkCard key={project.title} project={project} />
+          {featured.map((project) => (
+            <WorkCard key={project.slug} project={project} />
           ))}
         </div>
 
