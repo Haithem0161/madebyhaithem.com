@@ -13,7 +13,7 @@ const TanStackRouterDevtools =
 
 function RootLayout() {
   return (
-    <div className="bg-background font-display antialiased overflow-x-hidden min-h-screen">
+    <div className="font-display antialiased overflow-x-hidden min-h-screen">
       <FloatingNav />
       <Outlet />
       <Suspense>

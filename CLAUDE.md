@@ -58,41 +58,47 @@ Standard Vite React app structure:
 <!-- MEMORY:START -->
 # Portfoliolio
 
-_Last updated: 2026-02-10 | 24 active memories, 24 total_
+_Last updated: 2026-02-10 | 30 active memories, 64 total_
 
 ## Architecture
-- Portfolio project will use Vite with TanStack Router, Framer Motion, shadcn/ui, Tailwind CSS v4, TanStack Query, Axio... [frontend, libraries, react]
-- Project structure created with organized directories for routes, components, lib, hooks, and types in the Portfolioli... [project-setup, structure]
-- Header will be reimplemented using TypeScript, TanStack Router, and Framer Motion to match original design's spring-a... [routing, animation]
-- Replaced hero background image and BackgroundOrbs component with FloatingLines WebGL shader component in the index route [background, webgl, theme]
-- Created a dedicated /components/icons directory to house individual SVG icon components for Node.js, React, Rust, Pos... [component-structure, icons]
+- Portfolio project architecture using Vite with comprehensive tech stack: TanStack Router, Framer Motion, shadcn/ui, T... [project-structure, technology-stack]
+- Created modular about page components including about-stats, about-tech, and about-section to compose the full page e... [component-design, page-structure]
 
 ## Key Decisions
-- Chose to use pre-built libraries and components instead of custom code, with a focus on rapid development using Conte... [development-strategy, libraries]
-- Removed default App.tsx and restructured main.tsx to use a more modular routing approach with TanStack Router [routing, cleanup]
-- Decided to remove the search feature from the floating navigation component to simplify the user interface [navigation, ui-simplification]
-- Plan to port existing React header design from old Portfolio project into new Portfoliolio project, maintaining core ... [redesign, migration]
 - Replaced previous tech stack representation with individual, composable SVG icon components for each technology [modularity, ui-components]
+- Added dynamic device pixel ratio (DPR) control to Plasma component to reduce raymarching computational complexity fro... [performance, optimization]
+- Refined Plasma background component positioning strategy, initially using fixed positioning for full viewport coverag... [layout, component, performance]
+- Focused on modular development approach, including porting existing design patterns, using composable components, and... [architecture, design, modularity]
+- Resolved Plasma background rendering issue by switching to `fixed` positioning to ensure full viewport coverage behin... [layout, background]
+- Investigate potential solutions to make Plasma background visible: making page background transparent or adjusting st... [debugging, visual-layers]
+- Need to adjust Plasma canvas rendering strategy to stretch dynamically with full page content height, potentially usi... [canvas, responsive, layout]
+- Added console logging and debug backgrounds to diagnose exact viewport sizing and rendering issues in Plasma component [debugging, performance]
+- Planned to add vertical offset in shader to shift plasma effect upward and ensure full viewport visual coverage [graphics, optimization]
+- Abandoned Plasma background component and decided to replace it with LiquidChrome component as an alternative backgro... [background, rendering]
 
 ## Patterns & Conventions
-- Project uses shadcn/ui with oklch color variables and a purple theme, initialized with `rsc: false` configuration [ui, theming]
-- Background image uses opacity-40 and mix-blend-overlay CSS classes for subtle visual integration [styling, background]
-- Updated index.html with comprehensive SEO tags including favicons, meta descriptions, Open Graph, and Twitter Card me... [seo, metadata]
-- Old website header uses a font-based logo with Holland font, custom CSS font-face with multiple font formats (woff2, ... [typography, fonts]
-- Tailwind classes were corrected on hero section and floating nav to ensure proper vertical centering and viewport hei... [layout, tailwind, responsive]
-- FloatingLines component configured with a purple gradient spanning 4 color stops matching the project's theme [color, theme]
-- FloatingLines background features 3 wave layers with 4/6/4 lines, mouse interactivity, and parallax effect [interactions, animation]
 - Implemented a barrel export (index.ts) in the icons directory to enable clean, centralized imports for technology sta... [import-pattern, exports]
+- Designed about page with a 12-column grid layout using a 5/7 split between portrait and content areas, maintaining a ... [layout, design-system]
+- Added `pointer-events-none` to Plasma wrapper to prevent canvas from intercepting mouse interactions with page content [interaction, design]
+- Navigation and UI components designed with responsive techniques: PillNav for desktop, Dock for mobile, using precise... [ui, responsive, styling, navigation]
+- Enhanced HTML metadata for improved SEO and sharing, including favicons, meta descriptions, Open Graph, and Twitter C... [seo, metadata]
 
 ## Gotchas & Pitfalls
 - Navigation icon color on active state needed explicit Tailwind class to maintain white color instead of defaulting to... [ui, navigation, state]
+- PillNav remains left-aligned due to absolute positioning and left-0 class, requiring explicit centering adjustments i... [layout, navigation]
+- PillNav's default white background is controlled by the `baseColor` prop, which affects both the logo circle and nav ... [ui, styling]
+- Plasma background component had multiple rendering issues including low intensity values causing near-invisible shade... [performance, rendering, component]
+- Plasma background rendering is blocked by the root layout's opaque background, causing it to be invisible when using ... [rendering, positioning, background]
+- Plasma background container renders only at viewport height, not full content height, causing partial visual coverage... [rendering, canvas, layout]
+- Plasma background component's ResizeObserver is not accurately capturing full viewport height dynamically, causing pa... [rendering, canvas, responsive]
+- Plasma background shader renders visible plasma concentrated in lower viewport, producing near-transparent output in ... [rendering, shader, graphics]
 
 ## Current Progress
-- Initiated work on creating a new home page for the portfolio website [page-development]
+- Project initialization and setup completed, including comprehensive phases: library research, Tailwind/shadcn setup, ... [project-setup, initialization]
+- Refined Plasma background visual parameters including DPR reduction to 0.5, opacity increased to 0.8, animation speed... [performance, visual-design]
+- Successfully built about page with a production bundle size of 19.20 kB (6.66 kB gzipped) [build, performance]
 - Copied logo from old website to public directory, replacing the default Vite SVG with a 690x690 PNG monogram logo [assets, migration]
 - Downloaded hero background image from hero.html and added it to the project's public/images directory as hero-bg.png [assets, hero]
-- Project setup completed through 4 phases: library research, Tailwind/shadcn init, library installation, and initial p... [project-setup]
-- Completed project setup through 7 phases, including vite configuration, library files, routes, main.tsx, and initial ... [milestone, setup-complete]
 
 _For deeper context, use memory_search, memory_related, or memory_ask tools._
 <!-- MEMORY:END -->
