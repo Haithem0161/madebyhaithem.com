@@ -1,0 +1,5 @@
+export { NodejsIcon } from "./nodejs"
+export { ReactIcon } from "./react"
+export { RustIcon } from "./rust"
+export { PostgresqlIcon } from "./postgresql"
+export { PrismaIcon } from "./prisma"

@@ -8,20 +8,11 @@ import { TechStack } from "./tech-stack"
 export function HeroSection() {
   return (
     <motion.div
-      className="max-w-4xl w-full flex flex-col items-center gap-8"
+      className="flex flex-1 flex-col items-center justify-center max-w-4xl w-full gap-4"
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
     >
-      {/* Avatar */}
-      <motion.div
-        variants={scaleIn}
-        className="mb-4 size-20 rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-sm"
-      >
-        <div className="size-full rounded-full bg-gradient-to-br from-primary to-secondary-purple flex items-center justify-center shadow-inner overflow-hidden">
-          <img src="/Logo.png" alt="Haithem" className="size-full object-cover" />
-        </div>
-      </motion.div>
 
       {/* Typography */}
       <motion.div variants={fadeInUp} className="flex flex-col gap-4">
