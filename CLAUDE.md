@@ -58,11 +58,12 @@ Standard Vite React app structure:
 <!-- MEMORY:START -->
 # Portfoliolio
 
-_Last updated: 2026-02-10 | 30 active memories, 64 total_
+_Last updated: 2026-02-10 | 33 active memories, 67 total_
 
 ## Architecture
 - Portfolio project architecture using Vite with comprehensive tech stack: TanStack Router, Framer Motion, shadcn/ui, T... [project-structure, technology-stack]
 - Created modular about page components including about-stats, about-tech, and about-section to compose the full page e... [component-design, page-structure]
+- Added `@types/three` as a dev dependency to resolve TypeScript type declaration issues for the Three.js library [typescript, dependencies]
 
 ## Key Decisions
 - Replaced previous tech stack representation with individual, composable SVG icon components for each technology [modularity, ui-components]
@@ -75,6 +76,8 @@ _Last updated: 2026-02-10 | 30 active memories, 64 total_
 - Added console logging and debug backgrounds to diagnose exact viewport sizing and rendering issues in Plasma component [debugging, performance]
 - Planned to add vertical offset in shader to shift plasma effect upward and ensure full viewport visual coverage [graphics, optimization]
 - Abandoned Plasma background component and decided to replace it with LiquidChrome component as an alternative backgro... [background, rendering]
+- Replaced `process.env.NODE_ENV` with `import.meta.env.DEV` to align with Vite's idiomatic environment variable access... [vite, typescript]
+- Updated Framer Motion animation configuration to use top-level `type: 'spring'` instead of nested `spring` key for sp... [animation, framer-motion]
 
 ## Patterns & Conventions
 - Implemented a barrel export (index.ts) in the icons directory to enable clean, centralized imports for technology sta... [import-pattern, exports]

@@ -153,8 +153,9 @@ export function FloatingNav() {
             translateY: 0,
           }}
           transition={{
-            duration: 0.6,
-            spring: { stiffness: 200 },
+            type: "spring",
+            stiffness: 200,
+            damping: 25,
             delay: 0.6,
           }}
         >

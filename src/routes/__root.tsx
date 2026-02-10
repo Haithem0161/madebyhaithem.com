@@ -1,21 +1,21 @@
-import { createRootRoute, Outlet } from "@tanstack/react-router"
+import { createRootRoute } from "@tanstack/react-router"
 import { lazy, Suspense } from "react"
 import { FloatingNav } from "@/components/layout/floating-nav"
+import { WipeTransition } from "@/components/layout/wipe-transition"
 
-const TanStackRouterDevtools =
-  process.env.NODE_ENV === "production"
-    ? () => null
-    : lazy(() =>
-        import("@tanstack/react-router-devtools").then((res) => ({
-          default: res.TanStackRouterDevtools,
-        })),
-      )
+const TanStackRouterDevtools = import.meta.env.PROD
+  ? () => null
+  : lazy(() =>
+      import("@tanstack/react-router-devtools").then((res) => ({
+        default: res.TanStackRouterDevtools,
+      })),
+    )
 
 function RootLayout() {
   return (
     <div className="font-display antialiased overflow-x-hidden min-h-screen">
       <FloatingNav />
-      <Outlet />
+      <WipeTransition />
       <Suspense>
         <TanStackRouterDevtools />
       </Suspense>

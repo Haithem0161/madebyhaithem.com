@@ -1,0 +1,247 @@
+import {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+} from "react"
+import { Outlet, useLocation } from "@tanstack/react-router"
+
+const DURATION = 800
+const BLUR_BAND = 120
+const LINE_COLOR = "#7f13ec" // matches theme primary purple
+
+function easeInOutCubic(t: number) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+}
+
+export function WipeTransition() {
+  const location = useLocation()
+  const [outgoing, setOutgoing] = useState<HTMLDivElement | null>(null)
+  const [progress, setProgress] = useState(0)
+
+  const contentRef = useRef<HTMLDivElement>(null)
+  const snapshotContainerRef = useRef<HTMLDivElement>(null)
+  const isAnimating = useRef(false)
+  const rafRef = useRef<number | null>(null)
+  const prevPathRef = useRef(location.pathname)
+
+  const cleanupSnapshot = useCallback(() => {
+    if (snapshotContainerRef.current) {
+      snapshotContainerRef.current.innerHTML = ""
+    }
+    setOutgoing(null)
+    setProgress(0)
+    isAnimating.current = false
+  }, [])
+
+  // Capture DOM snapshot before React re-renders the new route
+  useLayoutEffect(() => {
+    if (location.pathname === prevPathRef.current) return
+    if (isAnimating.current) {
+      // If already animating, skip — let current transition finish
+      prevPathRef.current = location.pathname
+      return
+    }
+
+    // Clone the current visible content as a frozen DOM snapshot
+    if (contentRef.current && snapshotContainerRef.current) {
+      const clone = contentRef.current.cloneNode(true) as HTMLDivElement
+      clone.style.position = "absolute"
+      clone.style.inset = "0"
+      clone.style.zIndex = "0"
+      clone.style.pointerEvents = "none"
+
+      snapshotContainerRef.current.innerHTML = ""
+      snapshotContainerRef.current.appendChild(clone)
+      setOutgoing(clone)
+    }
+
+    prevPathRef.current = location.pathname
+  }, [location.pathname])
+
+  // Run the wipe animation when outgoing snapshot is set
+  useEffect(() => {
+    if (!outgoing) return
+
+    isAnimating.current = true
+    setProgress(0)
+
+    const start = performance.now()
+    const animate = (now: number) => {
+      const t = Math.min((now - start) / DURATION, 1)
+      setProgress(easeInOutCubic(t))
+
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(animate)
+      } else {
+        cleanupSnapshot()
+      }
+    }
+
+    rafRef.current = requestAnimationFrame(animate)
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [outgoing, cleanupSnapshot])
+
+  const isActive = outgoing !== null
+  const wipePos = progress * 100
+  const blur = Math.sin(progress * Math.PI) * 28
+
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        minHeight: "100vh",
+        overflow: "hidden",
+      }}
+    >
+      {/* Snapshot container — old page sits here during transition */}
+      <div
+        ref={snapshotContainerRef}
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          filter: isActive ? `blur(${blur * 0.3}px)` : "none",
+          willChange: isActive ? "filter" : "auto",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Blur band on old page side */}
+      {isActive && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 1,
+            pointerEvents: "none",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              left: `calc(${wipePos}% - ${BLUR_BAND}px)`,
+              width: BLUR_BAND,
+              backdropFilter: `blur(${blur}px)`,
+              WebkitBackdropFilter: `blur(${blur}px)`,
+              maskImage: "linear-gradient(to right, transparent, black)",
+              WebkitMaskImage: "linear-gradient(to right, transparent, black)",
+              willChange: "left, backdrop-filter",
+            }}
+          />
+        </div>
+      )}
+
+      {/* New page (current Outlet) — clipped during transition */}
+      <div
+        ref={contentRef}
+        style={{
+          position: isActive ? "absolute" : "relative",
+          inset: isActive ? 0 : undefined,
+          clipPath: isActive ? `inset(0 ${100 - wipePos}% 0 0)` : "none",
+          filter: isActive ? `blur(${blur * 0.3}px)` : "none",
+          zIndex: 2,
+          willChange: isActive ? "clip-path, filter" : "auto",
+          minHeight: "100vh",
+        }}
+      >
+        <Outlet />
+
+        {/* Blur band on new page side */}
+        {isActive && (
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              left: `calc(${wipePos}%)`,
+              width: BLUR_BAND,
+              backdropFilter: `blur(${blur}px)`,
+              WebkitBackdropFilter: `blur(${blur}px)`,
+              maskImage: "linear-gradient(to left, transparent, black)",
+              WebkitMaskImage: "linear-gradient(to left, transparent, black)",
+              zIndex: 1,
+              pointerEvents: "none",
+              willChange: "left, backdrop-filter",
+            }}
+          />
+        )}
+      </div>
+
+      {/* Sweeping line */}
+      {isActive && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: `${wipePos}%`,
+            width: 2,
+            background: LINE_COLOR,
+            zIndex: 4,
+            transform: "translateX(-50%)",
+            willChange: "left",
+            boxShadow: `
+              0 0 40px 12px ${LINE_COLOR}70,
+              0 0 100px 30px ${LINE_COLOR}30,
+              0 0 160px 50px ${LINE_COLOR}15
+            `,
+          }}
+        >
+          {/* Center dot */}
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 12,
+              height: 12,
+              borderRadius: "50%",
+              background: LINE_COLOR,
+              boxShadow: `0 0 24px 8px ${LINE_COLOR}`,
+            }}
+          />
+          {/* Top floating dot */}
+          <div
+            style={{
+              position: "absolute",
+              top: `${20 + Math.sin(progress * Math.PI * 3) * 8}%`,
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 4,
+              height: 4,
+              borderRadius: "50%",
+              background: LINE_COLOR,
+              opacity: blur / 28,
+              boxShadow: `0 0 12px 4px ${LINE_COLOR}`,
+            }}
+          />
+          {/* Bottom floating dot */}
+          <div
+            style={{
+              position: "absolute",
+              top: `${80 - Math.sin(progress * Math.PI * 2.5) * 8}%`,
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 4,
+              height: 4,
+              borderRadius: "50%",
+              background: LINE_COLOR,
+              opacity: blur / 28,
+              boxShadow: `0 0 12px 4px ${LINE_COLOR}`,
+            }}
+          />
+        </div>
+      )}
+    </div>
+  )
+}

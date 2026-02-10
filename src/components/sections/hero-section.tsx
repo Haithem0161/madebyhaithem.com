@@ -2,7 +2,7 @@ import { motion } from "motion/react"
 import { ArrowRight, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link } from "@tanstack/react-router"
-import { staggerContainer, fadeInUp, scaleIn } from "@/lib/variants"
+import { staggerContainer, fadeInUp } from "@/lib/variants"
 import { TechStack } from "./tech-stack"
 
 export function HeroSection() {
