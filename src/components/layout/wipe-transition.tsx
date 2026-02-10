@@ -2,7 +2,6 @@ import {
   useState,
   useRef,
   useCallback,
-  useEffect,
   useLayoutEffect,
 } from "react"
 import { Outlet, useLocation } from "@tanstack/react-router"
@@ -17,12 +16,13 @@ function easeInOutCubic(t: number) {
 
 export function WipeTransition() {
   const location = useLocation()
-  const [outgoing, setOutgoing] = useState<HTMLDivElement | null>(null)
+
   const [progress, setProgress] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
 
   const contentRef = useRef<HTMLDivElement>(null)
   const snapshotContainerRef = useRef<HTMLDivElement>(null)
-  const isAnimating = useRef(false)
+  const animatingRef = useRef(false)
   const rafRef = useRef<number | null>(null)
   const prevPathRef = useRef(location.pathname)
 
@@ -30,41 +30,36 @@ export function WipeTransition() {
     if (snapshotContainerRef.current) {
       snapshotContainerRef.current.innerHTML = ""
     }
-    setOutgoing(null)
+    setIsAnimating(false)
     setProgress(0)
-    isAnimating.current = false
+    animatingRef.current = false
   }, [])
 
-  // Capture DOM snapshot before React re-renders the new route
+  // Capture DOM snapshot + start animation on pathname change.
+  // With code splitting disabled, routes resolve synchronously —
+  // useLayoutEffect fires before paint, so the old DOM is still in contentRef.
   useLayoutEffect(() => {
     if (location.pathname === prevPathRef.current) return
-    if (isAnimating.current) {
-      // If already animating, skip — let current transition finish
+    if (animatingRef.current) {
       prevPathRef.current = location.pathname
       return
     }
 
-    // Clone the current visible content as a frozen DOM snapshot
+    // Clone the current (old) page content before React paints the new route
     if (contentRef.current && snapshotContainerRef.current) {
       const clone = contentRef.current.cloneNode(true) as HTMLDivElement
       clone.style.position = "absolute"
       clone.style.inset = "0"
       clone.style.zIndex = "0"
       clone.style.pointerEvents = "none"
-
       snapshotContainerRef.current.innerHTML = ""
       snapshotContainerRef.current.appendChild(clone)
-      setOutgoing(clone)
     }
 
     prevPathRef.current = location.pathname
-  }, [location.pathname])
 
-  // Run the wipe animation when outgoing snapshot is set
-  useEffect(() => {
-    if (!outgoing) return
-
-    isAnimating.current = true
+    animatingRef.current = true
+    setIsAnimating(true)
     setProgress(0)
 
     const start = performance.now()
@@ -84,9 +79,9 @@ export function WipeTransition() {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
-  }, [outgoing, cleanupSnapshot])
+  }, [location.pathname, cleanupSnapshot])
 
-  const isActive = outgoing !== null
+  const isActive = isAnimating
   const wipePos = progress * 100
   const blur = Math.sin(progress * Math.PI) * 28
 
@@ -147,9 +142,8 @@ export function WipeTransition() {
           position: isActive ? "absolute" : "relative",
           inset: isActive ? 0 : undefined,
           clipPath: isActive ? `inset(0 ${100 - wipePos}% 0 0)` : "none",
-          filter: isActive ? `blur(${blur * 0.3}px)` : "none",
           zIndex: 2,
-          willChange: isActive ? "clip-path, filter" : "auto",
+          willChange: isActive ? "clip-path" : "auto",
           minHeight: "100vh",
         }}
       >

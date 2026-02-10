@@ -55,3 +55,24 @@ export const slideInLeft: Variants = {
     transition: { duration: 0.6, ease: "easeOut" },
   },
 }
+
+export const scrollReveal: Variants = {
+  hidden: { opacity: 0, y: 60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.25, 0.4, 0.25, 1] },
+  },
+}
+
+export const scrollStagger: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+}

@@ -1,12 +1,26 @@
+import { useRef } from "react"
 import { createFileRoute } from "@tanstack/react-router"
+import { motion, useScroll, useTransform } from "motion/react"
 import FloatingLines from "@/components/FloatingLines"
-import { HeroSection } from "@/components/sections/hero-section"
+import { HeroViewport } from "@/components/sections/hero-viewport"
+import { AboutBlurb } from "@/components/sections/about-blurb"
+import { FeaturedWork } from "@/components/sections/featured-work"
+import { HomeCta } from "@/components/sections/home-cta"
 
 function HomePage() {
+  const pageRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll()
+
+  // FloatingLines fades as user scrolls into content
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.15])
+
   return (
-    <div className="relative flex h-screen min-h-[600px] w-full flex-col overflow-hidden">
-      {/* WebGL animated lines background */}
-      <div className="absolute inset-0 z-0">
+    <div ref={pageRef} className="relative">
+      {/* Fixed WebGL background — persists across entire page */}
+      <motion.div
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{ opacity: bgOpacity }}
+      >
         <FloatingLines
           linesGradient={["#7f13ec", "#52154e", "#4a0d85", "#9333ea"]}
           enabledWaves={["top", "middle", "bottom"]}
@@ -20,9 +34,22 @@ function HomePage() {
           parallaxStrength={0.15}
           mixBlendMode="screen"
         />
-      </div>
-      <main className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 text-center">
-        <HeroSection />
+      </motion.div>
+
+      {/* Page content */}
+      <main className="relative">
+        {/* Hero — full viewport, transparent bg, lines shine through */}
+        <HeroViewport />
+
+        {/* Gradient fade from transparent to dark bg */}
+        <div className="relative z-20 h-32 bg-linear-to-b from-transparent to-background-dark" />
+
+        {/* Content sections — semi-transparent so lines peek through */}
+        <div className="relative z-20 bg-background-dark/80 backdrop-blur-sm">
+          <AboutBlurb />
+          <FeaturedWork />
+          <HomeCta />
+        </div>
       </main>
     </div>
   )

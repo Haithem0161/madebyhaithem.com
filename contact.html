@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Contact — Haithem</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "slate-matte": "#1a1c1e",
+                        "slate-accent": "#2c2e30",
+                        "editorial-border": "#3f4144",
+                    },
+                    fontFamily: {
+                        "serif": ["Playfair Display", "serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    letterSpacing: {
+                        "widest": ".15em",
+                        "tightest": "-.04em",
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        :root {
+            --bg-matte: #1a1c1e;
+        }
+        body {
+            background-color: var(--bg-matte);
+            -webkit-font-smoothing: antialiased;
+        }
+        input, textarea {
+            background: transparent !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-bottom: 1px solid #3f4144 !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            border-radius: 0 !important;
+            transition: border-color 0.4s ease;
+        }
+        input:focus, textarea:focus {
+            box-shadow: none !important;
+            border-bottom-color: #ffffff !important;
+        }
+        .editorial-line {
+            height: 1px;
+            background: linear-gradient(90deg, #3f4144 0%, transparent 100%);
+        }
+    </style>
+</head>
+
+<body
+    class="text-gray-100 font-sans selection:bg-white selection:text-slate-matte min-h-screen flex flex-col overflow-x-hidden">
+    <header class="w-full px-8 md:px-20 py-10 flex justify-between items-center z-20">
+        <div class="flex items-center gap-2">
+            <span class="font-serif italic text-2xl tracking-tightest">H.</span>
+        </div>
+        <nav class="hidden md:flex gap-12 text-[11px] font-medium uppercase tracking-widest text-gray-400">
+            <a class="hover:text-white transition-colors" href="#">Work</a>
+            <a class="hover:text-white transition-colors" href="#">Information</a>
+            <a class="text-white" href="#">Contact</a>
+        </nav>
+        <div
+            class="text-[11px] font-medium uppercase tracking-widest border-b border-gray-600 pb-1 cursor-pointer hover:border-white transition-colors">
+            Enquire
+        </div>
+    </header>
+    <main
+        class="flex-grow flex flex-col lg:flex-row items-stretch px-8 md:px-20 py-12 lg:py-24 max-w-7xl mx-auto w-full gap-24">
+        <div class="lg:w-1/2 flex flex-col justify-between">
+            <div class="space-y-12">
+                <div class="space-y-4">
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-medium">Availability:
+                        Currently Open</span>
+                    <h1 class="text-6xl md:text-8xl font-serif leading-[1.1] tracking-tightest">
+                        Let’s <br /> <span class="italic">Connect.</span>
+                    </h1>
+                </div>
+                <p class="text-lg md:text-xl text-gray-400 font-light leading-relaxed max-w-sm">
+                    In pursuit of meaningful collaborations and elevated digital experiences.
+                </p>
+                <div class="editorial-line w-32"></div>
+                <div class="space-y-6 pt-4">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-[10px] uppercase tracking-widest text-gray-500">Electronic Mail</span>
+                        <a class="text-lg font-light hover:text-gray-400 transition-colors"
+                            href="mailto:haithem@example.com">haithem@example.com</a>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span class="text-[10px] uppercase tracking-widest text-gray-500">Location</span>
+                        <span class="text-lg font-light">Tunis, TN &amp; Remote</span>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="mt-20 lg:mt-0 flex items-center gap-8 grayscale opacity-40 hover:opacity-100 transition-opacity duration-500">
+                <a class="transition-transform hover:-translate-y-0.5" href="#">
+                    <img alt="GitHub" class="w-4 h-4 invert"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkS1YKADcPJtFTuULH8-6iYu6KA7mRSgTC2xDdDA8IPZFBFTDd4D-m8ZBJtxjwEx48eoyPJmgJG1gAwriI2DhtcfZZiM5EbZagfGIjXuFUO1HR1Krw-q9PpUqEtMObydw3MtGJZZ5No6B1PXSdITm75gFvbU6jd-wYkL_YV0LljT5JlX9zUkMZWN9I7Dfp8pkTKJbBOULwwTxEdHE_0UwM9TJ3sp451HN8MaNRcwy-90NBiVpEbqTUlngQdALHOgRVNvxVofjaKXMZ" />
+                </a>
+                <a class="transition-transform hover:-translate-y-0.5" href="#">
+                    <img alt="LinkedIn" class="w-4 h-4"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVJbt84JgmaznaZz4JlqIfnQ5HzR8JtBAFo-ZJgFTgEJqtnW1co7lDG6CO4kCabGzdlCn9StbSmVAXV6x9nyIbhMvHJoMnAea0DqUfocXvFwnA1aUc0t-dd4prOaU7QIGpqXlKyX1p6yiYO_d-lTrGqv8IPPxVzLL4csXvtPBCkJz8XgXyuPDdWd7V6F73pediCvNizcTnuJp8_HyaAAGmCi2u_d82yaukZwVwxR13Wq3uqDLJRWN0Pm-7ot2-jue8aIzPuZ5Ct7cD" />
+                </a>
+                <a class="transition-transform hover:-translate-y-0.5" href="#">
+                    <img alt="Twitter" class="w-4 h-4 invert"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD37_orqP2qvH09pR4G1LVBQDeksiBCaq-GkD9qsOHKdn_z7-YxryyUpE1aaMzKm5dT9iKtEB8u8S9v94Qf3SnqtMXmkaRktz4yr_Tl96dS5HAqPK_nq61IdEHml91hjoXfhRMvo9CpUIv235VL_rSPjJhf-dhjLFDPyl6kgaxX-sm9nB-ffvQ19Cj1PZvvH-igbyzJaNpC1cKCCTgnynVLcFgNyZgaGWzVijayQv0hdOPDWNSk9DI8GlQGJnVvl6vH7apjW9iTjpjZ" />
+                </a>
+            </div>
+        </div>
+        <div class="lg:w-1/2 flex flex-col justify-center">
+            <form class="space-y-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+                    <div class="group relative flex flex-col gap-3">
+                        <label
+                            class="text-[10px] uppercase tracking-[0.2em] text-gray-500 group-focus-within:text-white transition-colors">Full
+                            Name</label>
+                        <input class="w-full text-base font-light placeholder:text-gray-700 focus:outline-none py-2"
+                            placeholder="Designate your name" type="text" />
+                    </div>
+                    <div class="group relative flex flex-col gap-3">
+                        <label
+                            class="text-[10px] uppercase tracking-[0.2em] text-gray-500 group-focus-within:text-white transition-colors">Email
+                            Address</label>
+                        <input class="w-full text-base font-light placeholder:text-gray-700 focus:outline-none py-2"
+                            placeholder="reach@example.com" type="email" />
+                    </div>
+                </div>
+                <div class="group relative flex flex-col gap-3">
+                    <label
+                        class="text-[10px] uppercase tracking-[0.2em] text-gray-500 group-focus-within:text-white transition-colors">Nature
+                        of Enquiry</label>
+                    <input class="w-full text-base font-light placeholder:text-gray-700 focus:outline-none py-2"
+                        placeholder="Project details or collaboration" type="text" />
+                </div>
+                <div class="group relative flex flex-col gap-3">
+                    <label
+                        class="text-[10px] uppercase tracking-[0.2em] text-gray-500 group-focus-within:text-white transition-colors">Your
+                        Message</label>
+                    <textarea
+                        class="w-full text-base font-light placeholder:text-gray-700 focus:outline-none py-2 resize-none"
+                        placeholder="How may I assist you?" rows="4"></textarea>
+                </div>
+                <div class="pt-8 flex items-center justify-between">
+                    <button
+                        class="relative group flex items-center gap-4 py-4 pr-12 text-[11px] uppercase tracking-[0.4em] font-medium overflow-hidden"
+                        type="submit">
+                        <span class="z-10">Transmit Message</span>
+                        <div
+                            class="absolute right-0 w-8 h-[1px] bg-white group-hover:w-full transition-all duration-700 opacity-50 group-hover:opacity-100">
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-sm absolute right-0 group-hover:-right-4 transition-all duration-500">arrow_forward</span>
+                    </button>
+                    <span class="hidden md:block text-[9px] uppercase tracking-widest text-gray-600 font-light italic">
+                        Estimated response: 24-48h
+                    </span>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer
+        class="w-full px-8 md:px-20 py-12 flex flex-col md:flex-row justify-between items-center border-t border-editorial-border/30 text-[10px] uppercase tracking-[0.3em] text-gray-600">
+        <div>© 2023 Haithem — Portfolio</div>
+        <div class="mt-4 md:mt-0 italic font-serif lowercase tracking-normal text-xs text-gray-500">Design focused,
+            developer driven.</div>
+        <div class="mt-4 md:mt-0 flex gap-8">
+            <a class="hover:text-white transition-colors" href="#">Privacy</a>
+            <a class="hover:text-white transition-colors" href="#">Legal</a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
