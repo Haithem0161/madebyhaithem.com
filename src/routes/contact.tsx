@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "motion/react"
 import { ArrowRight, Check, AlertCircle } from "lucide-react"
 import { useForm } from "@tanstack/react-form"
 import { z } from "zod"
-import { GithubIcon, LinkedinIcon, XIcon } from "@/components/icons"
+import { GithubIcon } from "@/components/icons"
 import { staggerContainer, fadeInUp } from "@/lib/variants"
 import { useContactMutation } from "@/lib/queries"
 
@@ -23,18 +23,8 @@ const contactSchema = z.object({
 const socials = [
   {
     icon: GithubIcon,
-    href: "https://github.com/madebyhaithem",
+    href: "https://github.com/Haithem0161",
     label: "GitHub",
-  },
-  {
-    icon: LinkedinIcon,
-    href: "https://linkedin.com/in/madebyhaithem",
-    label: "LinkedIn",
-  },
-  {
-    icon: XIcon,
-    href: "https://twitter.com/madebyhaithem",
-    label: "X (Twitter)",
   },
 ]
 
@@ -105,9 +95,9 @@ function ContactPage() {
                 </span>
                 <a
                   className="font-body text-lg font-light text-white transition-colors hover:text-white/60"
-                  href="mailto:haithem@example.com"
+                  href="mailto:haithem.m.nadhir@gmail.com"
                 >
-                  haithem@example.com
+                  haithem.m.nadhir@gmail.com
                 </a>
               </div>
               <div className="flex flex-col gap-1">
@@ -115,7 +105,7 @@ function ContactPage() {
                   Location
                 </span>
                 <span className="font-body text-lg font-light text-white">
-                  Tunis, TN & Remote
+                  Baghdad, Iraq & Remote
                 </span>
               </div>
             </motion.div>

@@ -3,6 +3,8 @@ import { fadeInUp } from "@/lib/variants"
 import {
   NodejsIcon,
   ReactIcon,
+  TypescriptIcon,
+  NestjsIcon,
   RustIcon,
   PostgresqlIcon,
   PrismaIcon,
@@ -10,7 +12,9 @@ import {
 
 const techIcons = [
   { icon: ReactIcon, label: "React" },
+  { icon: TypescriptIcon, label: "TypeScript" },
   { icon: NodejsIcon, label: "Node.js" },
+  { icon: NestjsIcon, label: "NestJS" },
   { icon: RustIcon, label: "Rust" },
   { icon: PostgresqlIcon, label: "PostgreSQL" },
   { icon: PrismaIcon, label: "Prisma" },

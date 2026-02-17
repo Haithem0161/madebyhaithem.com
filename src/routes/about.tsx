@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { LiquidChrome } from "@/components/LiquidChrome"
 import { AboutSection } from "@/components/sections/about-section"
+import { projectsQueryOptions } from "@/lib/queries"
 
 function AboutPage() {
   return (
@@ -26,5 +27,6 @@ function AboutPage() {
 }
 
 export const Route = createFileRoute("/about")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(projectsQueryOptions),
   component: AboutPage,
 })

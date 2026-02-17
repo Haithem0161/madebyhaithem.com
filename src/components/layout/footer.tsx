@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router"
-import { GithubIcon, LinkedinIcon, XIcon } from "@/components/icons"
+import { GithubIcon } from "@/components/icons"
 
 const navLinks = [
   { label: "Home", to: "/" as const },
@@ -9,9 +9,7 @@ const navLinks = [
 ]
 
 const socials = [
-  { icon: GithubIcon, href: "https://github.com/madebyhaithem", label: "GitHub" },
-  { icon: LinkedinIcon, href: "https://linkedin.com/in/madebyhaithem", label: "LinkedIn" },
-  { icon: XIcon, href: "https://twitter.com/madebyhaithem", label: "X" },
+  { icon: GithubIcon, href: "https://github.com/Haithem0161", label: "GitHub" },
 ]
 
 export function Footer() {

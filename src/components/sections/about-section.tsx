@@ -56,16 +56,16 @@ export function AboutSection() {
             className="space-y-4 text-gray-300 text-lg leading-relaxed max-w-2xl"
           >
             <p>
-              I'm Haithem, a Fullstack Developer dedicated to crafting scalable,
-              high-performance web applications. I don't just write code; I
-              architect solutions.
+              I'm Haithem — a fullstack developer with 4 years of experience
+              delivering complete web solutions. From marketing sites and
+              portfolios to ecommerce platforms, internal business tools, and
+              scalable backend systems.
             </p>
             <p>
-              With a deep passion for clean architecture and intuitive UI, I
-              bridge the gap between complex backend logic and seamless frontend
-              magic. Whether it's optimizing database queries or refining
-              pixel-perfect CSS, I focus on delivering digital experiences that
-              just work.
+              I work across the full development lifecycle: UI/UX
+              implementation, API design, database architecture, and deployment.
+              Whether the project calls for a monolith or microservices, I build
+              what fits.
             </p>
           </motion.div>
 

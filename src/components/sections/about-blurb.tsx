@@ -31,8 +31,9 @@ export function AboutBlurb() {
           variants={scrollReveal}
           className="font-body mb-8 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl"
         >
-          Scalable backends, intuitive interfaces, and everything in between. I
-          care about clean architecture and experiences that feel effortless.
+          From marketing sites to ecommerce platforms, business tools, and
+          streaming backends — I care about clean architecture and experiences
+          that feel effortless.
         </motion.p>
 
         <motion.div variants={scrollReveal}>

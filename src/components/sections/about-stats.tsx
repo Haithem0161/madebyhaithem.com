@@ -1,14 +1,25 @@
 import { motion } from "motion/react"
 import { Clock, Rocket, SmilePlus } from "lucide-react"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import { scaleIn } from "@/lib/variants"
+import { projectsQueryOptions } from "@/lib/queries"
 
-const stats = [
-  { icon: Clock, value: "5+", label: "Years Experience" },
-  { icon: Rocket, value: "20+", label: "Projects Shipped" },
-  { icon: SmilePlus, value: "100%", label: "Client Satisfaction" },
-]
+const CAREER_START = new Date("2022-09-01")
+
+function getYearsExperience(): number {
+  const ms = Date.now() - CAREER_START.getTime()
+  return Math.floor(ms / (365.25 * 24 * 60 * 60 * 1000))
+}
 
 export function AboutStats() {
+  const { data: projects } = useSuspenseQuery(projectsQueryOptions)
+
+  const stats = [
+    { icon: Clock, value: `${getYearsExperience()}+`, label: "Years Experience" },
+    { icon: Rocket, value: `${projects.length}+`, label: "Projects Shipped" },
+    { icon: SmilePlus, value: "100%", label: "Client Satisfaction" },
+  ]
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
       {stats.map((stat) => (
