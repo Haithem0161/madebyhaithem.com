@@ -69,6 +69,38 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, "").trim()
 }
 
+// Map CMS multiselect values to display labels
+const TAG_LABELS: Record<string, string> = {
+  react: "React",
+  rust: "Rust",
+  fastify: "Fastify",
+  "node-js": "Node.js",
+  nestjs: "NestJS",
+  prisma: "Prisma",
+  microservice: "Microservice",
+  tauri: "Tauri",
+  postgresql: "PostgreSQL",
+  typescript: "TypeScript",
+  nextjs: "Next.js",
+  docker: "Docker",
+  redis: "Redis",
+  socketio: "Socket.IO",
+  hls: "HLS",
+  ai: "AI",
+  seo: "SEO",
+  devops: "DevOps",
+  websocket: "WebSocket",
+  "framer-motion": "Framer Motion",
+  rtl: "RTL",
+  i18n: "i18n",
+  expressjs: "Express.js",
+  kafka: "Kafka",
+}
+
+function formatTag(value: string): string {
+  return TAG_LABELS[value] ?? value
+}
+
 export function transformCmsProject(
   raw: CmsProject,
   index: number,
@@ -85,17 +117,17 @@ export function transformCmsProject(
     role: raw.role ?? undefined,
     year: raw.year ?? undefined,
     client: raw.client ?? undefined,
-    tags: raw.tags ?? [],
+    tags: (raw.tags ?? []).map(formatTag),
     gradient:
       raw.gradient ?? DEFAULT_GRADIENTS[index % DEFAULT_GRADIENTS.length],
     featured: raw.featured ?? false,
-    liveUrl: raw.liveUrl ?? undefined,
-    repoUrl: raw.repoUrl ?? undefined,
+    liveUrl: raw.live_url ?? undefined,
+    repoUrl: raw.repo_url ?? undefined,
     overview: parseOverview(raw.overview),
     pullQuote: raw.pullQuote ?? undefined,
     features: safeJsonParse(raw.features),
     metrics: safeJsonParse(raw.metrics),
-    techStack: safeJsonParse(raw.techStack),
+    techStack: safeJsonParse(raw.tech_stack),
     gallery: raw.gallery?.map((img) => ({
       id: img.id,
       alt: img.alt ?? img.filename ?? "Project image",

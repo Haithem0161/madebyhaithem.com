@@ -55,7 +55,7 @@ void mainImage(out vec4 o, vec2 C) {
   float i, d, z, T = iTime * uSpeed * uDirection;
   vec3 O, p, S;
 
-  for (vec2 r = iResolution.xy, Q; ++i < 60.; O += o.w/d*o.xyz) {
+  for (vec2 r = iResolution.xy, Q; ++i < 30.; O += o.w/d*o.xyz) {
     p = z*normalize(vec3(C-.5*r,r.y));
     p.z -= 4.;
     S = p;
@@ -175,6 +175,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
     setSize();
 
     let raf = 0;
+    let visible = true;
     const t0 = performance.now();
     const loop = (t: number) => {
       const timeValue = (t - t0) * 0.001;
@@ -193,11 +194,25 @@ export const Plasma: React.FC<PlasmaProps> = ({
       renderer.render({ scene: mesh });
       raf = requestAnimationFrame(loop);
     };
+
+    // Pause rAF loop entirely when scrolled out of view — stops all GPU work
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !visible) {
+        visible = true;
+        raf = requestAnimationFrame(loop);
+      } else if (!entry.isIntersecting && visible) {
+        visible = false;
+        cancelAnimationFrame(raf);
+      }
+    }, { threshold: 0 });
+    io.observe(containerRef.current);
+
     raf = requestAnimationFrame(loop);
 
     const node = containerRef.current;
     return () => {
       cancelAnimationFrame(raf);
+      io.disconnect();
       ro.disconnect();
       if (mouseInteractive && node) {
         node.removeEventListener('mousemove', handleMouseMove);

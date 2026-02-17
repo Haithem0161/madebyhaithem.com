@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, lazy, Suspense } from "react"
 import { motion, useScroll, useTransform } from "motion/react"
 import { ArrowLeft, ArrowUpRight, ChevronDown } from "lucide-react"
 import { Link } from "@tanstack/react-router"
@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge"
 import { GithubIcon } from "@/components/icons"
 import { getMediaUrl } from "@/lib/api"
 import type { Project } from "@/lib/projects"
+
+// Lazy-load Plasma — defers OGL bundle until needed (only when no CMS image exists)
+const Plasma = lazy(() => import("@/components/Plasma"))
 
 function MetaField({ label, value }: { label: string; value: string }) {
   return (
@@ -62,10 +65,26 @@ export function ProjectHero({
           </>
         ) : (
           <>
+            {/* Plasma WebGL — ambient, slow-moving purple (lazy-loaded, half-res) */}
+            <div className="absolute inset-0 pointer-events-none">
+              <Suspense fallback={null}>
+                <Plasma
+                  color="#7f13ec"
+                  speed={0.3}
+                  scale={1.2}
+                  opacity={0.35}
+                  mouseInteractive={false}
+                  dpr={0.5}
+                />
+              </Suspense>
+            </div>
+            {/* Gradient overlay */}
             <div
-              className={`absolute inset-0 bg-linear-to-br ${project.gradient}`}
+              className={`absolute inset-0 bg-linear-to-br ${project.gradient} opacity-40`}
             />
-            <div className="circuit-bg absolute inset-0 opacity-20" />
+            {/* Circuit dot texture */}
+            <div className="circuit-bg absolute inset-0 opacity-10" />
+            {/* Content legibility gradient */}
             <div className="absolute inset-0 bg-linear-to-b from-background-dark/60 via-background-dark/20 to-background-dark" />
           </>
         )}

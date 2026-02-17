@@ -32,13 +32,13 @@ export interface CmsProject {
   year?: string
   client?: string
   gradient?: string
-  liveUrl?: string
-  repoUrl?: string
+  live_url?: string
+  repo_url?: string
   overview?: string // richtext
   pullQuote?: string
   features?: string // JSON string, {title, description}[]
   metrics?: string // JSON string, {value, label}[]
-  techStack?: string // JSON string, {category, items[]}[]
+  tech_stack?: string // JSON string, {category, items[]}[]
   gallery?: CmsMediaField[]
 
   // Allow any additional CMS fields

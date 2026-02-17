@@ -1,8 +1,8 @@
 import {
   useRef,
+  useState,
   useCallback,
   useLayoutEffect,
-  useReducer,
 } from "react"
 import { Outlet, useLocation } from "@tanstack/react-router"
 import { Footer } from "./footer"
@@ -18,19 +18,19 @@ function easeInOutCubic(t: number) {
 export function WipeTransition() {
   const location = useLocation()
 
-  const [wipeState, dispatch] = useReducer(
-    (_: { progress: number; isAnimating: boolean }, action: { type: "start" } | { type: "tick"; progress: number } | { type: "reset" }) => {
-      switch (action.type) {
-        case "start": return { progress: 0, isAnimating: true }
-        case "tick": return { progress: action.progress, isAnimating: true }
-        case "reset": return { progress: 0, isAnimating: false }
-      }
-    },
-    { progress: 0, isAnimating: false },
-  )
+  // Only React state: whether the wipe overlay is visible.
+  // All per-frame values are written directly to the DOM via refs
+  // to avoid re-rendering the entire component tree (including Outlet) at 60fps.
+  const [isActive, setIsActive] = useState(false)
 
   const contentRef = useRef<HTMLDivElement>(null)
   const snapshotContainerRef = useRef<HTMLDivElement>(null)
+  const blurBandOldRef = useRef<HTMLDivElement>(null)
+  const blurBandNewRef = useRef<HTMLDivElement>(null)
+  const sweepLineRef = useRef<HTMLDivElement>(null)
+  const topDotRef = useRef<HTMLDivElement>(null)
+  const bottomDotRef = useRef<HTMLDivElement>(null)
+
   const animatingRef = useRef(false)
   const rafRef = useRef<number | null>(null)
   const prevPathRef = useRef(location.pathname)
@@ -38,9 +38,13 @@ export function WipeTransition() {
   const cleanupSnapshot = useCallback(() => {
     if (snapshotContainerRef.current) {
       snapshotContainerRef.current.innerHTML = ""
+      snapshotContainerRef.current.style.filter = "none"
     }
-    dispatch({ type: "reset" })
+    if (contentRef.current) {
+      contentRef.current.style.clipPath = "none"
+    }
     animatingRef.current = false
+    setIsActive(false)
   }, [])
 
   // Capture DOM snapshot + start animation on pathname change.
@@ -65,14 +69,56 @@ export function WipeTransition() {
     }
 
     prevPathRef.current = location.pathname
-
     animatingRef.current = true
-    dispatch({ type: "start" })
+    setIsActive(true)
 
     const start = performance.now()
+
+    // Direct DOM manipulation per frame — zero React re-renders during animation
     const animate = (now: number) => {
       const t = Math.min((now - start) / DURATION, 1)
-      dispatch({ type: "tick", progress: easeInOutCubic(t) })
+      const progress = easeInOutCubic(t)
+      const wipePos = progress * 100
+      const blur = Math.sin(progress * Math.PI) * 28
+
+      // Snapshot blur
+      if (snapshotContainerRef.current) {
+        snapshotContainerRef.current.style.filter = `blur(${blur * 0.3}px)`
+      }
+
+      // Blur band on old page side
+      if (blurBandOldRef.current) {
+        blurBandOldRef.current.style.left = `calc(${wipePos}% - ${BLUR_BAND}px)`
+        blurBandOldRef.current.style.backdropFilter = `blur(${blur}px)`
+        ;(blurBandOldRef.current.style as CSSStyleDeclaration & { webkitBackdropFilter: string }).webkitBackdropFilter = `blur(${blur}px)`
+      }
+
+      // Content clip
+      if (contentRef.current) {
+        contentRef.current.style.clipPath = `inset(0 ${100 - wipePos}% 0 0)`
+      }
+
+      // Blur band on new page side
+      if (blurBandNewRef.current) {
+        blurBandNewRef.current.style.left = `${wipePos}%`
+        blurBandNewRef.current.style.backdropFilter = `blur(${blur}px)`
+        ;(blurBandNewRef.current.style as CSSStyleDeclaration & { webkitBackdropFilter: string }).webkitBackdropFilter = `blur(${blur}px)`
+      }
+
+      // Sweep line
+      if (sweepLineRef.current) {
+        sweepLineRef.current.style.left = `${wipePos}%`
+      }
+
+      // Floating dots
+      if (topDotRef.current) {
+        topDotRef.current.style.top = `${20 + Math.sin(progress * Math.PI * 3) * 8}%`
+        topDotRef.current.style.opacity = String(blur / 28)
+      }
+      if (bottomDotRef.current) {
+        bottomDotRef.current.style.top = `${80 - Math.sin(progress * Math.PI * 2.5) * 8}%`
+        bottomDotRef.current.style.opacity = String(blur / 28)
+      }
 
       if (t < 1) {
         rafRef.current = requestAnimationFrame(animate)
@@ -87,10 +133,6 @@ export function WipeTransition() {
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
   }, [location.pathname, cleanupSnapshot])
-
-  const isActive = wipeState.isAnimating
-  const wipePos = wipeState.progress * 100
-  const blur = Math.sin(wipeState.progress * Math.PI) * 28
 
   return (
     <div
@@ -108,7 +150,6 @@ export function WipeTransition() {
           position: "absolute",
           inset: 0,
           zIndex: 0,
-          filter: isActive ? `blur(${blur * 0.3}px)` : "none",
           willChange: isActive ? "filter" : "auto",
           pointerEvents: "none",
         }}
@@ -126,14 +167,13 @@ export function WipeTransition() {
           }}
         >
           <div
+            ref={blurBandOldRef}
             style={{
               position: "absolute",
               top: 0,
               bottom: 0,
-              left: `calc(${wipePos}% - ${BLUR_BAND}px)`,
+              left: 0,
               width: BLUR_BAND,
-              backdropFilter: `blur(${blur}px)`,
-              WebkitBackdropFilter: `blur(${blur}px)`,
               maskImage: "linear-gradient(to right, transparent, black)",
               WebkitMaskImage: "linear-gradient(to right, transparent, black)",
               willChange: "left, backdrop-filter",
@@ -148,7 +188,6 @@ export function WipeTransition() {
         style={{
           position: isActive ? "absolute" : "relative",
           inset: isActive ? 0 : undefined,
-          clipPath: isActive ? `inset(0 ${100 - wipePos}% 0 0)` : "none",
           zIndex: 2,
           willChange: isActive ? "clip-path" : "auto",
           minHeight: "100vh",
@@ -160,14 +199,13 @@ export function WipeTransition() {
         {/* Blur band on new page side */}
         {isActive && (
           <div
+            ref={blurBandNewRef}
             style={{
               position: "absolute",
               top: 0,
               bottom: 0,
-              left: `calc(${wipePos}%)`,
+              left: 0,
               width: BLUR_BAND,
-              backdropFilter: `blur(${blur}px)`,
-              WebkitBackdropFilter: `blur(${blur}px)`,
               maskImage: "linear-gradient(to left, transparent, black)",
               WebkitMaskImage: "linear-gradient(to left, transparent, black)",
               zIndex: 1,
@@ -181,11 +219,12 @@ export function WipeTransition() {
       {/* Sweeping line */}
       {isActive && (
         <div
+          ref={sweepLineRef}
           style={{
             position: "absolute",
             top: 0,
             bottom: 0,
-            left: `${wipePos}%`,
+            left: 0,
             width: 2,
             background: LINE_COLOR,
             zIndex: 4,
@@ -214,31 +253,33 @@ export function WipeTransition() {
           />
           {/* Top floating dot */}
           <div
+            ref={topDotRef}
             style={{
               position: "absolute",
-              top: `${20 + Math.sin(wipeState.progress * Math.PI * 3) * 8}%`,
+              top: "20%",
               left: "50%",
               transform: "translate(-50%, -50%)",
               width: 4,
               height: 4,
               borderRadius: "50%",
               background: LINE_COLOR,
-              opacity: blur / 28,
+              opacity: 0,
               boxShadow: `0 0 12px 4px ${LINE_COLOR}`,
             }}
           />
           {/* Bottom floating dot */}
           <div
+            ref={bottomDotRef}
             style={{
               position: "absolute",
-              top: `${80 - Math.sin(wipeState.progress * Math.PI * 2.5) * 8}%`,
+              top: "80%",
               left: "50%",
               transform: "translate(-50%, -50%)",
               width: 4,
               height: 4,
               borderRadius: "50%",
               background: LINE_COLOR,
-              opacity: blur / 28,
+              opacity: 0,
               boxShadow: `0 0 12px 4px ${LINE_COLOR}`,
             }}
           />

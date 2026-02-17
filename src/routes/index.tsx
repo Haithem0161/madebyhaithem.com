@@ -1,4 +1,3 @@
-import { useRef } from "react"
 import { createFileRoute } from "@tanstack/react-router"
 import { projectsQueryOptions } from "@/lib/queries"
 import { motion, useScroll, useTransform } from "motion/react"
@@ -8,25 +7,31 @@ import { AboutBlurb } from "@/components/sections/about-blurb"
 import { FeaturedWork } from "@/components/sections/featured-work"
 import { HomeCta } from "@/components/sections/home-cta"
 
+// Stable references — prevents FloatingLines WebGL scene from tearing down and
+// rebuilding on every parent re-render due to new array/object identity.
+const LINES_GRADIENT = ["#7f13ec", "#52154e", "#4a0d85", "#9333ea"]
+const ENABLED_WAVES: Array<"top" | "middle" | "bottom"> = ["top", "middle", "bottom"]
+const LINE_COUNT = [4, 6, 4]
+const LINE_DISTANCE = [5, 5, 5]
+
 function HomePage() {
-  const pageRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
 
   // FloatingLines fades as user scrolls into content
   const bgOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.15])
 
   return (
-    <div ref={pageRef} className="relative">
+    <div className="relative">
       {/* Fixed WebGL background, persists across entire page */}
       <motion.div
         className="pointer-events-none fixed inset-0 z-0"
         style={{ opacity: bgOpacity }}
       >
         <FloatingLines
-          linesGradient={["#7f13ec", "#52154e", "#4a0d85", "#9333ea"]}
-          enabledWaves={["top", "middle", "bottom"]}
-          lineCount={[4, 6, 4]}
-          lineDistance={[5, 5, 5]}
+          linesGradient={LINES_GRADIENT}
+          enabledWaves={ENABLED_WAVES}
+          lineCount={LINE_COUNT}
+          lineDistance={LINE_DISTANCE}
           animationSpeed={0.8}
           interactive
           bendRadius={5.0}

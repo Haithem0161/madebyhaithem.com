@@ -433,6 +433,7 @@ export default function FloatingLines({
     }
 
     let raf = 0;
+    let visible = true;
     const renderLoop = () => {
       uniforms.iTime.value = clock.getElapsedTime();
 
@@ -452,11 +453,25 @@ export default function FloatingLines({
       renderer.render(scene, camera);
       raf = requestAnimationFrame(renderLoop);
     };
-    renderLoop();
+
+    // Pause rAF loop entirely when scrolled out of view — stops all GPU work
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !visible) {
+        visible = true;
+        raf = requestAnimationFrame(renderLoop);
+      } else if (!entry.isIntersecting && visible) {
+        visible = false;
+        cancelAnimationFrame(raf);
+      }
+    }, { threshold: 0 });
+    io.observe(containerRef.current);
+
+    raf = requestAnimationFrame(renderLoop);
 
     const node = containerRef.current;
     return () => {
       cancelAnimationFrame(raf);
+      io.disconnect();
       if (ro && node) {
         ro.disconnect();
       }

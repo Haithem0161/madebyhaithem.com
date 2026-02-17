@@ -12,6 +12,8 @@ const socials = [
   { icon: GithubIcon, href: "https://github.com/Haithem0161", label: "GitHub" },
 ]
 
+const CURRENT_YEAR = new Date().getFullYear()
+
 export function Footer() {
   return (
     <footer className="relative z-20 border-t border-white/5 bg-background-dark px-6 py-14 md:px-12 md:py-16 lg:px-20">
@@ -61,7 +63,7 @@ export function Footer() {
         {/* Bottom row */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 md:flex-row">
           <span className="font-mono-label text-xs uppercase tracking-[0.2em] text-white/35">
-            &copy; {new Date().getFullYear()} Haithem Mustafa
+            &copy; {CURRENT_YEAR} Haithem Mustafa
           </span>
         </div>
       </div>

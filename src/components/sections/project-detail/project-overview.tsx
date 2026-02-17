@@ -33,9 +33,18 @@ export function ProjectOverview({ project }: { project: Project }) {
             {i === pullQuoteAfter && project.pullQuote && (
               <motion.blockquote
                 variants={cinematicReveal}
-                className="my-12 border-l-2 border-primary py-2 pl-8 md:my-16"
+                className="relative my-16 py-8 pl-10 md:my-24 md:pl-12"
               >
-                <p className="font-display text-2xl italic leading-relaxed text-white/80 md:text-3xl">
+                {/* Thick gradient border */}
+                <div className="absolute left-0 top-0 h-full w-1 rounded-full bg-linear-to-b from-primary via-secondary-purple to-primary/20" />
+                {/* Decorative quotation mark */}
+                <span
+                  className="absolute -left-2 -top-6 font-display text-8xl italic leading-none text-primary/15 select-none md:-left-4 md:-top-8 md:text-9xl"
+                  aria-hidden="true"
+                >
+                  &ldquo;
+                </span>
+                <p className="font-display text-2xl italic leading-relaxed text-white/80 md:text-3xl lg:text-4xl">
                   {project.pullQuote}
                 </p>
               </motion.blockquote>

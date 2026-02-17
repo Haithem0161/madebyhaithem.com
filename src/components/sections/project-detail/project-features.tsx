@@ -29,18 +29,25 @@ export function ProjectFeatures({ project }: { project: Project }) {
         </motion.h2>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {project.features.map((feature) => (
+          {project.features.map((feature, i) => (
             <motion.div
               key={feature.title}
               variants={cinematicReveal}
-              className="rounded-2xl border border-white/5 bg-white/3 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/20 hover:bg-white/6"
+              className="group overflow-hidden rounded-2xl border border-white/5 bg-white/3 backdrop-blur-sm transition-all duration-300 hover:border-primary/20 hover:bg-white/6"
             >
-              <h3 className="mb-3 text-xl font-bold text-white">
-                {feature.title}
-              </h3>
-              <p className="font-body text-sm leading-relaxed text-white/50">
-                {feature.description}
-              </p>
+              {/* Accent gradient bar */}
+              <div className="h-px w-full bg-linear-to-r from-primary/0 via-primary/20 to-primary/0 transition-all duration-300 group-hover:via-primary/50" />
+              <div className="p-8">
+                <span className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-primary/40">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-3 mb-3 text-xl font-bold text-white">
+                  {feature.title}
+                </h3>
+                <p className="font-body text-sm leading-relaxed text-white/50">
+                  {feature.description}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>

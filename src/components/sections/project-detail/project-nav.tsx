@@ -35,19 +35,23 @@ export function ProjectNav({
               <Link
                 to="/work/$slug"
                 params={{ slug: prevProject.slug }}
-                className="group flex flex-col gap-3"
+                className="group relative flex flex-col gap-3 overflow-hidden rounded-xl p-6 transition-colors duration-300 hover:bg-white/3"
               >
-                <span className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-white/30">
-                  <ArrowLeft className="mr-2 inline size-3" />
+                {/* Background glow on hover */}
+                <div
+                  className={`absolute inset-0 bg-linear-to-br ${prevProject.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-5`}
+                />
+                <span className="relative font-mono-label text-[10px] uppercase tracking-[0.2em] text-white/30">
+                  <ArrowLeft className="mr-2 inline size-3 transition-transform duration-300 group-hover:-translate-x-1" />
                   Previous Project
                 </span>
-                <span className="font-display text-2xl italic text-ghost-white transition-colors group-hover:text-primary md:text-3xl">
+                <span className="relative font-display text-2xl italic text-ghost-white transition-colors group-hover:text-primary md:text-3xl">
                   {prevProject.title}
                 </span>
 
-                {/* Mini gradient preview */}
+                {/* Expanding gradient bar */}
                 <div
-                  className={`mt-2 h-1.5 w-16 rounded-full bg-linear-to-r ${prevProject.gradient} opacity-50 transition-opacity group-hover:opacity-100`}
+                  className={`relative mt-2 h-1 w-12 rounded-full bg-linear-to-r ${prevProject.gradient} opacity-50 transition-all duration-500 group-hover:w-24 group-hover:opacity-100`}
                 />
               </Link>
             </motion.div>
@@ -62,19 +66,23 @@ export function ProjectNav({
               <Link
                 to="/work/$slug"
                 params={{ slug: nextProject.slug }}
-                className="group flex flex-col items-start gap-3 md:items-end"
+                className="group relative flex flex-col items-start gap-3 overflow-hidden rounded-xl p-6 transition-colors duration-300 hover:bg-white/3 md:items-end"
               >
-                <span className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-white/30">
+                {/* Background glow on hover */}
+                <div
+                  className={`absolute inset-0 bg-linear-to-br ${nextProject.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-5`}
+                />
+                <span className="relative font-mono-label text-[10px] uppercase tracking-[0.2em] text-white/30">
                   Next Project
-                  <ArrowRight className="ml-2 inline size-3" />
+                  <ArrowRight className="ml-2 inline size-3 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
-                <span className="font-display text-2xl italic text-ghost-white transition-colors group-hover:text-primary md:text-3xl">
+                <span className="relative font-display text-2xl italic text-ghost-white transition-colors group-hover:text-primary md:text-3xl">
                   {nextProject.title}
                 </span>
 
-                {/* Mini gradient preview */}
+                {/* Expanding gradient bar */}
                 <div
-                  className={`mt-2 h-1.5 w-16 rounded-full bg-linear-to-r ${nextProject.gradient} opacity-50 transition-opacity group-hover:opacity-100`}
+                  className={`relative mt-2 h-1 w-12 rounded-full bg-linear-to-r ${nextProject.gradient} opacity-50 transition-all duration-500 group-hover:w-24 group-hover:opacity-100 md:ml-auto`}
                 />
               </Link>
             </motion.div>

@@ -153,6 +153,15 @@
   }
 }
 
+/* Hide scrollbar but keep scroll functionality */
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Glass-morphism navigation */
 .glass-nav {
   background: rgba(25, 16, 34, 0.7);

@@ -9,24 +9,44 @@ import type {
 
 // ── Projects ────────────────────────────────────────────────────────
 
+// The CMS public API nests collection fields inside a `data` object.
+// We flatten it so transformCmsProject can read fields at the top level.
+type RawCmsItem = {
+  id: string
+  slug: string
+  data: Record<string, unknown>
+  published_at: string | null
+  seo_title?: string | null
+  seo_description?: string | null
+}
+
+function flattenCmsItem(raw: RawCmsItem): CmsProject {
+  const { data: fields, ...rest } = raw
+  return { ...rest, ...fields } as CmsProject
+}
+
 export async function fetchProjects(params?: {
   limit?: number
   offset?: number
   sortBy?: string
   sortOrder?: "asc" | "desc"
 }) {
-  const { data } = await api.get<CmsCollectionResponse<CmsProject>>(
-    "/collections/_api/content/projects",
-    { params },
-  )
-  return data
+  const { data } = await api.get<{
+    collection: CmsCollectionResponse<CmsProject>["collection"]
+    items: RawCmsItem[]
+    total: number
+  }>("/collections/_api/content/projects", { params })
+  return {
+    ...data,
+    items: data.items.map(flattenCmsItem),
+  } as CmsCollectionResponse<CmsProject>
 }
 
 export async function fetchProjectBySlug(slug: string) {
-  const { data } = await api.get<CmsProject>(
+  const { data } = await api.get<RawCmsItem>(
     `/collections/_api/content/projects/${slug}`,
   )
-  return data
+  return flattenCmsItem(data)
 }
 
 // ── Contact ─────────────────────────────────────────────────────────

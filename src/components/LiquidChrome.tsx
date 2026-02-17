@@ -102,14 +102,14 @@ export const LiquidChrome: React.FC<LiquidChromeProps> = ({
     const mesh = new Mesh(gl, { geometry, program });
 
     function resize() {
-      const scale = 1;
-      renderer.setSize(container.offsetWidth * scale, container.offsetHeight * scale);
+      renderer.setSize(container.offsetWidth, container.offsetHeight);
       const resUniform = program.uniforms.uResolution.value as Float32Array;
       resUniform[0] = gl.canvas.width;
       resUniform[1] = gl.canvas.height;
       resUniform[2] = gl.canvas.width / gl.canvas.height;
     }
-    window.addEventListener('resize', resize);
+    const ro = new ResizeObserver(resize);
+    ro.observe(container);
     resize();
 
     function handleMouseMove(event: MouseEvent) {
@@ -139,18 +139,33 @@ export const LiquidChrome: React.FC<LiquidChromeProps> = ({
     }
 
     let animationId: number;
+    let visible = true;
     function update(t: number) {
       animationId = requestAnimationFrame(update);
       program.uniforms.uTime.value = t * 0.001 * speed;
       renderer.render({ scene: mesh });
     }
+
+    // Pause rAF loop entirely when scrolled out of view — stops all GPU work
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !visible) {
+        visible = true;
+        animationId = requestAnimationFrame(update);
+      } else if (!entry.isIntersecting && visible) {
+        visible = false;
+        cancelAnimationFrame(animationId);
+      }
+    }, { threshold: 0 });
+    io.observe(container);
+
     animationId = requestAnimationFrame(update);
 
     container.appendChild(gl.canvas);
 
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', resize);
+      io.disconnect();
+      ro.disconnect();
       if (interactive) {
         container.removeEventListener('mousemove', handleMouseMove);
         container.removeEventListener('touchmove', handleTouchMove);

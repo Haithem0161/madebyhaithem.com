@@ -1,5 +1,6 @@
 import { motion } from "motion/react"
 import { cinematicStagger, cinematicReveal } from "@/lib/variants"
+import { cn } from "@/lib/utils"
 import type { Project } from "@/lib/projects"
 
 export function ProjectTechStack({ project }: { project: Project }) {
@@ -28,17 +29,27 @@ export function ProjectTechStack({ project }: { project: Project }) {
           Built with.
         </motion.h2>
 
-        <div className="flex flex-col gap-10">
-          {project.techStack.map((group) => (
-            <motion.div key={group.category} variants={cinematicReveal}>
-              <p className="font-mono-label mb-4 text-xs uppercase tracking-[0.2em] text-primary/70">
+        <div className="flex flex-col gap-0">
+          {project.techStack.map((group, i) => (
+            <motion.div
+              key={group.category}
+              variants={cinematicReveal}
+              className={cn(
+                "grid grid-cols-1 gap-4 py-8 md:grid-cols-[180px_1fr] md:items-center md:gap-12",
+                i !== 0 && "border-t border-white/5",
+              )}
+            >
+              {/* Category label */}
+              <p className="font-mono-label text-xs uppercase tracking-[0.2em] text-primary/70">
                 {group.category}
               </p>
+
+              {/* Tech pills */}
               <div className="flex flex-wrap gap-3">
                 {group.items.map((item) => (
                   <span
                     key={item}
-                    className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 font-body text-sm text-white/60 transition-colors duration-200 hover:border-white/20 hover:text-white/80"
+                    className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 font-body text-sm text-white/60 transition-colors duration-200 hover:border-primary/20 hover:bg-primary/5 hover:text-white/80"
                   >
                     {item}
                   </span>

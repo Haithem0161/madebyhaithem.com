@@ -45,7 +45,7 @@ function WorkPage() {
   )
 }
 
-export const Route = createFileRoute("/work")({
+export const Route = createFileRoute("/work/")({
   loader: ({ context }) =>
     context.queryClient.ensureQueryData(projectsQueryOptions),
   component: WorkPage,

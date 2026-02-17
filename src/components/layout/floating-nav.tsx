@@ -54,9 +54,9 @@ export function FloatingNav() {
   }, [updateIndicatorPosition])
 
   const immediateUpdate = useCallback(() => {
-    for (const delay of [0, 50, 150, 300]) {
-      setTimeout(() => updateIndicatorPosition(), delay)
-    }
+    // Single rAF-based update instead of 4 staggered timeouts
+    updateIndicatorPosition()
+    requestAnimationFrame(() => updateIndicatorPosition())
   }, [updateIndicatorPosition])
 
   // Mobile detection
@@ -67,18 +67,20 @@ export function FloatingNav() {
     return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
-  // Scroll detection
+  // Scroll detection — use ref to avoid re-registering listener on state change
+  const isScrolledRef = useRef(false)
   useEffect(() => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 50
-      if (scrolled !== isScrolled) {
+      if (scrolled !== isScrolledRef.current) {
+        isScrolledRef.current = scrolled
         setIsScrolled(scrolled)
         immediateUpdate()
       }
     }
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [isScrolled, immediateUpdate])
+  }, [immediateUpdate])
 
   // Update indicator on activeIndex change
   useEffect(() => {
@@ -92,27 +94,14 @@ export function FloatingNav() {
     return () => window.removeEventListener("resize", handleResize)
   }, [debouncedUpdate])
 
-  // MutationObserver for DOM changes during animations
+  // ResizeObserver for nav item size changes — no activeIndex dependency
+  // since we only need to re-observe when the container mounts
   useEffect(() => {
-    if (!navContainerRef.current) return
-    const observer = new MutationObserver(() => debouncedUpdate())
-    observer.observe(navContainerRef.current, {
-      attributes: true,
-      attributeFilter: ["style", "class"],
-      subtree: true,
-    })
+    if (!window.ResizeObserver || !navContainerRef.current) return
+    const observer = new ResizeObserver(() => debouncedUpdate())
+    observer.observe(navContainerRef.current)
     return () => observer.disconnect()
   }, [debouncedUpdate])
-
-  // ResizeObserver for nav item size changes
-  useEffect(() => {
-    if (!window.ResizeObserver || navItemRefs.current.length === 0) return
-    const observer = new ResizeObserver(() => debouncedUpdate())
-    navItemRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref)
-    })
-    return () => observer.disconnect()
-  }, [debouncedUpdate, activeIndex])
 
   // Cleanup
   useEffect(() => {
