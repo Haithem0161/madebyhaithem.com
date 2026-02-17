@@ -6,7 +6,7 @@ import { projectsQueryOptions } from "@/lib/queries"
 function AboutPage() {
   return (
     <div className="relative min-h-screen">
-      {/* Background — fixed to viewport, always behind content */}
+      {/* Background, fixed to viewport, always behind content */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-30">
         <LiquidChrome
           baseColor={[0.1, 0.0, 0.2]}

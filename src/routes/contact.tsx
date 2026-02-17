@@ -59,7 +59,7 @@ function ContactPage() {
         initial="hidden"
         animate="visible"
       >
-        {/* Left — Info */}
+        {/* Left, Info */}
         <div className="flex flex-col justify-between lg:w-1/2">
           <div className="space-y-10">
             {/* Availability + Heading */}
@@ -131,7 +131,7 @@ function ContactPage() {
           </motion.div>
         </div>
 
-        {/* Right — Form */}
+        {/* Right, Form */}
         <motion.div
           variants={fadeInUp}
           className="flex flex-col justify-center lg:w-1/2"

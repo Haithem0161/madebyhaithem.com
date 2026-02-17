@@ -58,7 +58,7 @@ Standard Vite React app structure:
 <!-- MEMORY:START -->
 # Portfoliolio
 
-_Last updated: 2026-02-17 | 21 active memories, 78 total_
+_Last updated: 2026-02-17 | 23 active memories, 80 total_
 
 ## Architecture
 - Portfolio project architecture using Vite with comprehensive tech stack: TanStack Router, Framer Motion, shadcn/ui, T... [project-structure, technology-stack]
@@ -86,6 +86,8 @@ _Last updated: 2026-02-17 | 21 active memories, 78 total_
 - Plasma background component had complex rendering issues including: 1) Low intensity values causing near-invisible sh... [plasma, rendering, shader, performance]
 
 ## Current Progress
+- Rewrote personal biography text in about section to better reflect professional background and personal narrative [bio, about-page]
+- Updated contact page with personal contact information, including changing email to personal Gmail, location to Baghd... [contact, personal-info]
 - Project setup and initialization completed, including Vite configuration, library installations (Tailwind, shadcn), p... [project-setup, assets, initialization]
 - Added a 'Download CV' button with an <a> tag pointing to `/Haithem Mustafa CV.pdf` in the public directory [ui, cv]
 

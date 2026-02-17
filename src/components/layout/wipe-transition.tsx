@@ -101,7 +101,7 @@ export function WipeTransition() {
         overflow: isActive ? "hidden" : undefined,
       }}
     >
-      {/* Snapshot container — old page sits here during transition */}
+      {/* Snapshot container, old page sits here during transition */}
       <div
         ref={snapshotContainerRef}
         style={{
@@ -142,7 +142,7 @@ export function WipeTransition() {
         </div>
       )}
 
-      {/* New page (current Outlet) — clipped during transition */}
+      {/* New page (current Outlet), clipped during transition */}
       <div
         ref={contentRef}
         style={{

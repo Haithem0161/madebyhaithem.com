@@ -32,14 +32,14 @@ export function WorkShowcase() {
 
   return (
     <div className="relative">
-      {/* Mobile — sticky horizontal strip (outside flex to allow full-width breakout) */}
+      {/* Mobile, sticky horizontal strip (outside flex to allow full-width breakout) */}
       <MobileSidebar
         projects={projects}
         activeIndex={activeIndex}
         onNavigate={scrollToSection}
       />
 
-      {/* Desktop — sidebar + content in flex row */}
+      {/* Desktop, sidebar + content in flex row */}
       <div className="flex gap-8 lg:gap-16">
         <DesktopSidebar
           projects={projects}

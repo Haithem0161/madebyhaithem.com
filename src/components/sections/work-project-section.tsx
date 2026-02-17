@@ -71,7 +71,7 @@ export const WorkProjectSection = forwardRef<
           variants={scrollReveal}
           className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-primary"
         >
-          {String(index + 1).padStart(2, "0")} — Project
+          {String(index + 1).padStart(2, "0")}, Project
         </motion.p>
 
         {/* Title */}

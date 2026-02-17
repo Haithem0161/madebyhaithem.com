@@ -22,7 +22,7 @@ function ProjectDetailPage() {
 
   return (
     <div className="relative">
-      {/* Hero — full viewport with parallax */}
+      {/* Hero, full viewport with parallax */}
       <ProjectHero project={project} index={projectIndex} />
 
       {/* Gradient transition from hero to content */}

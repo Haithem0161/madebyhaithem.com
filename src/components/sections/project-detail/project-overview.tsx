@@ -18,7 +18,7 @@ export function ProjectOverview({ project }: { project: Project }) {
       variants={cinematicStagger}
     >
       <div className="mx-auto max-w-3xl">
-        {/* Lead paragraph — larger, italic */}
+        {/* Lead paragraph, larger, italic */}
         <motion.p
           variants={cinematicReveal}
           className="font-display text-2xl italic leading-relaxed text-ghost-white md:text-3xl"

@@ -32,7 +32,7 @@ export function AboutBlurb() {
           className="font-body mb-8 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl"
         >
           From marketing sites to ecommerce platforms, business tools, and
-          streaming backends — I care about clean architecture and experiences
+          streaming backends, I care about clean architecture and experiences
           that feel effortless.
         </motion.p>
 

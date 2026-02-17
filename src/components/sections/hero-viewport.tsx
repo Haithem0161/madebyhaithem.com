@@ -53,7 +53,7 @@ export function HeroViewport() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.8 }}
         >
-          fullstack developer — react · node · rust
+          fullstack developer, react · node · rust
         </motion.p>
       </motion.div>
 

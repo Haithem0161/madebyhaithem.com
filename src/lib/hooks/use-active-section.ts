@@ -20,7 +20,7 @@ export function useActiveSection(
       },
       {
         threshold: options?.threshold ?? 0.35,
-        // Bias detection toward upper viewport — section is "active" when
+        // Bias detection toward upper viewport, section is "active" when
         // its top region enters roughly the upper half of the screen
         rootMargin: options?.rootMargin ?? "-10% 0px -40% 0px",
       },

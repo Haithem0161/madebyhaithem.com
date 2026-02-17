@@ -56,7 +56,7 @@ export function AboutSection() {
             className="space-y-4 text-gray-300 text-lg leading-relaxed max-w-2xl"
           >
             <p>
-              I'm Haithem — a fullstack developer with 4 years of experience
+              I'm Haithem, a fullstack developer with 4 years of experience
               delivering complete web solutions. From marketing sites and
               portfolios to ecommerce platforms, internal business tools, and
               scalable backend systems.

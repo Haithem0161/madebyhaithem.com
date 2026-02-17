@@ -18,7 +18,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl">
         {/* Main row */}
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
-          {/* Left — Logo + tagline */}
+          {/* Left, Logo + tagline */}
           <div className="flex flex-col gap-3">
             <Link to="/" className="font-holland text-ghost-white text-4xl leading-none">
               Haithem
@@ -28,7 +28,7 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Center — Nav links */}
+          {/* Center, Nav links */}
           <nav className="flex gap-8">
             {navLinks.map((link) => (
               <Link
@@ -41,7 +41,7 @@ export function Footer() {
             ))}
           </nav>
 
-          {/* Right — Socials */}
+          {/* Right, Socials */}
           <div className="flex items-center gap-6">
             {socials.map((social) => (
               <a

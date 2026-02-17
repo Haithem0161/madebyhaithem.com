@@ -21,7 +21,7 @@ export interface CmsProject {
 
   // Current CMS fields
   title: string
-  description?: string // richtext — may be HTML
+  description?: string // richtext, may be HTML
   images?: CmsMediaField[] // image field returns media references
   tags?: string[] // multiselect
   featured?: boolean
@@ -36,9 +36,9 @@ export interface CmsProject {
   repoUrl?: string
   overview?: string // richtext
   pullQuote?: string
-  features?: string // JSON string — {title, description}[]
-  metrics?: string // JSON string — {value, label}[]
-  techStack?: string // JSON string — {category, items[]}[]
+  features?: string // JSON string, {title, description}[]
+  metrics?: string // JSON string, {value, label}[]
+  techStack?: string // JSON string, {category, items[]}[]
   gallery?: CmsMediaField[]
 
   // Allow any additional CMS fields

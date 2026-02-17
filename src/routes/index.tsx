@@ -17,7 +17,7 @@ function HomePage() {
 
   return (
     <div ref={pageRef} className="relative">
-      {/* Fixed WebGL background — persists across entire page */}
+      {/* Fixed WebGL background, persists across entire page */}
       <motion.div
         className="pointer-events-none fixed inset-0 z-0"
         style={{ opacity: bgOpacity }}
@@ -39,13 +39,13 @@ function HomePage() {
 
       {/* Page content */}
       <main className="relative">
-        {/* Hero — full viewport, transparent bg, lines shine through */}
+        {/* Hero, full viewport, transparent bg, lines shine through */}
         <HeroViewport />
 
         {/* Gradient fade from transparent to dark bg */}
         <div className="relative z-20 h-32 bg-linear-to-b from-transparent to-background-dark" />
 
-        {/* Content sections — semi-transparent so lines peek through */}
+        {/* Content sections, semi-transparent so lines peek through */}
         <div className="relative z-20 bg-background-dark/80 backdrop-blur-sm">
           <AboutBlurb />
           <FeaturedWork />

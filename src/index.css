@@ -70,7 +70,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* Light theme — purple palette */
+/* Light theme, purple palette */
 :root {
   --radius: 0.625rem;
   --background: oklch(0.97 0.005 290);
@@ -106,7 +106,7 @@
   --sidebar-ring: oklch(0.44 0.28 293);
 }
 
-/* Dark theme — deep purple palette (#191022 background) */
+/* Dark theme, deep purple palette (#191022 background) */
 .dark {
   --background: oklch(0.16 0.03 290);
   --foreground: oklch(0.95 0.01 290);

@@ -87,7 +87,7 @@ export function ProjectHero({
         </Link>
       </motion.div>
 
-      {/* Main content — pushed to bottom */}
+      {/* Main content, pushed to bottom */}
       <div className="relative z-20 mt-auto px-6 pb-[10vh] md:px-12 lg:px-20">
         {/* Project number */}
         <motion.p
@@ -97,7 +97,7 @@ export function ProjectHero({
           transition={{ duration: 0.5, delay: 0.3 }}
           style={{ opacity: contentOpacity }}
         >
-          {String(index + 1).padStart(2, "0")} — Project
+          {String(index + 1).padStart(2, "0")}, Project
         </motion.p>
 
         {/* Title */}
