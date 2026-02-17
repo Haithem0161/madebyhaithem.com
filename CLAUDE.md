@@ -58,7 +58,7 @@ Standard Vite React app structure:
 <!-- MEMORY:START -->
 # Portfoliolio
 
-_Last updated: 2026-02-17 | 56 active memories, 124 total_
+_Last updated: 2026-02-17 | 68 active memories, 139 total_
 
 ## Architecture
 - Portfolio project architecture using Vite with comprehensive tech stack: TanStack Router, Framer Motion, shadcn/ui, T... [project-structure, technology-stack]
@@ -67,6 +67,10 @@ _Last updated: 2026-02-17 | 56 active memories, 124 total_
 - Redesigned featured work section with a dynamic sticky scroll mechanism that translates vertical scroll progress into... [ui, layout, interaction]
 - Discovered existing project detail section components at `/src/components/sections/project-detail/`, including Projec... [routing, components]
 - Expanded technology tagging system for CMS projects, with predefined tag options growing from initial 10 to 24 differ... [cms, project-management, data-handling]
+- Enhanced project tag system to support 10+ additional technology tags including `stripe`, `socketio`, `ai`, `i18n`, a... [tagging, metadata]
+- Extended project collection in CMS to include new JSON field types for features, metrics, pullQuote, and gallery, all... [cms, metadata]
+- Expanded technology tagging system to include new project tags like 'docker', 'seo', 'rtl', and 'i18n', further enric... [cms, tags]
+- Expanded technology tagging system to include security-specific technologies like zero-knowledge authentication, encr... [technology-tags, cms]
 
 ## Key Decisions
 - Replaced `process.env.NODE_ENV` with `import.meta.env.DEV` to align with Vite's idiomatic environment variable access... [vite, typescript]
@@ -87,6 +91,8 @@ _Last updated: 2026-02-17 | 56 active memories, 124 total_
 - Implemented performance optimizations for page transitions using direct DOM manipulation and refs instead of 60fps Re... [performance, react, optimization]
 - Need to implement a more performance-friendly fallback background strategy for project detail pages, potentially repl... [optimization, rendering]
 - Implemented performance optimizations for WebGL components by adding IntersectionObserver to pause rendering when com... [performance, webgl]
+- Chose to maintain existing tag label mapping strategy when adding new project tags, ensuring consistent human-readabl... [metadata, consistency]
+- Continued using snake_case for new CMS field transformations (pull_quote, features) to maintain consistent API data h... [api, naming-convention]
 
 ## Patterns & Conventions
 - Implemented a barrel export (index.ts) in the icons directory to enable clean, centralized imports for technology sta... [import-pattern, exports]
@@ -104,6 +110,8 @@ _Last updated: 2026-02-17 | 56 active memories, 124 total_
 - Restructured route files into a directory-based routing approach with `/routes/work/index.tsx` and `/routes/work/$slu... [routing, project structure]
 - Enhanced project detail page with a modular component approach, creating dedicated components for Hero, Overview, Fea... [component design, project structure]
 - Used React.lazy and Suspense for code-splitting Plasma WebGL component, reducing initial bundle size and enabling con... [react, performance, code-splitting]
+- Updated CMS data transformation logic to handle snake_case field `pull_quote` instead of camelCase `pullQuote` in the... [data-mapping, naming-conventions]
+- Updated CMS data transformation logic to handle snake_case field naming for new metadata fields, converting from came... [data-mapping, api-transformation]
 
 ## Gotchas & Pitfalls
 - PillNav remains left-aligned due to absolute positioning and left-0 class, requiring explicit centering adjustments i... [layout, navigation]
@@ -117,6 +125,10 @@ _Last updated: 2026-02-17 | 56 active memories, 124 total_
 - Discovered that WebGL components like Plasma were consuming significant GPU resources by running 60 shader iterations... [performance, webgl, gpu]
 
 ## Current Progress
+- Successfully added Torch Password Manager as the 8th project in the CMS with comprehensive enterprise security softwa... [project-cms, projects]
+- Added Jerash Oil Field Services project to CMS with comprehensive metadata including bilingual support, monorepo arch... [project-cms, metadata]
+- Successfully populated 6 projects in the CMS with comprehensive metadata including features, metrics, and pull quotes [cms, project-data]
+- Successfully added Alhikma Akademie project to the CMS, capturing full details of the e-learning platform including c... [project-management, cms]
 - Successfully created 5 new project entries in the CMS, updating project data and metadata [cms, content]
 - Rewrote personal biography text in about section to better reflect professional background and personal narrative [bio, about-page]
 - Updated contact page with personal contact information, including changing email to personal Gmail, location to Baghd... [contact, personal-info]

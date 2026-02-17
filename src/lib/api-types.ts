@@ -35,9 +35,10 @@ export interface CmsProject {
   live_url?: string
   repo_url?: string
   overview?: string // richtext
-  pullQuote?: string
-  features?: string // JSON string, {title, description}[]
-  metrics?: string // JSON string, {value, label}[]
+  pull_quote?: string
+  pullQuote?: string // legacy alias
+  features?: string | object // JSON string or parsed, {title, description}[]
+  metrics?: string | object // JSON string or parsed, {value, label}[]
   tech_stack?: string // JSON string, {category, items[]}[]
   gallery?: CmsMediaField[]
 

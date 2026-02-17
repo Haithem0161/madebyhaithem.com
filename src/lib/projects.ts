@@ -95,6 +95,15 @@ const TAG_LABELS: Record<string, string> = {
   i18n: "i18n",
   expressjs: "Express.js",
   kafka: "Kafka",
+  drizzle: "Drizzle",
+  bullmq: "BullMQ",
+  opentelemetry: "OpenTelemetry",
+  webauthn: "WebAuthn",
+  saml: "SAML",
+  stripe: "Stripe",
+  twilio: "Twilio",
+  minio: "MinIO",
+  ddd: "DDD",
 }
 
 function formatTag(value: string): string {
@@ -124,7 +133,7 @@ export function transformCmsProject(
     liveUrl: raw.live_url ?? undefined,
     repoUrl: raw.repo_url ?? undefined,
     overview: parseOverview(raw.overview),
-    pullQuote: raw.pullQuote ?? undefined,
+    pullQuote: raw.pull_quote ?? raw.pullQuote ?? undefined,
     features: safeJsonParse(raw.features),
     metrics: safeJsonParse(raw.metrics),
     techStack: safeJsonParse(raw.tech_stack),
