@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { GithubIcon } from "@/components/icons"
 import { getMediaUrl } from "@/lib/api"
 import { scrollStagger, scrollReveal } from "@/lib/variants"
+import { useAnalytics } from "@/lib/hooks/use-analytics"
 import type { Project } from "@/lib/projects"
 
 function MetaField({ label, value }: { label: string; value: string }) {
@@ -23,6 +24,8 @@ export const WorkProjectSection = forwardRef<
   HTMLElement,
   { project: Project; index: number; isLast: boolean }
 >(function WorkProjectSection({ project, index, isLast }, ref) {
+  const { trackEvent, trackExternalClick } = useAnalytics()
+
   return (
     <section
       ref={ref}
@@ -137,6 +140,7 @@ export const WorkProjectSection = forwardRef<
             to="/work/$slug"
             params={{ slug: project.slug }}
             className="group inline-flex items-center gap-2 font-medium text-white transition-colors hover:text-primary"
+            onClick={() => trackEvent("click", "project_action", `view_details:${project.slug}`)}
           >
             View Details
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
@@ -147,6 +151,7 @@ export const WorkProjectSection = forwardRef<
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 text-sm text-white/30 transition-colors hover:text-white/60"
+              onClick={() => trackExternalClick(project.liveUrl!, `live_site:${project.slug}`)}
             >
               Live Site
               <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -158,6 +163,7 @@ export const WorkProjectSection = forwardRef<
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm text-white/30 transition-colors hover:text-white/60"
+              onClick={() => trackExternalClick(project.repoUrl!, `github_repo:${project.slug}`)}
             >
               <GithubIcon className="size-4" />
               Source

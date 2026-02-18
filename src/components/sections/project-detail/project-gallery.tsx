@@ -4,11 +4,13 @@ import { Expand } from "lucide-react"
 import { cinematicStagger, cinematicReveal } from "@/lib/variants"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { getMediaUrl } from "@/lib/api"
+import { useAnalytics } from "@/lib/hooks/use-analytics"
 import type { Project } from "@/lib/projects"
 
 type GalleryItem = { id: string; alt: string; caption?: string }
 
 export function ProjectGallery({ project }: { project: Project }) {
+  const { trackEvent } = useAnalytics()
   const [lightboxImage, setLightboxImage] = useState<GalleryItem | null>(null)
 
   if (!project.gallery?.length) return null
@@ -42,7 +44,12 @@ export function ProjectGallery({ project }: { project: Project }) {
               key={i}
               variants={cinematicReveal}
               className="group cursor-pointer"
-              onClick={() => item.id && setLightboxImage(item)}
+              onClick={() => {
+                if (item.id) {
+                  setLightboxImage(item)
+                  trackEvent("click", "gallery", `lightbox_open:${project.slug}`)
+                }
+              }}
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-white/5 transition-all duration-500 group-hover:border-white/10 group-hover:shadow-lg group-hover:shadow-primary/5">
                 {item.id ? (

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import { Link, useLocation } from "@tanstack/react-router"
 import { motion, AnimatePresence } from "motion/react"
 import { Home, LayoutGrid, User, Mail } from "lucide-react"
+import { useAnalytics } from "@/lib/hooks/use-analytics"
 
 const navItems = [
   { icon: Home, to: "/" as const },
@@ -11,6 +12,7 @@ const navItems = [
 ]
 
 export function FloatingNav() {
+  const { trackEvent } = useAnalytics()
   const location = useLocation()
   const activeIndex = (() => {
     const path = location.pathname
@@ -195,6 +197,7 @@ export function FloatingNav() {
                       ? "text-white"
                       : "text-ghost-white"
                   }`}
+                  onClick={() => trackEvent("click", "main_nav", item.to)}
                 >
                   <item.icon size={20} />
                 </Link>

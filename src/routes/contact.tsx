@@ -6,6 +6,7 @@ import { z } from "zod"
 import { GithubIcon } from "@/components/icons"
 import { staggerContainer, fadeInUp } from "@/lib/variants"
 import { useContactMutation } from "@/lib/queries"
+import { useAnalytics } from "@/lib/hooks/use-analytics"
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required").max(255, "Name is too long"),
@@ -30,6 +31,7 @@ const socials = [
 
 function ContactPage() {
   const mutation = useContactMutation()
+  const { trackEvent, trackExternalClick } = useAnalytics()
 
   const form = useForm({
     defaultValues: {
@@ -42,12 +44,18 @@ function ContactPage() {
       onSubmit: contactSchema,
     },
     onSubmit: async ({ value }) => {
-      await mutation.mutateAsync({
-        name: value.name,
-        email: value.email,
-        subject: value.subject || undefined,
-        message: value.message,
-      })
+      try {
+        await mutation.mutateAsync({
+          name: value.name,
+          email: value.email,
+          subject: value.subject || undefined,
+          message: value.message,
+        })
+        trackEvent("submit", "contact_form", "success")
+      } catch (err) {
+        trackEvent("submit", "contact_form", "error")
+        throw err
+      }
     },
   })
 
@@ -96,6 +104,7 @@ function ContactPage() {
                 <a
                   className="font-body text-lg font-light text-white transition-colors hover:text-white/60"
                   href="mailto:haithem.m.nadhir@gmail.com"
+                  onClick={() => trackExternalClick("mailto:haithem.m.nadhir@gmail.com", "email_link")}
                 >
                   haithem.m.nadhir@gmail.com
                 </a>
@@ -124,6 +133,7 @@ function ContactPage() {
                 rel="noopener noreferrer"
                 aria-label={social.label}
                 className="text-white/30 transition-all duration-300 hover:-translate-y-0.5 hover:text-white"
+                onClick={() => trackExternalClick(social.href, `social:${social.label}`)}
               >
                 <social.icon className="size-[18px]" />
               </a>

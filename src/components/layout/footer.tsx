@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router"
 import { GithubIcon } from "@/components/icons"
+import { useAnalytics } from "@/lib/hooks/use-analytics"
 
 const navLinks = [
   { label: "Home", to: "/" as const },
@@ -15,6 +16,8 @@ const socials = [
 const CURRENT_YEAR = new Date().getFullYear()
 
 export function Footer() {
+  const { trackEvent, trackExternalClick } = useAnalytics()
+
   return (
     <footer className="relative z-20 border-t border-white/5 bg-background-dark px-6 py-14 md:px-12 md:py-16 lg:px-20">
       <div className="mx-auto max-w-7xl">
@@ -37,6 +40,7 @@ export function Footer() {
                 key={link.to}
                 to={link.to}
                 className="font-mono-label text-sm uppercase tracking-[0.15em] text-white/45 transition-colors hover:text-white"
+                onClick={() => trackEvent("click", "footer_nav", link.label.toLowerCase())}
               >
                 {link.label}
               </Link>
@@ -53,6 +57,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 aria-label={social.label}
                 className="text-white/35 transition-colors duration-300 hover:text-white"
+                onClick={() => trackExternalClick(social.href, `footer_social:${social.label}`)}
               >
                 <social.icon className="size-6" />
               </a>

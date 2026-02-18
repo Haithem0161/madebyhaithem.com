@@ -5,6 +5,7 @@ import { Link } from "@tanstack/react-router"
 import { Badge } from "@/components/ui/badge"
 import { GithubIcon } from "@/components/icons"
 import { getMediaUrl } from "@/lib/api"
+import { useAnalytics } from "@/lib/hooks/use-analytics"
 import type { Project } from "@/lib/projects"
 
 // Lazy-load Plasma — defers OGL bundle until needed (only when no CMS image exists)
@@ -28,6 +29,7 @@ export function ProjectHero({
   project: Project
   index: number
 }) {
+  const { trackExternalClick } = useAnalytics()
   const heroRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -189,6 +191,7 @@ export function ProjectHero({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-1.5 font-mono-label text-[10px] uppercase tracking-[0.15em] text-white/40 transition-colors hover:text-white"
+                  onClick={() => trackExternalClick(project.liveUrl!, `live_site:${project.slug}`)}
                 >
                   Live Site
                   <ArrowUpRight className="size-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -200,6 +203,7 @@ export function ProjectHero({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-white/30 transition-colors hover:text-white/60"
+                  onClick={() => trackExternalClick(project.repoUrl!, `github_repo:${project.slug}`)}
                 >
                   <GithubIcon className="size-4" />
                 </a>

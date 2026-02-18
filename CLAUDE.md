@@ -58,7 +58,7 @@ Standard Vite React app structure:
 <!-- MEMORY:START -->
 # Portfoliolio
 
-_Last updated: 2026-02-17 | 68 active memories, 139 total_
+_Last updated: 2026-02-18 | 60 active memories, 156 total_
 
 ## Architecture
 - Portfolio project architecture using Vite with comprehensive tech stack: TanStack Router, Framer Motion, shadcn/ui, T... [project-structure, technology-stack]
@@ -66,11 +66,11 @@ _Last updated: 2026-02-17 | 68 active memories, 139 total_
 - Added `@types/three` as a dev dependency to resolve TypeScript type declaration issues for the Three.js library [typescript, dependencies]
 - Redesigned featured work section with a dynamic sticky scroll mechanism that translates vertical scroll progress into... [ui, layout, interaction]
 - Discovered existing project detail section components at `/src/components/sections/project-detail/`, including Projec... [routing, components]
-- Expanded technology tagging system for CMS projects, with predefined tag options growing from initial 10 to 24 differ... [cms, project-management, data-handling]
-- Enhanced project tag system to support 10+ additional technology tags including `stripe`, `socketio`, `ai`, `i18n`, a... [tagging, metadata]
 - Extended project collection in CMS to include new JSON field types for features, metrics, pullQuote, and gallery, all... [cms, metadata]
-- Expanded technology tagging system to include new project tags like 'docker', 'seo', 'rtl', and 'i18n', further enric... [cms, tags]
-- Expanded technology tagging system to include security-specific technologies like zero-knowledge authentication, encr... [technology-tags, cms]
+- Expanded the project tag system to include 9 new technology tags for the torch-core-backend monorepo, preparing to sp... [cms, tags, metadata]
+- Comprehensive expansion of technology tagging system across CMS projects, growing from initial 10 to 40+ technology t... [project-metadata, technology-tags, cms-enhancement]
+- Created a comprehensive analytics SDK using a provider pattern in `/src/lib/hooks/use-analytics.ts` to centralize tra... [analytics, sdk]
+- Created new analytics tracking system with `AnalyticsProvider`, `useAnalytics()` hook, and `RouteAnalytics` component... [analytics, tracking, hooks]
 
 ## Key Decisions
 - Replaced `process.env.NODE_ENV` with `import.meta.env.DEV` to align with Vite's idiomatic environment variable access... [vite, typescript]
@@ -93,38 +93,30 @@ _Last updated: 2026-02-17 | 68 active memories, 139 total_
 - Implemented performance optimizations for WebGL components by adding IntersectionObserver to pause rendering when com... [performance, webgl]
 - Chose to maintain existing tag label mapping strategy when adding new project tags, ensuring consistent human-readabl... [metadata, consistency]
 - Continued using snake_case for new CMS field transformations (pull_quote, features) to maintain consistent API data h... [api, naming-convention]
+- Chose to omit 'Torch' from project titles when creating CMS entries, maintaining a more generic and professional pres... [naming, branding]
+- Chose to mount the analytics provider in the root route `__root.tsx` to ensure comprehensive coverage of all page and... [routing, provider]
+- Renamed `use-analytics.ts` to `use-analytics.tsx` to support JSX syntax and resolve TypeScript configuration constrai... [typescript, configuration]
 
 ## Patterns & Conventions
 - Implemented a barrel export (index.ts) in the icons directory to enable clean, centralized imports for technology sta... [import-pattern, exports]
 - Designed about page with a 12-column grid layout using a 5/7 split between portrait and content areas, maintaining a ... [layout, design-system]
 - Added `pointer-events-none` to Plasma wrapper to prevent canvas from intercepting mouse interactions with page content [interaction, design]
-- Comprehensive responsive design strategy with sophisticated UI/UX techniques: Navigation components (PillNav for desk... [responsive-design, ui-ux, navigation, metadata]
-- Systematic CV data integration across website components, dynamically computing professional experience metrics and f... [cv-data, dynamic-content, tanstack-query]
-- Implemented a tag label mapping in projects configuration to convert raw tag values (e.g., 'node-js') into human-read... [ui, projects]
-- Implemented text truncation strategy using Tailwind's `line-clamp-3` utility to restrict description text to 3 lines ... [tailwind, responsive-design]
-- Added `no-scrollbar` custom utility to Tailwind CSS configuration to enable horizontal scrolling without visible scro... [css, tailwind]
-- Implemented 'View All' card as the last item in project carousel, providing clear navigation to full project collection [navigation, ui]
-- Implemented a scroll-driven horizontal carousel for featured work section using Framer Motion's `useScroll` and `useT... [animation, scroll, performance]
-- Implemented a performance optimization strategy targeting high-frequency re-renders by using refs for direct DOM mani... [performance, optimization]
-- Added performance best practices to image loading including `loading='lazy'`, `decoding='async'`, and `{ passive: tru... [web-performance, images, event-listeners]
-- Restructured route files into a directory-based routing approach with `/routes/work/index.tsx` and `/routes/work/$slu... [routing, project structure]
-- Enhanced project detail page with a modular component approach, creating dedicated components for Hero, Overview, Fea... [component design, project structure]
-- Used React.lazy and Suspense for code-splitting Plasma WebGL component, reducing initial bundle size and enabling con... [react, performance, code-splitting]
-- Updated CMS data transformation logic to handle snake_case field `pull_quote` instead of camelCase `pullQuote` in the... [data-mapping, naming-conventions]
-- Updated CMS data transformation logic to handle snake_case field naming for new metadata fields, converting from came... [data-mapping, api-transformation]
+- Comprehensive responsive design strategy with advanced techniques: Navigation components (PillNav/Dock), UI styling w... [responsive-design, ui/ux, navigation, seo]
+- CMS data transformation strategy for handling field naming conventions, converting between camelCase and snake_case f... [data-transformation, cms-integration]
+- Performance optimization techniques including code-splitting, image loading best practices, and efficient rendering s... [performance, optimization, rendering]
+- Implemented granular tracking method for different interaction types including page views, link clicks, and component... [tracking, interactions]
 
 ## Gotchas & Pitfalls
 - PillNav remains left-aligned due to absolute positioning and left-0 class, requiring explicit centering adjustments i... [layout, navigation]
 - PillNav's default white background is controlled by the `baseColor` prop, which affects both the logo circle and nav ... [ui, styling]
 - Featured work section experienced uneven card heights due to unconstrained description text length and lack of height... [ui, layout]
 - TanStack Router can create implicit layout routes with shared prefixes, causing unexpected routing behavior when file... [routing, tanstack-router]
-- Identified that MutationObserver in floating-nav was firing excessively on every motion animation style change, creat... [performance, debugging]
-- Plasma background component had extensive rendering complexities including positioning constraints, performance issue... [rendering, performance, component]
-- Horizontal scroll section encountered height calculation errors, with section height incorrectly set to total track w... [scrolling, layout, calculation]
-- Project detail page performance is severely impacted by the Plasma WebGL shader running as a fallback background, whi... [performance, webgl]
-- Discovered that WebGL components like Plasma were consuming significant GPU resources by running 60 shader iterations... [performance, webgl, gpu]
+- WebGL/Plasma background components have significant performance challenges, including: 60 shader iterations per pixel... [performance, webgl, shader]
+- MutationObserver in floating navigation triggering excessive updates during motion animations, causing unnecessary de... [optimization, performance]
+- Identified and fixed potential error propagation issue in contact form submission by avoiding `throw undefined` which... [error-handling, form-submission]
 
 ## Current Progress
+- Successfully added 7 new enterprise service projects to the CMS, expanding project portfolio to include domain, notif... [cms, project-collection]
 - Successfully added Torch Password Manager as the 8th project in the CMS with comprehensive enterprise security softwa... [project-cms, projects]
 - Added Jerash Oil Field Services project to CMS with comprehensive metadata including bilingual support, monorepo arch... [project-cms, metadata]
 - Successfully populated 6 projects in the CMS with comprehensive metadata including features, metrics, and pull quotes [cms, project-data]

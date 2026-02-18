@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { EmptyState } from "@/components/ui/empty-state"
 import { projectsQueryOptions } from "@/lib/queries"
 import { getMediaUrl } from "@/lib/api"
+import { useAnalytics } from "@/lib/hooks/use-analytics"
 import type { Project } from "@/lib/projects"
 
 const hoverGradients: Record<string, string> = {
@@ -19,6 +20,7 @@ const hoverGradients: Record<string, string> = {
 }
 
 function WorkCard({ project, index }: { project: Project; index: number }) {
+  const { trackEvent } = useAnalytics()
   const hoverGradient = hoverGradients[project.gradient] ?? ""
   const thumbnail = project.images?.[0]
 
@@ -27,6 +29,7 @@ function WorkCard({ project, index }: { project: Project; index: number }) {
       to="/work/$slug"
       params={{ slug: project.slug }}
       className="block shrink-0"
+      onClick={() => trackEvent("click", "project_card", project.slug)}
     >
       <motion.article
         initial={{ opacity: 0, y: 40 }}
@@ -94,8 +97,9 @@ function WorkCard({ project, index }: { project: Project; index: number }) {
 }
 
 function ViewAllCard({ count }: { count: number }) {
+  const { trackEvent } = useAnalytics()
   return (
-    <Link to="/work" className="block shrink-0">
+    <Link to="/work" className="block shrink-0" onClick={() => trackEvent("click", "cta", "view_all_projects")}>
       <div className="group flex h-[420px] w-[280px] cursor-pointer flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-white/10 bg-white/2 transition-all duration-300 hover:border-primary/30 hover:bg-white/5 sm:w-[300px]">
         <div className="flex size-14 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all duration-300 group-hover:border-primary/30 group-hover:bg-primary/10">
           <ArrowRight className="size-6 text-white/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-primary" />

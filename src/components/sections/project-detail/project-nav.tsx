@@ -2,6 +2,7 @@ import { motion } from "motion/react"
 import { Link } from "@tanstack/react-router"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { cinematicStagger, cinematicReveal } from "@/lib/variants"
+import { useAnalytics } from "@/lib/hooks/use-analytics"
 import type { Project } from "@/lib/projects"
 
 export function ProjectNav({
@@ -11,6 +12,7 @@ export function ProjectNav({
   currentSlug: string
   projects: Project[]
 }) {
+  const { trackEvent } = useAnalytics()
   const currentIndex = projects.findIndex((p) => p.slug === currentSlug)
   const prevProject =
     projects[(currentIndex - 1 + projects.length) % projects.length]
@@ -36,6 +38,7 @@ export function ProjectNav({
                 to="/work/$slug"
                 params={{ slug: prevProject.slug }}
                 className="group relative flex flex-col gap-3 overflow-hidden rounded-xl p-6 transition-colors duration-300 hover:bg-white/3"
+                onClick={() => trackEvent("click", "project_nav", `prev:${prevProject.slug}`)}
               >
                 {/* Background glow on hover */}
                 <div
@@ -67,6 +70,7 @@ export function ProjectNav({
                 to="/work/$slug"
                 params={{ slug: nextProject.slug }}
                 className="group relative flex flex-col items-start gap-3 overflow-hidden rounded-xl p-6 transition-colors duration-300 hover:bg-white/3 md:items-end"
+                onClick={() => trackEvent("click", "project_nav", `next:${nextProject.slug}`)}
               >
                 {/* Background glow on hover */}
                 <div

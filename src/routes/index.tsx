@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { createFileRoute } from "@tanstack/react-router"
 import { projectsQueryOptions } from "@/lib/queries"
 import { motion, useScroll, useTransform } from "motion/react"
@@ -6,6 +7,7 @@ import { HeroViewport } from "@/components/sections/hero-viewport"
 import { AboutBlurb } from "@/components/sections/about-blurb"
 import { FeaturedWork } from "@/components/sections/featured-work"
 import { HomeCta } from "@/components/sections/home-cta"
+import { useAnalytics } from "@/lib/hooks/use-analytics"
 
 // Stable references — prevents FloatingLines WebGL scene from tearing down and
 // rebuilding on every parent re-render due to new array/object identity.
@@ -14,11 +16,37 @@ const ENABLED_WAVES: Array<"top" | "middle" | "bottom"> = ["top", "middle", "bot
 const LINE_COUNT = [4, 6, 4]
 const LINE_DISTANCE = [5, 5, 5]
 
+const SCROLL_SECTIONS = ["hero", "about-blurb", "featured-work", "home-cta"]
+
 function HomePage() {
   const { scrollYProgress } = useScroll()
+  const { trackEvent } = useAnalytics()
 
   // FloatingLines fades as user scrolls into content
   const bgOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.15])
+
+  // Track scroll depth — fire once per section when it enters viewport
+  useEffect(() => {
+    const tracked = new Set<string>()
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && !tracked.has(entry.target.id)) {
+            tracked.add(entry.target.id)
+            trackEvent("scroll", "section_view", entry.target.id)
+          }
+        }
+      },
+      { threshold: 0.3 },
+    )
+
+    for (const id of SCROLL_SECTIONS) {
+      const el = document.getElementById(id)
+      if (el) io.observe(el)
+    }
+
+    return () => io.disconnect()
+  }, [trackEvent])
 
   return (
     <div className="relative">
@@ -45,16 +73,24 @@ function HomePage() {
       {/* Page content */}
       <main className="relative">
         {/* Hero, full viewport, transparent bg, lines shine through */}
-        <HeroViewport />
+        <div id="hero">
+          <HeroViewport />
+        </div>
 
         {/* Gradient fade from transparent to dark bg */}
         <div className="relative z-20 h-32 bg-linear-to-b from-transparent to-background-dark" />
 
         {/* Content sections, semi-transparent so lines peek through */}
         <div className="relative z-20 bg-background-dark/80 backdrop-blur-sm">
-          <AboutBlurb />
-          <FeaturedWork />
-          <HomeCta />
+          <div id="about-blurb">
+            <AboutBlurb />
+          </div>
+          <div id="featured-work">
+            <FeaturedWork />
+          </div>
+          <div id="home-cta">
+            <HomeCta />
+          </div>
         </div>
       </main>
     </div>
