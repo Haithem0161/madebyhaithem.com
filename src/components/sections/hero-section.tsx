@@ -47,9 +47,12 @@ export function HeroSection() {
           variant="outline"
           size="lg"
           className="h-14 px-8 rounded-full bg-white/5 text-white border-white/10 text-base font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-200 w-full sm:w-auto"
+          asChild
         >
-          <span>Download CV</span>
-          <Download className="size-5" />
+          <a href="/Haithem Mustafa CV.pdf" download>
+            <span>Download CV</span>
+            <Download className="size-5" />
+          </a>
         </Button>
       </motion.div>
 
