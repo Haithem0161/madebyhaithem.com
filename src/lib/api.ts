@@ -61,6 +61,9 @@ export async function submitContact(payload: ContactPayload) {
 const API_BASE =
   import.meta.env.VITE_API_URL || "https://api.madebyhaithem.com"
 
+// In dev, proxy through Vite to bypass CORP headers on the CMS transform endpoint
+const MEDIA_BASE = import.meta.env.DEV ? "/api-media" : `${API_BASE}/media`
+
 export function getMediaUrl(
   id: string,
   options?: MediaTransformOptions,
@@ -75,5 +78,5 @@ export function getMediaUrl(
   if (options?.sharpen) params.set("sharpen", "true")
 
   const qs = params.toString()
-  return `${API_BASE}/media/${id}/transform${qs ? `?${qs}` : ""}`
+  return `${MEDIA_BASE}/${id}/transform${qs ? `?${qs}` : ""}`
 }

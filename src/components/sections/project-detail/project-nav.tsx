@@ -21,10 +21,10 @@ export function ProjectNav({
   return (
     <motion.section
       className="px-6 py-16 md:px-12 md:py-20 lg:px-20"
+      variants={cinematicStagger}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={cinematicStagger}
+      viewport={{ once: true, margin: "-80px" }}
     >
       <div className="mx-auto max-w-6xl">
         {/* Divider */}

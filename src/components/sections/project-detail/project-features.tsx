@@ -8,10 +8,10 @@ export function ProjectFeatures({ project }: { project: Project }) {
   return (
     <motion.section
       className="px-6 py-20 md:px-12 md:py-28 lg:px-20 lg:py-36"
+      variants={cinematicStagger}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
-      variants={cinematicStagger}
+      viewport={{ once: true, margin: "-80px" }}
     >
       <div className="mx-auto max-w-5xl">
         <motion.p

@@ -50,10 +50,10 @@ export function ProjectMetrics({ project }: { project: Project }) {
   return (
     <motion.section
       className="bg-linear-to-r from-primary/5 via-transparent to-secondary-purple/5 px-6 py-20 md:px-12 md:py-28 lg:px-20 lg:py-36"
+      variants={cinematicStagger}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={cinematicStagger}
+      viewport={{ once: true, margin: "-80px" }}
     >
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-12 md:justify-between md:gap-8">
         {project.metrics.map((metric) => (

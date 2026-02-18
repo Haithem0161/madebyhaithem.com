@@ -12,10 +12,10 @@ export function ProjectOverview({ project }: { project: Project }) {
   return (
     <motion.section
       className="px-6 py-24 md:px-12 md:py-36 lg:px-20 lg:py-48"
+      variants={cinematicStagger}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={cinematicStagger}
+      viewport={{ once: true, margin: "-80px" }}
     >
       <div className="mx-auto max-w-3xl">
         {/* Lead paragraph, larger, italic */}

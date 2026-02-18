@@ -18,4 +18,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/api-media": {
+        target: "https://api.madebyhaithem.com",
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/api-media/, "/media"),
+      },
+    },
+  },
 })

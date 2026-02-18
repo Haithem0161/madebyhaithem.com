@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { motion } from "motion/react"
 import { staggerContainer, fadeInUp } from "@/lib/variants"
-import { WorkShowcase } from "@/components/sections/work-showcase"
+import { WorkGrid } from "@/components/sections/work-grid"
 import { projectsQueryOptions } from "@/lib/queries"
 
 function WorkPage() {
@@ -37,9 +37,7 @@ function WorkPage() {
         </motion.p>
 
         {/* Showcase */}
-        <motion.div variants={fadeInUp}>
-          <WorkShowcase />
-        </motion.div>
+        <WorkGrid />
       </motion.div>
     </div>
   )

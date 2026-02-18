@@ -7,10 +7,10 @@ export function AboutBlurb() {
   return (
     <motion.section
       className="px-6 py-20 md:px-12 md:py-28 lg:px-20 lg:py-36"
+      variants={scrollStagger}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={scrollStagger}
+      viewport={{ once: true, margin: "-80px" }}
     >
       <div className="max-w-3xl">
         <motion.p

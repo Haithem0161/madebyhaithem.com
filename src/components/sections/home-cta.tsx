@@ -10,10 +10,10 @@ export function HomeCta() {
   return (
     <motion.section
       className="px-6 py-24 text-center md:px-12 md:py-40 lg:px-20"
+      variants={scrollStagger}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={scrollStagger}
+      viewport={{ once: true, margin: "-80px" }}
     >
       <div className="mx-auto max-w-2xl">
         <motion.h2

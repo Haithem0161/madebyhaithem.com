@@ -32,10 +32,10 @@ function WorkCard({ project, index }: { project: Project; index: number }) {
       onClick={() => trackEvent("click", "project_card", project.slug)}
     >
       <motion.article
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, delay: index * 0.08, ease: [0.25, 0.4, 0.25, 1] }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.45, delay: index * 0.06, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="group relative flex h-[420px] w-[340px] cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/5 bg-white/3 backdrop-blur-sm transition-all duration-300 hover:border-primary/20 hover:bg-white/6 sm:w-[380px]"
       >
         {/* Image */}

@@ -1,23 +1,25 @@
 import type { Variants } from "motion/react"
 
+// ── Page-level stagger (for route components: work, about, contact) ──
+// Parent orchestrates timing only. Children (fadeInUp) handle the visual animation.
 export const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: {
-    opacity: 1,
     transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
+      staggerChildren: 0.1,
+      delayChildren: 0.15,
     },
   },
 }
 
+// ── Child variants for stagger containers ──
+
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 }
 
@@ -25,12 +27,12 @@ export const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.4, ease: "easeOut" },
   },
 }
 
 export const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.8 },
+  hidden: { opacity: 0, scale: 0.9 },
   visible: {
     opacity: 1,
     scale: 1,
@@ -48,52 +50,52 @@ export const navSlideDown: Variants = {
 }
 
 export const slideInLeft: Variants = {
-  hidden: { opacity: 0, x: -50 },
+  hidden: { opacity: 0, x: -30 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+}
+
+// ── Scroll-triggered sections (home page: about blurb, CTA) ──
+
+export const scrollStagger: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
   },
 }
 
 export const scrollReveal: Variants = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.4, 0.25, 1] },
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 }
 
-export const scrollStagger: Variants = {
-  hidden: { opacity: 0 },
+// ── Project detail sections (overview, features, metrics, tech, gallery, nav) ──
+
+export const cinematicStagger: Variants = {
+  hidden: {},
   visible: {
-    opacity: 1,
     transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0.08,
     },
   },
 }
 
 export const cinematicReveal: Variants = {
-  hidden: { opacity: 0, y: 80 },
+  hidden: { opacity: 0, y: 32 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 1.0, ease: [0.25, 0.4, 0.25, 1] },
-  },
-}
-
-export const cinematicStagger: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.18,
-      delayChildren: 0.15,
-    },
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 }

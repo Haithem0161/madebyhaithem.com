@@ -58,19 +58,16 @@ Standard Vite React app structure:
 <!-- MEMORY:START -->
 # Portfoliolio
 
-_Last updated: 2026-02-18 | 73 active memories, 169 total_
+_Last updated: 2026-02-18 | 80 active memories, 211 total_
 
 ## Architecture
 - Portfolio project architecture using Vite with comprehensive tech stack: TanStack Router, Framer Motion, shadcn/ui, T... [project-structure, technology-stack]
 - Created modular about page components including about-stats, about-tech, and about-section to compose the full page e... [component-design, page-structure]
 - Added `@types/three` as a dev dependency to resolve TypeScript type declaration issues for the Three.js library [typescript, dependencies]
 - Redesigned featured work section with a dynamic sticky scroll mechanism that translates vertical scroll progress into... [ui, layout, interaction]
-- Discovered existing project detail section components at `/src/components/sections/project-detail/`, including Projec... [routing, components]
-- Extended project collection in CMS to include new JSON field types for features, metrics, pullQuote, and gallery, all... [cms, metadata]
-- Expanded the project tag system to include 9 new technology tags for the torch-core-backend monorepo, preparing to sp... [cms, tags, metadata]
-- Comprehensive expansion of technology tagging system across CMS projects, growing from initial 10 to 40+ technology t... [project-metadata, technology-tags, cms-enhancement]
-- Created a comprehensive analytics SDK using a provider pattern in `/src/lib/hooks/use-analytics.ts` to centralize tra... [analytics, sdk]
-- Created new analytics tracking system with `AnalyticsProvider`, `useAnalytics()` hook, and `RouteAnalytics` component... [analytics, tracking, hooks]
+- Enhanced project metadata and technology tracking system across portfolio, expanding technology tags from 10 to 40+ t... [cms, metadata, technology-tracking]
+- Developed modular project page components and navigation system, including WorkGrid for dynamic project card renderin... [components, project-navigation]
+- Implemented comprehensive client-side analytics tracking using a provider pattern, with `AnalyticsProvider`, `useAnal... [analytics, tracking]
 
 ## Key Decisions
 - Replaced `process.env.NODE_ENV` with `import.meta.env.DEV` to align with Vite's idiomatic environment variable access... [vite, typescript]
@@ -101,17 +98,23 @@ _Last updated: 2026-02-18 | 73 active memories, 169 total_
 - Planned to use a frontend API layer to transform raw CMS image field strings into fully resolved media objects for pr... [cms, api-layer, data-transformation]
 - Created a `normalizeImages` function to handle different CMS media field formats, converting single image objects and... [api, data-parsing]
 - Planned to modify backend media transform endpoint to use cross-origin resource policy that allows loading images fro... [cors, images, backend]
+- Chose to compress project screenshots to 85% quality and resize them to reduce file size from 1-2MB to 170-335KB befo... [performance, media-optimization]
+- Redesigned the /work page to use a 2-column grid layout with flexible card design that gracefully handles projects wi... [ui, project-grid]
+- Chose to replace numeric fallback with a themed purple wave placeholder image that maintains visual consistency acros... [design, ui]
+- Selected 7 high-quality screenshots for project documentation, deliberately excluding 404 pages and text-only homepag... [media-selection, project-documentation]
+- Chose to compress screenshots to JPEG format and reduce total file size to 960KB for efficient media upload and storage [media-optimization, performance]
+- Added Vite dev server proxy for media transform endpoint to bypass CORP issues during development, with a fallback to... [vite, proxy, cors]
+- Implement a server-side base64 to binary file conversion step during initial media upload to ensure proper file stora... [media, upload, backend]
+- Rewrote animation variants to remove opacity transitions from parent stagger containers, allowing child components to... [animation, optimization]
 
 ## Patterns & Conventions
 - Implemented a barrel export (index.ts) in the icons directory to enable clean, centralized imports for technology sta... [import-pattern, exports]
 - Designed about page with a 12-column grid layout using a 5/7 split between portrait and content areas, maintaining a ... [layout, design-system]
 - Added `pointer-events-none` to Plasma wrapper to prevent canvas from intercepting mouse interactions with page content [interaction, design]
-- Comprehensive responsive design strategy with advanced techniques: Navigation components (PillNav/Dock), UI styling w... [responsive-design, ui/ux, navigation, seo]
-- CMS data transformation strategy for handling field naming conventions, converting between camelCase and snake_case f... [data-transformation, cms-integration]
-- Performance optimization techniques including code-splitting, image loading best practices, and efficient rendering s... [performance, optimization, rendering]
-- Implemented granular tracking method for different interaction types including page views, link clicks, and component... [tracking, interactions]
-- Implemented a fallback strategy for sending analytics data using a `Blob` with `application/json` MIME type to ensure... [analytics, error-handling]
-- Implemented flexible media field parsing in the API transformation layer to handle variations in CMS data storage, en... [api-design, data-resilience]
+- Advanced frontend optimization and architecture with comprehensive strategies: Performance techniques including code-... [frontend, performance, optimization, tracking]
+- Project design strategy for visual consistency and efficiency, including fallback design with gradient/circuit backgr... [design, optimization, placeholders]
+- Implemented a robust Motion animation strategy using CSS fallback opacity and precise variant management to prevent r... [animation, performance, react]
+- Standardized animation variant configuration across components, reducing timing and adjusting reveal distances to cre... [animation, design-system]
 
 ## Gotchas & Pitfalls
 - PillNav remains left-aligned due to absolute positioning and left-0 class, requiring explicit centering adjustments i... [layout, navigation]
@@ -119,15 +122,19 @@ _Last updated: 2026-02-18 | 73 active memories, 169 total_
 - Featured work section experienced uneven card heights due to unconstrained description text length and lack of height... [ui, layout]
 - TanStack Router can create implicit layout routes with shared prefixes, causing unexpected routing behavior when file... [routing, tanstack-router]
 - WebGL/Plasma background components have significant performance challenges, including: 60 shader iterations per pixel... [performance, webgl, shader]
-- MutationObserver in floating navigation triggering excessive updates during motion animations, causing unnecessary de... [optimization, performance]
 - Identified and fixed potential error propagation issue in contact form submission by avoiding `throw undefined` which... [error-handling, form-submission]
-- Discovered that `navigator.sendBeacon` sends requests with `Content-Type: text/plain` by default, causing Cross-Origi... [analytics, cors, web-api]
-- Discovered that the CMS media upload API has token expiration, requiring re-authentication for multiple image uploads [authentication, api]
-- CMS image field storage is complex, with image fields accepting either string or object formats, and the frontend exp... [cms, images, data-transformation]
-- CMS image and gallery fields require custom transformation logic, with images stored as single objects and gallery as... [data-transformation, cms]
-- Media transform API endpoint is blocking cross-origin image requests by incorrectly setting Cross-Origin-Resource-Pol... [cors, images, api]
+- Discovered that the Arabic language project image filename includes non-standard characters (السراج-حلول-تكنولوجيا-ال... [internationalization, file-naming]
+- CMS media handling involves complex image and storage challenges with network and upload issues: image fields can acc... [CMS, media, upload, image-processing]
+- WorkGrid's animation stack causes double-opacity entrance animation where both parent grid and individual cards start... [animation, framer-motion]
+- Parent containers with staggered animations can create visual flickering when they AND their child components simulta... [animation, framer-motion, performance]
+- Animation stagger containers were causing visual flickering by having both parent and child components simultaneously... [animation, performance]
+- Animation variants can cause visual flickering when parent containers and child components simultaneously animate opa... [animation, performance]
 
 ## Current Progress
+- Completed screenshot and media upload process for Jerash Oil Field Services project, capturing 7 total images includi... [media, project-upload]
+- Captured 7-8 screenshots of the Jerash platform website, focusing on hero, services, gallery, HSE, contact, careers, ... [media, project-documentation]
+- Completed screenshot and media upload process for Alshabaka project, capturing 7 total images including login page, h... [media, project-documentation]
+- Prepared 4 images for Al-Seraj IT Integrated Solutions project, with a specific focus on the Arabic dark mode hero im... [cms, project-assets]
 - Successfully uploaded 5 images for the Alhikma Akademie project to the CMS, with the first image identified as the la... [cms, media-upload]
 - Successfully added 7 new enterprise service projects to the CMS, expanding project portfolio to include domain, notif... [cms, project-collection]
 - Successfully added Torch Password Manager as the 8th project in the CMS with comprehensive enterprise security softwa... [project-cms, projects]
