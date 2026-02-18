@@ -58,16 +58,12 @@ Standard Vite React app structure:
 <!-- MEMORY:START -->
 # Portfoliolio
 
-_Last updated: 2026-02-18 | 80 active memories, 211 total_
+_Last updated: 2026-02-18 | 64 active memories, 224 total_
 
 ## Architecture
-- Portfolio project architecture using Vite with comprehensive tech stack: TanStack Router, Framer Motion, shadcn/ui, T... [project-structure, technology-stack]
-- Created modular about page components including about-stats, about-tech, and about-section to compose the full page e... [component-design, page-structure]
 - Added `@types/three` as a dev dependency to resolve TypeScript type declaration issues for the Three.js library [typescript, dependencies]
 - Redesigned featured work section with a dynamic sticky scroll mechanism that translates vertical scroll progress into... [ui, layout, interaction]
-- Enhanced project metadata and technology tracking system across portfolio, expanding technology tags from 10 to 40+ t... [cms, metadata, technology-tracking]
-- Developed modular project page components and navigation system, including WorkGrid for dynamic project card renderin... [components, project-navigation]
-- Implemented comprehensive client-side analytics tracking using a provider pattern, with `AnalyticsProvider`, `useAnal... [analytics, tracking]
+- Portfolio project with comprehensive modular architecture using Vite and modern web technologies. Project structure i... [portfolio, modular-architecture, web-technologies, component-design]
 
 ## Key Decisions
 - Replaced `process.env.NODE_ENV` with `import.meta.env.DEV` to align with Vite's idiomatic environment variable access... [vite, typescript]
@@ -106,15 +102,16 @@ _Last updated: 2026-02-18 | 80 active memories, 211 total_
 - Added Vite dev server proxy for media transform endpoint to bypass CORP issues during development, with a fallback to... [vite, proxy, cors]
 - Implement a server-side base64 to binary file conversion step during initial media upload to ensure proper file stora... [media, upload, backend]
 - Rewrote animation variants to remove opacity transitions from parent stagger containers, allowing child components to... [animation, optimization]
+- Chose to compress project screenshots from PNG to JPEG, reducing total file size and optimizing for web transfer [media-optimization, performance]
+- Used @public/placeholder.webp as a fallback image in featured work section to maintain visual consistency across proj... [ui, images]
+- Limited featured work section horizontal scroll carousel to maximum 8 projects, ensuring a compact and curated projec... [pagination, project-display]
+- Chose Lenis smooth scrolling library with React wrapper for its ultra-lightweight 4 KB bundle size and native scrolli... [performance, scroll, library-selection]
 
 ## Patterns & Conventions
 - Implemented a barrel export (index.ts) in the icons directory to enable clean, centralized imports for technology sta... [import-pattern, exports]
 - Designed about page with a 12-column grid layout using a 5/7 split between portrait and content areas, maintaining a ... [layout, design-system]
 - Added `pointer-events-none` to Plasma wrapper to prevent canvas from intercepting mouse interactions with page content [interaction, design]
-- Advanced frontend optimization and architecture with comprehensive strategies: Performance techniques including code-... [frontend, performance, optimization, tracking]
-- Project design strategy for visual consistency and efficiency, including fallback design with gradient/circuit backgr... [design, optimization, placeholders]
-- Implemented a robust Motion animation strategy using CSS fallback opacity and precise variant management to prevent r... [animation, performance, react]
-- Standardized animation variant configuration across components, reducing timing and adjusting reveal distances to cre... [animation, design-system]
+- Comprehensive frontend optimization strategy covering performance, design consistency, and animation techniques: Code... [frontend, optimization, design, performance]
 
 ## Gotchas & Pitfalls
 - PillNav remains left-aligned due to absolute positioning and left-0 class, requiring explicit centering adjustments i... [layout, navigation]
@@ -125,26 +122,13 @@ _Last updated: 2026-02-18 | 80 active memories, 211 total_
 - Identified and fixed potential error propagation issue in contact form submission by avoiding `throw undefined` which... [error-handling, form-submission]
 - Discovered that the Arabic language project image filename includes non-standard characters (السراج-حلول-تكنولوجيا-ال... [internationalization, file-naming]
 - CMS media handling involves complex image and storage challenges with network and upload issues: image fields can acc... [CMS, media, upload, image-processing]
-- WorkGrid's animation stack causes double-opacity entrance animation where both parent grid and individual cards start... [animation, framer-motion]
-- Parent containers with staggered animations can create visual flickering when they AND their child components simulta... [animation, framer-motion, performance]
-- Animation stagger containers were causing visual flickering by having both parent and child components simultaneously... [animation, performance]
-- Animation variants can cause visual flickering when parent containers and child components simultaneously animate opa... [animation, performance]
+- Animation stagger containers create visual flickering by having both parent and child components simultaneously anima... [animation, performance, ui]
 
 ## Current Progress
-- Completed screenshot and media upload process for Jerash Oil Field Services project, capturing 7 total images includi... [media, project-upload]
-- Captured 7-8 screenshots of the Jerash platform website, focusing on hero, services, gallery, HSE, contact, careers, ... [media, project-documentation]
-- Completed screenshot and media upload process for Alshabaka project, capturing 7 total images including login page, h... [media, project-documentation]
-- Prepared 4 images for Al-Seraj IT Integrated Solutions project, with a specific focus on the Arabic dark mode hero im... [cms, project-assets]
-- Successfully uploaded 5 images for the Alhikma Akademie project to the CMS, with the first image identified as the la... [cms, media-upload]
-- Successfully added 7 new enterprise service projects to the CMS, expanding project portfolio to include domain, notif... [cms, project-collection]
-- Successfully added Torch Password Manager as the 8th project in the CMS with comprehensive enterprise security softwa... [project-cms, projects]
-- Added Jerash Oil Field Services project to CMS with comprehensive metadata including bilingual support, monorepo arch... [project-cms, metadata]
-- Successfully populated 6 projects in the CMS with comprehensive metadata including features, metrics, and pull quotes [cms, project-data]
-- Successfully added Alhikma Akademie project to the CMS, capturing full details of the e-learning platform including c... [project-management, cms]
-- Successfully created 5 new project entries in the CMS, updating project data and metadata [cms, content]
-- Rewrote personal biography text in about section to better reflect professional background and personal narrative [bio, about-page]
-- Updated contact page with personal contact information, including changing email to personal Gmail, location to Baghd... [contact, personal-info]
-- Project setup and initialization completed, including Vite configuration, library installations (Tailwind, shadcn), p... [project-setup, assets, initialization]
+- Project setup and initialization completed with Vite, including library installations (Tailwind, shadcn), project str... [project-setup, configuration]
+- Updated personal profile with refined personal biography in about section and contact information (email set to perso... [profile, personal-info]
+- Successfully populated CMS with project entries: Added 8 enterprise service projects including Alhikma Akademie (e-le... [cms, project-documentation]
+- Completed screenshot and media upload process for multiple projects, including Alhikma Akademie (5 images), Al-Seraj ... [media-upload, project-documentation]
 - Added a 'Download CV' button with an <a> tag pointing to `/Haithem Mustafa CV.pdf` in the public directory [ui, cv]
 
 ## Context

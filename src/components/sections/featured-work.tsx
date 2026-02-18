@@ -10,18 +10,8 @@ import { getMediaUrl } from "@/lib/api"
 import { useAnalytics } from "@/lib/hooks/use-analytics"
 import type { Project } from "@/lib/projects"
 
-const hoverGradients: Record<string, string> = {
-  "from-primary/20 to-secondary-purple/20":
-    "group-hover:from-primary/30 group-hover:to-secondary-purple/30",
-  "from-secondary-purple/20 to-palatinate/20":
-    "group-hover:from-secondary-purple/30 group-hover:to-palatinate/30",
-  "from-palatinate/20 to-primary/20":
-    "group-hover:from-palatinate/30 group-hover:to-primary/30",
-}
-
 function WorkCard({ project, index }: { project: Project; index: number }) {
   const { trackEvent } = useAnalytics()
-  const hoverGradient = hoverGradients[project.gradient] ?? ""
   const thumbnail = project.images?.[0]
 
   return (
@@ -39,17 +29,17 @@ function WorkCard({ project, index }: { project: Project; index: number }) {
         className="group relative flex h-[420px] w-[340px] cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/5 bg-white/3 backdrop-blur-sm transition-all duration-300 hover:border-primary/20 hover:bg-white/6 sm:w-[380px]"
       >
         {/* Image */}
-        <div
-          className={`relative h-44 shrink-0 overflow-hidden bg-linear-to-br ${project.gradient} ${hoverGradient} transition-colors duration-300`}
-        >
-          {thumbnail && (
-            <img
-              src={getMediaUrl(thumbnail.id, { w: 600, h: 400, fit: "cover", format: "webp" })}
-              alt={thumbnail.alt ?? project.title}
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-            />
-          )}
+        <div className="relative h-44 shrink-0 overflow-hidden">
+          <img
+            src={
+              thumbnail
+                ? getMediaUrl(thumbnail.id, { w: 600, h: 400, fit: "cover", format: "webp" })
+                : "/placeholder.webp"
+            }
+            alt={thumbnail?.alt ?? project.title}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
 
           {/* Index chip */}
           <span className="absolute left-4 top-4 font-mono-label text-[10px] uppercase tracking-widest text-white/30">
@@ -124,7 +114,7 @@ export function FeaturedWork() {
   const [overflow, setOverflow] = useState(0)
 
   const featuredProjects = allProjects.filter((p) => p.featured)
-  const featured = featuredProjects.length > 0 ? featuredProjects : allProjects.slice(0, 5)
+  const featured = (featuredProjects.length > 0 ? featuredProjects : allProjects).slice(0, 8)
 
   // Measure actual overflow: how far the track extends beyond the viewport.
   // useLayoutEffect ensures measurement happens before paint to avoid flicker.
