@@ -23,9 +23,29 @@ interface AnalyticsAPI {
 
 const AnalyticsContext = createContext<AnalyticsAPI | null>(null)
 
+/** Fire-and-forget POST with JSON body. Uses fetch + keepalive so the browser
+ *  can set Content-Type: application/json (sendBeacon can't set headers). */
+function fireAndForget(url: string, body: object) {
+  try {
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      keepalive: true,
+    }).catch(() => {})
+  } catch {
+    // analytics must never crash the app
+  }
+}
+
+/** sendBeacon with a JSON Blob — used only for session end on page unload
+ *  where fetch may not complete. The Blob sets the correct MIME type. */
 function beacon(url: string, body: object) {
   try {
-    navigator.sendBeacon(url, JSON.stringify(body))
+    const blob = new Blob([JSON.stringify(body)], {
+      type: "application/json",
+    })
+    navigator.sendBeacon(url, blob)
   } catch {
     // analytics must never crash the app
   }
@@ -89,7 +109,7 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
       if (!sessionId.current) return
       pageViewCount.current++
 
-      beacon(`${API_URL}/analytics/pageview`, {
+      fireAndForget(`${API_URL}/analytics/pageview`, {
         session_id: sessionId.current,
         page: page ?? window.location.pathname,
         title: title ?? document.title,
@@ -108,7 +128,7 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
       await ensureSession()
       if (!sessionId.current) return
 
-      beacon(`${API_URL}/analytics/track`, {
+      fireAndForget(`${API_URL}/analytics/track`, {
         session_id: sessionId.current,
         events: [
           {

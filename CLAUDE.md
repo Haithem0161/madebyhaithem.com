@@ -58,7 +58,7 @@ Standard Vite React app structure:
 <!-- MEMORY:START -->
 # Portfoliolio
 
-_Last updated: 2026-02-18 | 60 active memories, 156 total_
+_Last updated: 2026-02-18 | 73 active memories, 169 total_
 
 ## Architecture
 - Portfolio project architecture using Vite with comprehensive tech stack: TanStack Router, Framer Motion, shadcn/ui, T... [project-structure, technology-stack]
@@ -96,6 +96,11 @@ _Last updated: 2026-02-18 | 60 active memories, 156 total_
 - Chose to omit 'Torch' from project titles when creating CMS entries, maintaining a more generic and professional pres... [naming, branding]
 - Chose to mount the analytics provider in the root route `__root.tsx` to ensure comprehensive coverage of all page and... [routing, provider]
 - Renamed `use-analytics.ts` to `use-analytics.tsx` to support JSX syntax and resolve TypeScript configuration constrai... [typescript, configuration]
+- Replaced `sendBeacon` with `fetch(keepalive: true)` in page view and event tracking to support custom headers and ens... [analytics, performance]
+- Recommended taking 3-5 high-quality project images to showcase different aspects of the project's design and function... [portfolio, project-presentation]
+- Planned to use a frontend API layer to transform raw CMS image field strings into fully resolved media objects for pr... [cms, api-layer, data-transformation]
+- Created a `normalizeImages` function to handle different CMS media field formats, converting single image objects and... [api, data-parsing]
+- Planned to modify backend media transform endpoint to use cross-origin resource policy that allows loading images fro... [cors, images, backend]
 
 ## Patterns & Conventions
 - Implemented a barrel export (index.ts) in the icons directory to enable clean, centralized imports for technology sta... [import-pattern, exports]
@@ -105,6 +110,8 @@ _Last updated: 2026-02-18 | 60 active memories, 156 total_
 - CMS data transformation strategy for handling field naming conventions, converting between camelCase and snake_case f... [data-transformation, cms-integration]
 - Performance optimization techniques including code-splitting, image loading best practices, and efficient rendering s... [performance, optimization, rendering]
 - Implemented granular tracking method for different interaction types including page views, link clicks, and component... [tracking, interactions]
+- Implemented a fallback strategy for sending analytics data using a `Blob` with `application/json` MIME type to ensure... [analytics, error-handling]
+- Implemented flexible media field parsing in the API transformation layer to handle variations in CMS data storage, en... [api-design, data-resilience]
 
 ## Gotchas & Pitfalls
 - PillNav remains left-aligned due to absolute positioning and left-0 class, requiring explicit centering adjustments i... [layout, navigation]
@@ -114,8 +121,14 @@ _Last updated: 2026-02-18 | 60 active memories, 156 total_
 - WebGL/Plasma background components have significant performance challenges, including: 60 shader iterations per pixel... [performance, webgl, shader]
 - MutationObserver in floating navigation triggering excessive updates during motion animations, causing unnecessary de... [optimization, performance]
 - Identified and fixed potential error propagation issue in contact form submission by avoiding `throw undefined` which... [error-handling, form-submission]
+- Discovered that `navigator.sendBeacon` sends requests with `Content-Type: text/plain` by default, causing Cross-Origi... [analytics, cors, web-api]
+- Discovered that the CMS media upload API has token expiration, requiring re-authentication for multiple image uploads [authentication, api]
+- CMS image field storage is complex, with image fields accepting either string or object formats, and the frontend exp... [cms, images, data-transformation]
+- CMS image and gallery fields require custom transformation logic, with images stored as single objects and gallery as... [data-transformation, cms]
+- Media transform API endpoint is blocking cross-origin image requests by incorrectly setting Cross-Origin-Resource-Pol... [cors, images, api]
 
 ## Current Progress
+- Successfully uploaded 5 images for the Alhikma Akademie project to the CMS, with the first image identified as the la... [cms, media-upload]
 - Successfully added 7 new enterprise service projects to the CMS, expanding project portfolio to include domain, notif... [cms, project-collection]
 - Successfully added Torch Password Manager as the 8th project in the CMS with comprehensive enterprise security softwa... [project-cms, projects]
 - Added Jerash Oil Field Services project to CMS with comprehensive metadata including bilingual support, monorepo arch... [project-cms, metadata]

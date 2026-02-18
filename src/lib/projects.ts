@@ -1,5 +1,25 @@
 import type { CmsProject, CmsMediaField } from "./api-types"
 
+/** Normalize CMS image field into an array of media refs.
+ *  Handles: single object, array of objects, media ID string, or comma-separated IDs. */
+function normalizeImages(raw: unknown): CmsMediaField[] | undefined {
+  if (!raw) return undefined
+  if (Array.isArray(raw)) return raw
+  if (typeof raw === "object") return [raw as CmsMediaField]
+  if (typeof raw === "string") {
+    // Could be a JSON string of array, or comma-separated media IDs
+    try {
+      const parsed = JSON.parse(raw)
+      if (Array.isArray(parsed)) return parsed
+      if (typeof parsed === "object") return [parsed as CmsMediaField]
+    } catch {
+      // Comma-separated media IDs
+      return raw.split(",").map((id) => ({ id: id.trim() }))
+    }
+  }
+  return undefined
+}
+
 export type Project = {
   id: string
   slug: string
@@ -137,11 +157,11 @@ export function transformCmsProject(
     features: safeJsonParse(raw.features),
     metrics: safeJsonParse(raw.metrics),
     techStack: safeJsonParse(raw.tech_stack),
-    gallery: raw.gallery?.map((img) => ({
+    gallery: normalizeImages(raw.gallery)?.map((img) => ({
       id: img.id,
       alt: img.alt ?? img.filename ?? "Project image",
       caption: img.caption,
     })),
-    images: raw.images,
+    images: normalizeImages(raw.images),
   }
 }

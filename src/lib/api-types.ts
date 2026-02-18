@@ -22,7 +22,7 @@ export interface CmsProject {
   // Current CMS fields
   title: string
   description?: string // richtext, may be HTML
-  images?: CmsMediaField[] // image field returns media references
+  images?: CmsMediaField | CmsMediaField[] | string // image field: object, array, or media ID string
   tags?: string[] // multiselect
   featured?: boolean
 
@@ -40,7 +40,7 @@ export interface CmsProject {
   features?: string | object // JSON string or parsed, {title, description}[]
   metrics?: string | object // JSON string or parsed, {value, label}[]
   tech_stack?: string // JSON string, {category, items[]}[]
-  gallery?: CmsMediaField[]
+  gallery?: CmsMediaField[] | string // image field: array or JSON string of array
 
   // Allow any additional CMS fields
   [key: string]: unknown
