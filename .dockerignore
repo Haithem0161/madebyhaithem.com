@@ -1,7 +1,13 @@
 node_modules
-dist
+.next
 .git
 .vscode
 .idea
+logs
+*.log
+.env*
+Dockerfile
+docker-compose.yml
+README.md
 *.md
 !REACT.md

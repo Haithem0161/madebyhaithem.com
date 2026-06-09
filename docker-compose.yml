@@ -1,0 +1,20 @@
+services:
+  frontend:
+    build: .
+    container_name: portfolio-frontend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portfolio.entrypoints=websecure"
+      - "traefik.http.routers.portfolio.rule=Host(`madebyhaithem.com`) || Host(`www.madebyhaithem.com`)"
+      - "traefik.http.routers.portfolio.tls.certresolver=letsencrypt"
+      - "traefik.http.services.portfolio.loadbalancer.server.port=3000"
+    networks:
+      - traefik-network
+
+networks:
+  traefik-network:
+    external: true
