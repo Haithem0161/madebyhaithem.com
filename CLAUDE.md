@@ -4,61 +4,150 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a React 19 + TypeScript website built with Vite. The React Compiler is enabled for automatic performance optimizations.
+**Haithem Mustafa Portfolio** — a Next.js 16 + TypeScript portfolio site for Haithem Mustafa
+(Full Stack Developer) with Arabic/English (RTL) support and per-project case-study pages.
 
-**Always use pnpm** - do not use npm or yarn.
+**Always use pnpm** — do not use npm or yarn.
 
 ## Commands
 
 ```bash
-pnpm dev
-pnpm build
-pnpm lint
-pnpm preview
+pnpm dev          # Start dev server (Turbopack)
+pnpm build        # Production build (Turbopack)
+pnpm start        # Run production server
+pnpm lint         # ESLint
+pnpm typecheck    # tsc --noEmit
 ```
 
 ## Tech Stack
 
-- **Framework:** React 19 with React Compiler (babel-plugin-react-compiler)
-- **Build Tool:** Vite with Rolldown
-- **Language:** TypeScript (strict mode, ES2022 target)
-- **Package Manager:** pnpm
-- **Linting:** ESLint 9 with flat config, typescript-eslint, react-hooks plugin
+- **Framework:** Next.js 16 (App Router, Turbopack, RSC)
+- **Language:** TypeScript 5.9 (strict)
+- **Runtime:** React 19.2
+- **Styling:** Tailwind CSS v4 (`@tailwindcss/postcss`) + shadcn/ui (`base-nova` preset, `@base-ui/react` primitives, RTL enabled)
+- **3D / WebGL:** Three.js (pinned to 0.171.0 to dodge Clock deprecation warning), `@react-three/fiber` v9, `@react-three/drei` v10
+- **Smooth scroll:** Lenis (touch + reduced-motion both fall back to native scroll)
+- **i18n:** next-intl 4 (App Router, `[locale]` segment, `src/proxy.ts` middleware, `as-needed` locale prefix)
+- **State:** Zustand v5 (`scene-store` for scroll/mouse/loading signals, no persist)
+- **Server State:** TanStack React Query v5 (SSR-safe singleton + Devtools in dev)
+- **HTTP:** Axios (auth interceptors, env-driven base URL)
+- **Animations:** Framer Motion (entrance + scroll reveals)
+- **Validation:** Zod v4
+- **Theme:** `next-themes` forced to light (v1)
+- **Forms:** react-hook-form + `@hookform/resolvers`
+- **Icons:** lucide-react
+- **Fonts:** Fraunces (display, italic, variable opsz/SOFT) + Inter (body) via `next/font`; Noto Kufi Arabic for `ar`
+- **Package Manager:** pnpm 10
+- **Linting:** ESLint 9 flat config + `eslint-config-next` (core-web-vitals + typescript)
 
 ## Architecture
 
-Standard Vite React app structure:
+```
+.
+├── messages/                          # next-intl message catalogs
+│   ├── en.json
+│   └── ar.json
+├── public/
+│   ├── logo.png                       # H logo mark
+│   └── Haithem Mustafa CV.pdf         # CV download (siteConfig.cvHref)
+├── next.config.ts                     # withNextIntl plugin + optimizePackageImports + transpilePackages: three
+├── postcss.config.mjs                 # @tailwindcss/postcss
+├── components.json                    # shadcn/ui (base-nova, RTL, RSC)
+└── src/
+    ├── proxy.ts                       # next-intl middleware (Next 16 renamed middleware to proxy)
+    ├── app/
+    │   ├── globals.css                # Tailwind v4 tokens (editorial light + warm; emerald, peach)
+    │   ├── favicon.ico
+    │   ├── not-found.tsx              # Root 404 (renders html)
+    │   ├── global-error.tsx           # Top-level error boundary (renders html)
+    │   ├── robots.ts                  # /robots.txt
+    │   ├── sitemap.ts                 # /sitemap.xml (locale-aware)
+    │   └── [locale]/
+    │       ├── layout.tsx             # html lang+dir, Fraunces+Inter+Noto Kufi, providers, SiteShell
+    │       ├── page.tsx               # Section composition (Hero/About/Projects/Skills/Education/Contact/Footer)
+    │       ├── projects/
+    │       │   ├── page.tsx           # /projects listing (all projects)
+    │       │   └── [slug]/
+    │       │       ├── page.tsx       # /projects/[slug] case study (generateStaticParams + metadata)
+    │       │       └── project-detail.tsx  # client reveal wrapper for a project case study
+    │       ├── not-found.tsx          # Locale-scoped 404
+    │       └── error.tsx              # Locale-scoped error boundary
+    ├── components/
+    │   ├── ui/                        # shadcn components (add via: pnpx shadcn@latest add <component>)
+    │   ├── canvas/
+    │   │   ├── scene.tsx              # R3F Canvas (fixed at z-0, behind content), webglcontextlost recovery
+    │   │   ├── lights.tsx             # ambient + hemisphere + 3 directional, no Environment HDRI
+    │   │   └── particle-field.tsx     # 220 drift particles, AdditiveBlending, scroll-faded ambient atmosphere
+    │   ├── cursor/cursor.tsx          # custom dot + ring, magnetic on links/buttons/[data-cursor]
+    │   ├── preloader/preloader.tsx    # cream splash, traced H, progress, fades on isReady
+    │   ├── sections/
+    │   │   ├── section-shell.tsx      # eyebrow + display title shared shell
+    │   │   ├── hero.tsx               # "Full stack, end to end." + CTAs
+    │   │   ├── about.tsx              # The backend / The frontend two-up
+    │   │   ├── projects.tsx           # Home featured-projects grid + "All projects" link
+    │   │   ├── project-card.tsx       # Shared project card (home + listing), links to /projects/[slug]
+    │   │   ├── projects-listing.tsx   # /projects grid (all projects)
+    │   │   ├── skills.tsx             # Skills matrix grouped chips
+    │   │   ├── education.tsx          # Degree + focus areas
+    │   │   ├── contact.tsx            # Big mailto, phone, website, GitHub, LinkedIn, location, CV
+    │   │   └── footer.tsx
+    │   ├── site/
+    │   │   ├── header.tsx             # Fixed wordmark + locale switcher
+    │   │   └── site-shell.tsx         # Client wrapper: Lenis, mouse, Cursor, Preloader, Scene
+    │   └── locale-switcher.tsx
+    ├── hooks/
+    │   ├── use-lenis.ts               # singleton Lenis -> scrollProgress (touch/reduced-motion fallback)
+    │   ├── use-hash-scroll.ts         # scrolls to #section after cross-page nav (e.g. /#about)
+    │   ├── use-mouse-tracking.ts      # pointermove -> scene-store via rAF
+    │   └── use-media-query.ts         # SSR-safe useSyncExternalStore wrapper
+    ├── i18n/
+    │   ├── routing.ts                 # defineRouting (en, ar) + localeDirection map
+    │   ├── request.ts                 # getRequestConfig - async messages loader
+    │   ├── navigation.ts              # createNavigation -> typed Link/redirect/usePathname/useRouter
+    │   └── global.d.ts                # AppConfig augmentation for typed t() and Locale
+    ├── lib/
+    │   ├── api.ts                     # Axios instance (interceptors, env base URL)
+    │   ├── env.ts                     # Zod-validated env (server/client schemas)
+    │   ├── projects.ts                # Project[] data (slug/year/stack/link) + featuredProjects/getProject
+    │   ├── query-client.ts            # SSR-safe singleton QueryClient
+    │   ├── site.ts                    # siteConfig (email/phone/socials/cv/keywords)
+    │   └── utils.ts                   # cn() helper
+    ├── providers/
+    │   ├── index.tsx                  # Theme (forced light) + Query providers
+    │   ├── query-provider.tsx
+    │   └── theme-provider.tsx
+    └── stores/
+        └── scene-store.ts             # zustand: scrollProgress, mouseX/Y, canvas/asset/min ready signals
+```
 
-- `src/main.tsx` - React entry point (StrictMode wrapper)
-- `src/App.tsx` - Main application component
-- `src/index.css` - Global styles (supports light/dark mode)
-- `public/` - Static assets served as-is
+- **Path alias:** `@/*` → `src/*` (`tsconfig.json`)
+- **Locale routing:** `localePrefix: 'as-needed'` — English at `/`, Arabic at `/ar`. Direction is set via `<html dir="rtl|ltr">` in the locale layout.
+- **Server vs client:** prefer Server Components. Mark client islands with `"use client"` (providers, switchers, anything using hooks/context/state).
 
-## Key Configuration
+## Key Patterns
 
-- **vite.config.ts** - React plugin with Babel and React Compiler enabled
-- **tsconfig.app.json** - Strict TypeScript with no unused variables/parameters
-- **eslint.config.js** - Flat config format (ESLint 9+)
+- **Translations (server):** `const t = await getTranslations(namespace?)` after `setRequestLocale(locale)`.
+- **Translations (client):** `const t = useTranslations(namespace?)` inside a `"use client"` component, descended from `<NextIntlClientProvider>`.
+- **Navigation:** import `Link, useRouter, usePathname` from `@/i18n/navigation` — never from `next/link` or `next/navigation` for locale-aware routes.
+- **Metadata:** `generateMetadata` in `[locale]/layout.tsx` uses `getTranslations` + `siteConfig`. Per-page metadata can override.
+- **Env vars:** add to `.env.local`, mirror in `.env.example`, declare in `src/lib/env.ts`. Server-only vars must NOT be prefixed with `NEXT_PUBLIC_`.
+- **Adding shadcn components:** `pnpx shadcn@latest add <component>` — installs into `src/components/ui/`. The active preset is `base-nova` with `@base-ui/react` (not Radix), so `asChild` is not available — wrap children in `Link`/etc. directly or use `buttonVariants({...})` as a className.
 
 ## Reference Guides
 
-- [REACT.md](REACT.md) - React patterns, architecture, and best practices
-- [REACT-QUERY.md](REACT-QUERY.md) - TanStack React Query patterns and best practices
-- [FRAMER-MOTION.md](FRAMER-MOTION.md) - Framer Motion animation patterns and best practices
-- [TAILWIND.md](TAILWIND.md) - Tailwind CSS utilities and patterns
-- [I18N.md](I18N.md) - i18n (react-i18next) for Arabic/English translations with RTL support
-- [SHADCN.md](SHADCN.md) - shadcn/ui component library and patterns
-- [REACT-BITS.md](REACT-BITS.md) - React Bits animated components
-- [ZOD.md](ZOD.md) - Zod schema validation and TypeScript types
-- [REACT-ROUTER.md](REACT-ROUTER.md) - React Router client-side routing
-- [ZUSTAND.md](ZUSTAND.md) - Zustand state management
-- [REACT-HELMET.md](REACT-HELMET.md) - React Helmet SEO and meta tags
-- [AXIOS.md](AXIOS.md) - Axios HTTP client
+- [REACT.md](REACT.md) — React 19 patterns
+- [REACT-QUERY.md](REACT-QUERY.md) — TanStack React Query
+- [FRAMER-MOTION.md](FRAMER-MOTION.md) — Framer Motion
+- [SHADCN.md](SHADCN.md) — shadcn/ui
+- [REACT-BITS.md](REACT-BITS.md) — animated components
+- [ZOD.md](ZOD.md) — schema validation
+- [ZUSTAND.md](ZUSTAND.md) — state management
+- [AXIOS.md](AXIOS.md) — HTTP client
 
 <!-- MEMORY:START -->
 # Portfoliolio
 
-_Last updated: 2026-02-18 | 64 active memories, 224 total_
+_Last updated: 2026-06-09 | 34 active memories, 237 total_
 
 ## Architecture
 - Added `@types/three` as a dev dependency to resolve TypeScript type declaration issues for the Three.js library [typescript, dependencies]
@@ -66,73 +155,36 @@ _Last updated: 2026-02-18 | 64 active memories, 224 total_
 - Portfolio project with comprehensive modular architecture using Vite and modern web technologies. Project structure i... [portfolio, modular-architecture, web-technologies, component-design]
 
 ## Key Decisions
-- Replaced `process.env.NODE_ENV` with `import.meta.env.DEV` to align with Vite's idiomatic environment variable access... [vite, typescript]
-- Updated Framer Motion animation configuration to use top-level `type: 'spring'` instead of nested `spring` key for sp... [animation, framer-motion]
 - Planned to dynamically calculate years of experience from September 2022 start date and project count from CMS query [stats, automation]
 - Implemented a route loader in `about.tsx` to prefetch project query data, ensuring smoother initial page load and imm... [data-fetching, performance]
 - Resolved Plasma background rendering and positioning challenges by investigating multiple strategies including fixed ... [UI, Component, Rendering]
 - Plan to add 5 projects from CV to CMS collection, marking all as featured, with 8 additional metadata fields includin... [project-management, cms-integration]
-- Decided to convert camelCase CMS field slugs to snake_case (`liveUrl` → `live_url`, `repoUrl` → `repo_url`, `techStac... [cms, api]
-- Chose to handle CMS data transformation at the API layer by spreading nested `data` object, maintaining a clean separ... [api, data-architecture]
-- Chose to use flex layout with `h-full` to normalize card heights across featured work section, ensuring consistent vi... [layout, design-system]
-- Redesigned featured work section from grid to horizontal scroll carousel with a terminal 'View All Projects' card, im... [ui, ux, projects]
-- Modified featured work section scroll tracking to dynamically calculate section height based on viewport plus actual ... [performance, scroll, layout]
 - Plan to enhance existing project detail page by upgrading 7 section components with more impressive design techniques... [design, ui-enhancement]
-- Chose to layer the Plasma WebGL shader as a fallback atmospheric background behind the hero gradient, providing a sub... [design-system, visual-enhancement]
-- Chose to use TanStack Router's directory-based routing convention over flat file naming to ensure clean, predictable ... [routing, architecture]
-- Replaced window resize event listeners with ResizeObserver in LiquidChrome component to improve event handling effici... [performance, web-apis]
-- Implemented performance optimizations for page transitions using direct DOM manipulation and refs instead of 60fps Re... [performance, react, optimization]
 - Need to implement a more performance-friendly fallback background strategy for project detail pages, potentially repl... [optimization, rendering]
-- Implemented performance optimizations for WebGL components by adding IntersectionObserver to pause rendering when com... [performance, webgl]
-- Chose to maintain existing tag label mapping strategy when adding new project tags, ensuring consistent human-readabl... [metadata, consistency]
-- Continued using snake_case for new CMS field transformations (pull_quote, features) to maintain consistent API data h... [api, naming-convention]
-- Chose to omit 'Torch' from project titles when creating CMS entries, maintaining a more generic and professional pres... [naming, branding]
-- Chose to mount the analytics provider in the root route `__root.tsx` to ensure comprehensive coverage of all page and... [routing, provider]
-- Renamed `use-analytics.ts` to `use-analytics.tsx` to support JSX syntax and resolve TypeScript configuration constrai... [typescript, configuration]
-- Replaced `sendBeacon` with `fetch(keepalive: true)` in page view and event tracking to support custom headers and ens... [analytics, performance]
-- Recommended taking 3-5 high-quality project images to showcase different aspects of the project's design and function... [portfolio, project-presentation]
 - Planned to use a frontend API layer to transform raw CMS image field strings into fully resolved media objects for pr... [cms, api-layer, data-transformation]
-- Created a `normalizeImages` function to handle different CMS media field formats, converting single image objects and... [api, data-parsing]
 - Planned to modify backend media transform endpoint to use cross-origin resource policy that allows loading images fro... [cors, images, backend]
-- Chose to compress project screenshots to 85% quality and resize them to reduce file size from 1-2MB to 170-335KB befo... [performance, media-optimization]
-- Redesigned the /work page to use a 2-column grid layout with flexible card design that gracefully handles projects wi... [ui, project-grid]
-- Chose to replace numeric fallback with a themed purple wave placeholder image that maintains visual consistency acros... [design, ui]
 - Selected 7 high-quality screenshots for project documentation, deliberately excluding 404 pages and text-only homepag... [media-selection, project-documentation]
-- Chose to compress screenshots to JPEG format and reduce total file size to 960KB for efficient media upload and storage [media-optimization, performance]
-- Added Vite dev server proxy for media transform endpoint to bypass CORP issues during development, with a fallback to... [vite, proxy, cors]
-- Implement a server-side base64 to binary file conversion step during initial media upload to ensure proper file stora... [media, upload, backend]
-- Rewrote animation variants to remove opacity transitions from parent stagger containers, allowing child components to... [animation, optimization]
-- Chose to compress project screenshots from PNG to JPEG, reducing total file size and optimizing for web transfer [media-optimization, performance]
-- Used @public/placeholder.webp as a fallback image in featured work section to maintain visual consistency across proj... [ui, images]
-- Limited featured work section horizontal scroll carousel to maximum 8 projects, ensuring a compact and curated projec... [pagination, project-display]
-- Chose Lenis smooth scrolling library with React wrapper for its ultra-lightweight 4 KB bundle size and native scrolli... [performance, scroll, library-selection]
+- Transformed CMS data handling strategy to use snake_case for field names, ensuring consistent API data conversion and... [CMS, data-transformation, API]
+- Implemented performance optimizations for WebGL and scroll-based components, including IntersectionObserver to pause ... [performance, WebGL, rendering]
+- Optimized project image handling with compression, format conversion, and normalization strategies to reduce file siz... [images, optimization, media]
+- Enhanced project presentation with dynamic layout and scroll strategies, including horizontal carousel, grid layouts,... [layout, scrolling, UX]
 
 ## Patterns & Conventions
-- Implemented a barrel export (index.ts) in the icons directory to enable clean, centralized imports for technology sta... [import-pattern, exports]
 - Designed about page with a 12-column grid layout using a 5/7 split between portrait and content areas, maintaining a ... [layout, design-system]
 - Added `pointer-events-none` to Plasma wrapper to prevent canvas from intercepting mouse interactions with page content [interaction, design]
-- Comprehensive frontend optimization strategy covering performance, design consistency, and animation techniques: Code... [frontend, optimization, design, performance]
+- Frontend optimization encompassing multiple performance and design strategies: Code-splitting, responsive design, SEO... [optimization, frontend, performance, design]
+- Scroll and navigation management using custom hooks like `use-scroll-to-top.ts` that integrate `useLenis` and `useLoc... [hooks, navigation, scroll-management]
 
 ## Gotchas & Pitfalls
 - PillNav remains left-aligned due to absolute positioning and left-0 class, requiring explicit centering adjustments i... [layout, navigation]
 - PillNav's default white background is controlled by the `baseColor` prop, which affects both the logo circle and nav ... [ui, styling]
 - Featured work section experienced uneven card heights due to unconstrained description text length and lack of height... [ui, layout]
 - TanStack Router can create implicit layout routes with shared prefixes, causing unexpected routing behavior when file... [routing, tanstack-router]
-- WebGL/Plasma background components have significant performance challenges, including: 60 shader iterations per pixel... [performance, webgl, shader]
 - Identified and fixed potential error propagation issue in contact form submission by avoiding `throw undefined` which... [error-handling, form-submission]
 - Discovered that the Arabic language project image filename includes non-standard characters (السراج-حلول-تكنولوجيا-ال... [internationalization, file-naming]
-- CMS media handling involves complex image and storage challenges with network and upload issues: image fields can acc... [CMS, media, upload, image-processing]
-- Animation stagger containers create visual flickering by having both parent and child components simultaneously anima... [animation, performance, ui]
-
-## Current Progress
-- Project setup and initialization completed with Vite, including library installations (Tailwind, shadcn), project str... [project-setup, configuration]
-- Updated personal profile with refined personal biography in about section and contact information (email set to perso... [profile, personal-info]
-- Successfully populated CMS with project entries: Added 8 enterprise service projects including Alhikma Akademie (e-le... [cms, project-documentation]
-- Completed screenshot and media upload process for multiple projects, including Alhikma Akademie (5 images), Al-Seraj ... [media-upload, project-documentation]
-- Added a 'Download CV' button with an <a> tag pointing to `/Haithem Mustafa CV.pdf` in the public directory [ui, cv]
-
-## Context
-- CMS credentials set for admin@madebyhaithem.com with specific password, preparing to populate projects collection via... [cms, authentication]
+- CMS media handling involves complex challenges including: multiple image upload formats, token management for uploads... [CMS, media, uploads, integration]
+- WebGL/Plasma background components present significant performance challenges: high shader computation (60 iterations... [performance, WebGL, rendering]
+- Animation stagger techniques can create visual flickering when parent and child components simultaneously animate opa... [animation, UI, performance]
 
 _For deeper context, use memory_search, memory_related, or memory_ask tools._
 <!-- MEMORY:END -->

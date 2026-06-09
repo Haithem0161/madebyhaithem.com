@@ -1,7 +1,0 @@
-export { ProjectHero } from "./project-hero"
-export { ProjectOverview } from "./project-overview"
-export { ProjectFeatures } from "./project-features"
-export { ProjectMetrics } from "./project-metrics"
-export { ProjectTechStack } from "./project-tech-stack"
-export { ProjectGallery } from "./project-gallery"
-export { ProjectNav } from "./project-nav"

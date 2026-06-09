@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+# Haithem Mustafa Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A production-ready Next.js 16 + TypeScript portfolio for Haithem Mustafa (Full Stack Developer)
+with Arabic/English (RTL) support and per-project case-study pages.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Next.js 16** (App Router, Turbopack, RSC)
+- **React 19** + **TypeScript 5.9** (strict)
+- **Tailwind CSS v4** + **shadcn/ui** (base-nova, RTL)
+- **next-intl 4** — i18n (`en`, `ar`) with `proxy.ts` middleware and `as-needed` locale prefix
+- **TanStack React Query 5** (SSR-safe singleton + Devtools)
+- **Zustand 5** (devtools + persist)
+- **Axios** (env-driven, interceptors)
+- **Framer Motion** + **Zod 4** + **react-hook-form** + **next-themes**
+- **ESLint 9** flat config (`eslint-config-next`)
 
-## React Compiler
+## Getting started
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm install
+cp .env.example .env.local
+pnpm dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:3000](http://localhost:3000) (English) or [http://localhost:3000/ar](http://localhost:3000/ar) (Arabic).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm dev          # Dev server (Turbopack)
+pnpm build        # Production build
+pnpm start        # Run production server
+pnpm lint         # ESLint
+pnpm typecheck    # tsc --noEmit
 ```
+
+## Adding a shadcn component
+
+```bash
+pnpx shadcn@latest add card
+```
+
+## Adding a locale
+
+1. Add the code (e.g. `fr`) to `routing.locales` in `src/i18n/routing.ts`.
+2. Add the direction in `localeDirection` (`ltr` or `rtl`).
+3. Create `messages/fr.json` mirroring `messages/en.json`.
+
+## Project layout
+
+See [CLAUDE.md](CLAUDE.md) for the full architecture map and conventions.

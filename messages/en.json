@@ -1,0 +1,360 @@
+{
+  "Metadata": {
+    "title": "Haithem Mustafa · Full Stack Developer",
+    "description": "Full stack developer with 4 years of experience building marketing sites, ecommerce platforms, internal business tools, and scalable backend systems. Fastify, NestJS, Rust, React, and Next.js. Baghdad."
+  },
+  "Common": {
+    "loading": "Loading",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "backHome": "Back to home",
+    "downloadCV": "Download CV",
+    "scroll": "Scroll"
+  },
+  "Nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "skills": "Skills",
+    "education": "Education",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "eyebrow": "Portfolio · 2026",
+    "tagline1": "Full stack,",
+    "tagline2": "end to end.",
+    "subtitle": "Full Stack Developer · Backend Team Lead. Baghdad.",
+    "intro": "I build complete web solutions, from marketing sites and portfolios to ecommerce platforms, internal tools, and scalable backend systems. UI/UX, API design, database architecture, and deployment.",
+    "ctaContact": "Get in touch",
+    "ctaCV": "Download CV"
+  },
+  "About": {
+    "eyebrow": "01 · About",
+    "title": "One developer, the whole stack.",
+    "backendLabel": "The backend",
+    "backendBody": "Four years building production backends in Fastify, NestJS, and Rust over PostgreSQL with Prisma. Real-time WebSocket systems, microservices, HLS media pipelines, Redis / BullMQ job queues, payments, and full-text search. Currently leading a backend team at TORCH: code reviews, architecture, and technical decisions.",
+    "frontendLabel": "The frontend",
+    "frontendBody": "I ship the product side too: React 19 and Next.js with TanStack Query, shadcn/ui, and Framer Motion. Trilingual interfaces with full RTL support, technical SEO, and performance work, from page structure and meta tags to Turbopack and priority hints.",
+    "footnote": "I work the full lifecycle: UI/UX, API design, database architecture, and deployment. Monoliths when it fits, microservices when it doesn't."
+  },
+  "Projects": {
+    "eyebrow": "02 · Selected work",
+    "title": "Things I've built.",
+    "subtitle": "A few systems I've designed, built, and shipped end to end.",
+    "viewAll": "All projects",
+    "allEyebrow": "Projects",
+    "allTitle": "Everything I've built.",
+    "allSubtitle": "Full stack systems, real-time platforms, and the products around them.",
+    "backToProjects": "Back to projects",
+    "overviewLabel": "Overview",
+    "roleLabel": "Role",
+    "yearLabel": "Year",
+    "stackLabel": "Stack",
+    "buildLabel": "The build",
+    "highlightsLabel": "Highlights",
+    "visitLabel": "Visit site",
+    "appStoreLabel": "On the App Store",
+    "internalLabel": "In development · no public link",
+    "items": {
+      "torch-core-backend": {
+        "name": "Torch Core Backend",
+        "tagline": "Microservices platform for a business OS",
+        "role": "Backend Team Lead",
+        "company": "TORCH",
+        "period": "2025 — Current",
+        "summary": "The backend powering Torch's business OS: an Nx monorepo of independently deployable Fastify microservices for HR, payroll, email, authentication, notifications, documents, domains, and more. I lead the backend team here, owning architecture, code reviews, and technical direction.",
+        "build": [
+          "Architected an Nx + pnpm monorepo of ~20 independently deployable Fastify 5 services (auth, HR, email, notifications, documents, domains, vault, automation, and more), with shared DDD and schema packages so services stay consistent without coupling.",
+          "Designed an event-driven core: a shared Redis pub/sub event bus lets services react to each other (auth and domain events fan out to the notification engine) without direct calls.",
+          "Built the HR service as the largest domain — payroll, attendance, leave, and scheduling — over a 130+ model Prisma schema, with ZK Teco biometric device integration.",
+          "Built email as its own service: IMAP/SMTP, real-time inbox push over WebSockets, and split worker processes for sync, send, and domain-sync so heavy mail work never blocks the API.",
+          "Designed the auth service as the central identity hub: RS256 JWT, MFA, WebAuthn, SAML and OpenID, Argon2 hashing, and entity/session management consumed by every other service.",
+          "Built a document center with OCR, e-signatures, retention policies, and templates, and a zero-knowledge vault (encrypted password sync), both backed by MinIO object storage.",
+          "Containerized every service with hardened multi-stage Docker images (non-root, health checks, graceful SIGTERM) and wired in OpenTelemetry traces and Prometheus metrics across the fleet.",
+          "Set up the testing strategy: Vitest, TestContainers (Postgres + Redis), and Pact contract tests so services can evolve independently with confidence."
+        ],
+        "highlights": [
+          "~20 Fastify microservices · Nx monorepo",
+          "380+ Prisma models across services",
+          "Event-driven via shared Redis bus",
+          "OpenTelemetry + Prometheus across the fleet"
+        ]
+      },
+      "torch-business-os": {
+        "name": "Torch Business OS",
+        "tagline": "Desktop shell & launcher for the business apps",
+        "role": "Full Stack Developer",
+        "company": "TORCH",
+        "period": "2025 — Current",
+        "summary": "A Tauri 2 desktop app that acts as a unified, authenticated entry point for Torch's business apps. Users discover, install, and run child apps in entity-scoped tabs, with centralized auth and binary distribution managed by the launcher.",
+        "build": [
+          "Built the desktop shell in Tauri 2 with a Rust core (~10k lines) and a React 19 frontend, exposing 40+ typed Rust commands with TypeScript bindings auto-generated via tauri-specta.",
+          "Designed a parent↔child IPC protocol: a TCP server speaking length-delimited MessagePack frames, passing each child app a run ID and port so they can refresh auth, signal readiness, and shut down gracefully.",
+          "Implemented unified auth: login once, store JWT + refresh tokens in the OS keychain, push tokens to child apps over IPC, and refresh in the background so sessions never expire mid-use.",
+          "Built a binary distribution system: download platform-specific app bundles from the CDN with resumable Range requests, verify SHA-256, extract, and run queued installs/updates with exponential backoff.",
+          "Wired the Tauri auto-updater to the distribution API so the launcher keeps itself and its catalog up to date across Linux, Windows, and macOS (x86_64 + aarch64).",
+          "Built process and lifecycle management: child apps run as separate OS processes tracked via PID files and process groups, stay alive in the background across tab switches, and clean up orphans on crash recovery.",
+          "Added an embedded mode where child apps serve a local HTTP UI and render seamlessly inside Business OS tabs, plus entity-scoped tabs so the same app can run per business entity in parallel.",
+          "Built the frontend with React 19, TanStack Query (tuned for native semantics), Zustand, React Router 7, shadcn/ui, and SQLite-backed offline state for sessions, installed apps, and UI."
+        ],
+        "highlights": [
+          "Tauri 2 · Rust core · 40+ typed commands",
+          "MessagePack TCP IPC to child apps",
+          "Unified auth via OS keychain + background refresh",
+          "Resumable, SHA-256-verified app distribution"
+        ]
+      },
+      "beeb": {
+        "name": "Beeb",
+        "tagline": "Ride-hailing backend in Rust",
+        "role": "Backend Developer",
+        "company": "Freelance",
+        "period": "2025",
+        "summary": "The backend for Beeb, a ride-hailing platform (think Uber / Careem for Baghdad). A single Rust service built on Axum with domain-driven design, real-time trip dispatch, and geospatial matching over PostGIS, serving an admin dashboard and the rider and captain apps.",
+        "build": [
+          "Built the service in Rust with Axum, organized as 14 domain-driven modules (trips, captains, payment, zone, realtime, scheduling, identity, privacy, reports, and more), each split into domain / presentation / infrastructure layers.",
+          "Designed the data layer with raw SQLx (compile-time checked queries) over PostgreSQL with the PostGIS extension — 33 migrations, 33 tables, and 23 enums — using ST_Contains for zone polygon matching and proximity-based dispatch.",
+          "Built real-time trip flow over WebSockets with a Redis pub/sub bridge, pushing live status, location updates, and room membership between riders and captains.",
+          "Implemented the trip lifecycle: base + distance + time fares, per-zone cancellation penalties, scheduled and recurring multi-stop trips, and per-rider fare breakdowns.",
+          "Built the payment layer: a wallet ledger, card and cash methods, and a refund cascade with admin override.",
+          "Built captain onboarding: document upload to MinIO via presigned URLs, an auto-approval engine, and a compliance-based daily activation gate.",
+          "Ran 12 background workers / sweepers — OTP SMS, trip dispatch, force-cancel, room expiry, push via Firebase, location-staleness checks, the WebSocket↔Redis bridge, and more.",
+          "Added JWT + OTP-SMS auth, rate limiting (tower-governor), number-proxy privacy for anonymized rider↔captain calls, OpenAPI/Swagger docs via utoipa, and Docker + systemd deployment.",
+          "Built analytics rollups (revenue by zone, captain leaderboard, cancellation patterns, daily activation) and admin hardening: audit logs, session revocation, and bulk actions."
+        ],
+        "highlights": [
+          "Rust + Axum · 14 DDD domains",
+          "PostGIS geospatial dispatch & zones",
+          "Real-time trips over WebSockets + Redis",
+          "12 background workers · wallet & refunds"
+        ]
+      },
+      "tan": {
+        "name": "TAN",
+        "tagline": "Car marketplace & short-video platform",
+        "role": "Backend Developer",
+        "company": "Freelance",
+        "period": "2025",
+        "summary": "The backend for a car-marketplace and short-video app. A Fastify and TypeScript service split into 16 modules (listings, reels, chat, payments, calls) over a 50-table PostgreSQL database with Prisma.",
+        "build": [
+          "Split the backend into 16 modules over a 50-table Postgres database with Prisma: listings, reels, chat, payments, calls, and more.",
+          "Built a video pipeline where each upload is transcoded once into 360p / 720p / 1080p HLS. The heavy FFmpeg work runs in its own worker container so it never blocks the API, with retry-or-fail handling per error.",
+          "Videos upload straight to S3 from the browser in parts, so the API never touches raw files. Finished HLS is pushed to S3 / MinIO and served through a Bunny CDN.",
+          "Did real-time chat and notifications over WebSockets, with end-to-end encrypted DMs and push notifications via Firebase and Apple.",
+          "Handled the social feed, likes, comments, follows and blocks, with feed ranking, trending hashtags, and view counts updated by background jobs on Redis / BullMQ.",
+          "Wired up QiCard payments for promoted listings and verified badges, including renewals, refunds, and click / view stats.",
+          "Added full-text search across users, listings, and reels, Arabic / English data throughout, HEIC image support, and the moderation tools (reports, appeals, logs)."
+        ],
+        "highlights": [
+          "16 modules · 50-table Postgres schema",
+          "One-pass HLS transcoding in an isolated worker",
+          "End-to-end encrypted real-time DMs",
+          "QiCard payments with renewals & refunds"
+        ]
+      },
+      "alhikma": {
+        "name": "Alhikma Akademie",
+        "tagline": "Arabic learning & Quran platform",
+        "role": "Full Stack Developer",
+        "company": "Freelance",
+        "period": "2024 — 2025",
+        "summary": "A full learning platform for Arabic and Quran study: courses, exercises, video lessons, live classes, and chat, with a complete admin back office. A Fastify API and a React 19 frontend over PostgreSQL, with real-time features throughout.",
+        "build": [
+          "Built the platform end to end: a Fastify 5 REST API (45+ route groups, 16 admin modules) and a React 19 + Vite single-page app, styled with Tailwind CSS and fully Arabic / RTL.",
+          "Designed the learning model over PostgreSQL (~60 tables, 40+ data models): multi-level Arabic courses, and exercise types for listening, reading, writing, speaking, grammar, and vocabulary.",
+          "Built the Quran module with surah memorization tracking, spaced-repetition scheduling, and progress analytics per student.",
+          "Built the vocabulary system with Arabic text processing and morphology, example sentences, study sessions, and dictionary management.",
+          "Added real-time features over Socket.IO with a Redis adapter for pub/sub: live chat (with moderation, banned users, canned responses, audit logs), notifications, and scheduled video calls with availability slots.",
+          "Built a video system: upload, ffmpeg processing, streaming, playlists, and categories, plus video-call groups with participant tracking.",
+          "Wired Stripe for subscriptions and payments, Nodemailer for transactional email and newsletter campaigns, and an Anthropic-powered translation cache.",
+          "Built the admin back office: CRUD dashboards for every entity, a notification scheduler with delivery tracking, subscriber management, RBAC (user / moderator / admin), badges, reviews, and audit trails."
+        ],
+        "highlights": [
+          "Fastify API · React 19 + Vite frontend",
+          "60+ Postgres tables · full LMS domain",
+          "Quran memorization with spaced repetition",
+          "Real-time chat & video calls over Socket.IO"
+        ]
+      },
+      "alshabaka": {
+        "name": "Alshabaka",
+        "tagline": "Streaming platform",
+        "role": "Full Stack Developer",
+        "company": "TORCH",
+        "period": "2024 — 2025",
+        "summary": "A scalable NestJS monorepo backend with 50+ feature modules and 43+ Sequelize models, plus a trilingual Next.js frontend. I took ownership of the platform's backend, diagnosed issues, optimized performance, and shipped new features.",
+        "build": [
+          "Architected a NestJS monorepo with 50+ feature modules, 43+ Sequelize models, and a multi-client controller pattern serving separate optimized APIs for web and mobile.",
+          "Built a real-time watch-history system over Socket.IO with multi-device sync, offline queuing, and profile-based room isolation, and authored cross-platform client SDKs (TypeScript, React, React Native, Flutter).",
+          "Designed session-based auth with Redis-backed sessions, Passport.js strategies, RBAC, OTP verification, QR-based TV authentication, and a guest-to-registered upgrade flow with device persistence.",
+          "Developed a media pipeline for movies, series, TV, theater, and music with HLS streaming, CDN management, subscription-based access control, and content maturity filtering.",
+          "Built notification infrastructure on Firebase Cloud Messaging with topic-based subscriptions, per-profile dismissals, and multi-platform delivery.",
+          "Containerized the full stack with Docker Compose (PostgreSQL, Redis, Elasticsearch, Kibana, Kafka, MinIO) with hot-reload dev workflows and automated migrations.",
+          "Built the frontend in Next.js 15 with full trilingual support (English, Arabic, Kurdish), RTL layouts, real-time Socket.IO integration, and responsive video playback."
+        ],
+        "highlights": [
+          "50+ modules · 43+ models · monorepo",
+          "QR-based TV auth & multi-device sync",
+          "HLS media pipeline with maturity filtering",
+          "Trilingual (EN / AR / KU) with RTL"
+        ]
+      },
+      "studio-system": {
+        "name": "The Studio System",
+        "tagline": "Internal business management platform",
+        "role": "Full Stack Developer",
+        "company": "The Studio",
+        "period": "2025 — Current",
+        "summary": "A full-stack business management platform with 8 integrated modules (CRM, HR, Tasks, Workspaces, Mailbox, Admin, Settings, and a companion Client Portal), built on a Fastify 5 backend with domain-driven design and a React 19 frontend.",
+        "build": [
+          "Built a CRM engine with pipeline stage tracking, stage-history auditing, follow-up scheduling, account analytics, Google Calendar sync, automated CRM ID generation, and bulk CSV import / export with duplicate detection.",
+          "Built a complete email system with IMAP / SMTP integration, multi-account support, IMAP IDLE for real-time inbox push, encrypted credential storage, background cron sync, folder management, attachments, and templates.",
+          "Implemented task management with workspace-based organization, drag-and-drop Kanban boards (dnd-kit), multi-assignee support, approval workflows, and role-based visibility.",
+          "Designed a dual-JWT auth system with httpOnly cookies, automatic token refresh with request queuing, 12-role RBAC with module- and route-level access, and a layered architecture (routes → handlers → services → repositories) with Prisma and TypeBox.",
+          "Engineered real-time WebSocket notifications with per-user broadcasting, exponential-backoff reconnection, heartbeat keep-alive, and automatic TanStack Query cache invalidation.",
+          "Built an HR module with employee management, time-off and overtime workflows with multi-stage approval, and work-schedule management.",
+          "Built the frontend in React 19, Vite 7, TanStack Query, shadcn/ui, Lexical, FullCalendar, and Recharts, with trilingual i18n (EN, FR, AR) and full RTL support."
+        ],
+        "highlights": [
+          "8 integrated modules · domain-driven design",
+          "IMAP IDLE real-time mailbox",
+          "Dual-JWT auth · 12-role RBAC",
+          "Trilingual (EN / FR / AR) with RTL"
+        ]
+      },
+      "studio-client-portal": {
+        "name": "The Studio · Client Portal",
+        "tagline": "Customer-facing project portal",
+        "role": "Full Stack Developer",
+        "company": "The Studio",
+        "period": "2025 — Current",
+        "summary": "An external-facing client portal, built as a standalone app inside the same platform, letting customers register, request services, and track project progress in real time, linked directly to the internal team's CRM and task workflows.",
+        "build": [
+          "Implemented a separate auth flow with dedicated portal JWT cookies, enabling dual-session support so staff can be signed into both the admin panel and the client portal at once.",
+          "Built a service-request system where clients pick from a dynamic catalog, submit multi-service requests, and track each through status stages (Pending, In Progress, Review, Completed) with a visual project timeline.",
+          "Developed real-time project updates over per-service-request WebSocket channels, pushing status changes, new notes, and deadline updates to clients instantly.",
+          "Built an interactive onboarding tour with spotlight overlays, guided tooltips, and auto-navigation to walk new clients through the portal on first login.",
+          "Implemented a project detail view with tabbed navigation for notes, timeline history, and service breakdowns, with bidirectional note exchange between clients and the team.",
+          "Built the portal frontend with bilingual support (EN, AR), full RTL layout, Framer Motion animations, and a dashboard for active projects, recent activity, and upcoming deadlines."
+        ],
+        "highlights": [
+          "Dual-session portal auth",
+          "Per-request real-time WebSocket channels",
+          "Guided onboarding tour",
+          "Bilingual (EN / AR) with RTL"
+        ]
+      },
+      "studio-website": {
+        "name": "The Studio · Website",
+        "tagline": "Agency marketing site, design to deploy",
+        "role": "Full Stack Developer",
+        "company": "The Studio",
+        "period": "2025",
+        "summary": "The Studio's company website: a fast, animated marketing site for a creative agency, with 3D scenes, scroll-driven motion, and a bilingual (EN / AR) experience. Built as a React 19 + Vite SPA, styled with Tailwind.",
+        "build": [
+          "Built the site as a React 19 + Vite single-page app with the React Compiler enabled, styled with Tailwind CSS and themed via CSS variables.",
+          "Built 3D scenes with Three.js and React Three Fiber: a particle field and an animated 3D logo whose accent colors shift between sections.",
+          "Drove the motion with GSAP ScrollTrigger for section reveals and Framer Motion for component transitions, with Lenis smooth scrolling throughout.",
+          "Made it bilingual (English / Arabic) with full RTL support via react-i18next and lazy-loaded translation namespaces.",
+          "Built the pages — home, services, work, and per-project case studies — with lazy-loaded routes (React Router) and static data ready to swap for a CMS/API.",
+          "Added light / dark / system theming persisted with Zustand, SEO via React Helmet, and a contact form with React Hook Form + Zod.",
+          "Deployed to production on nginx alongside the separate admin CMS and API domains."
+        ],
+        "highlights": [
+          "React 19 + Vite SPA · React Compiler",
+          "Three.js / R3F 3D scenes & logo",
+          "GSAP ScrollTrigger + Lenis motion",
+          "Bilingual (EN / AR) with RTL"
+        ]
+      },
+      "alseraj": {
+        "name": "Alseraj Company Website",
+        "tagline": "Marketing site, design to deploy",
+        "role": "Full Stack Developer",
+        "company": "Alseraj",
+        "period": "2024",
+        "summary": "Alseraj's company website, built from design to deploy with Next.js, React, and Tailwind. A fast, responsive PWA tuned to load quickly on phones and desktop, with the motion, SEO, and content done end to end.",
+        "build": [
+          "Built the site from design to deploy with Next.js, React, and Tailwind.",
+          "Made it a fast, responsive PWA using HTTP/2, Open Graph tags, priority hints, and Turbopack, tuned to load quickly on phones and desktop.",
+          "Added the motion and feel, with page animations in Framer Motion and smooth scrolling via Lenis.",
+          "Did the technical SEO: page structure, meta tags, and speed, to help it rank.",
+          "Deployed it to production with monitoring and an automated deploy setup.",
+          "Wrote the site's content too: the copy, images, and the layout."
+        ],
+        "highlights": [
+          "Design to deploy, solo",
+          "Fast responsive PWA · HTTP/2",
+          "Framer Motion + Lenis",
+          "Technical SEO & monitoring"
+        ]
+      }
+    }
+  },
+  "Skills": {
+    "eyebrow": "03 · Skills",
+    "title": "What I work with.",
+    "groups": {
+      "languages": "Languages",
+      "backend": "Backend & APIs",
+      "frontend": "Frontend",
+      "data": "Data & Infra",
+      "devops": "DevOps & Tooling",
+      "soft": "Strengths",
+      "spoken": "Spoken"
+    },
+    "items": {
+      "languages": ["TypeScript", "JavaScript", "Rust", "PHP", "SQL"],
+      "backend": ["Node.js", "Fastify", "NestJS", "Axum", "WebSockets", "REST APIs", "Microservices"],
+      "frontend": ["React", "Next.js", "TanStack Query", "Tailwind CSS", "shadcn/ui", "Framer Motion"],
+      "data": ["PostgreSQL", "Prisma", "Sequelize", "Redis", "BullMQ", "Elasticsearch", "Kafka"],
+      "devops": ["Docker", "DevOps", "Technical SEO", "S3 / MinIO", "CDN", "CI / CD"],
+      "soft": ["Fast learner", "Team leadership", "Clear communicator", "Ownership"],
+      "spoken": ["Arabic, native", "English, fluent"]
+    }
+  },
+  "Education": {
+    "eyebrow": "04 · Education",
+    "title": "Education.",
+    "degree": "Bachelor of Science in Computer Engineering",
+    "school": "University of Technology, Baghdad",
+    "period": "Baghdad, Iraq",
+    "certsLabel": "Focus",
+    "certs": [
+      "Backend architecture & distributed systems",
+      "Real-time systems & WebSockets",
+      "Database design & performance"
+    ]
+  },
+  "Contact": {
+    "eyebrow": "05 · Contact",
+    "title": "Let's build something.",
+    "intro": "Open to full-stack and backend work, technical leadership, and consulting collaborations.",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "websiteLabel": "Website",
+    "githubLabel": "GitHub",
+    "linkedinLabel": "LinkedIn",
+    "locationLabel": "Based in"
+  },
+  "Footer": {
+    "rights": "All rights reserved",
+    "builtWith": "Built with Next.js · Baghdad"
+  },
+  "Preloader": {
+    "loading": "Loading"
+  },
+  "NotFound": {
+    "title": "404",
+    "description": "We couldn't find the page you were looking for."
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again."
+  },
+  "LocaleSwitcher": {
+    "label": "Language",
+    "en": "EN",
+    "ar": "AR"
+  }
+}

@@ -1,167 +1,216 @@
-import type { CmsProject, CmsMediaField } from "./api-types"
+export type ProjectLinkKind = "live" | "appstore" | "internal";
 
-/** Normalize CMS image field into an array of media refs.
- *  Handles: single object, array of objects, media ID string, or comma-separated IDs. */
-function normalizeImages(raw: unknown): CmsMediaField[] | undefined {
-  if (!raw) return undefined
-  if (Array.isArray(raw)) return raw
-  if (typeof raw === "object") return [raw as CmsMediaField]
-  if (typeof raw === "string") {
-    // Could be a JSON string of array, or comma-separated media IDs
-    try {
-      const parsed = JSON.parse(raw)
-      if (Array.isArray(parsed)) return parsed
-      if (typeof parsed === "object") return [parsed as CmsMediaField]
-    } catch {
-      // Comma-separated media IDs
-      return raw.split(",").map((id) => ({ id: id.trim() }))
-    }
-  }
-  return undefined
-}
+export type ProjectSlug =
+  | "torch-core-backend"
+  | "torch-business-os"
+  | "beeb"
+  | "tan"
+  | "alshabaka"
+  | "alhikma"
+  | "studio-system"
+  | "studio-client-portal"
+  | "studio-website"
+  | "alseraj";
 
 export type Project = {
-  id: string
-  slug: string
-  title: string
+  /** URL slug and i18n key under Projects.items.* */
+  slug: ProjectSlug;
+  /** Show on the home page featured grid */
+  featured: boolean;
+  /** Non-translatable date range, e.g. "2024 — 2025" */
+  year: string;
+  /** Tech stack chips, shown as-is */
+  stack: string[];
+  /** External link; omitted for internal projects */
+  link?: { href: string };
+  linkKind: ProjectLinkKind;
+};
 
-  subtitle?: string
-  description?: string
-  role?: string
-  year?: string
-  client?: string
-  tags: string[]
-  gradient: string
-  featured?: boolean
-  liveUrl?: string
-  repoUrl?: string
+export const projects: Project[] = [
+  {
+    slug: "torch-core-backend",
+    featured: true,
+    year: "2025 — Current",
+    stack: [
+      "Fastify 5",
+      "TypeScript",
+      "Nx Monorepo",
+      "Prisma",
+      "PostgreSQL",
+      "Redis",
+      "BullMQ",
+      "WebSockets",
+      "MinIO",
+      "Docker",
+      "OpenTelemetry",
+    ],
+    linkKind: "internal",
+  },
+  {
+    slug: "torch-business-os",
+    featured: false,
+    year: "2025 — Current",
+    stack: [
+      "Tauri 2",
+      "Rust",
+      "React 19",
+      "TypeScript",
+      "SQLite",
+      "MessagePack",
+      "TanStack Query",
+      "Zustand",
+      "Tailwind CSS",
+    ],
+    linkKind: "internal",
+  },
+  {
+    slug: "tan",
+    featured: true,
+    year: "2025",
+    stack: [
+      "Fastify",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "Redis",
+      "BullMQ",
+      "WebSockets",
+      "S3",
+      "Bunny CDN",
+      "FFmpeg / HLS",
+    ],
+    linkKind: "appstore",
+  },
+  {
+    slug: "beeb",
+    featured: false,
+    year: "2025",
+    stack: [
+      "Rust",
+      "Axum",
+      "PostgreSQL",
+      "PostGIS",
+      "SQLx",
+      "Redis",
+      "WebSockets",
+      "JWT",
+      "FCM",
+      "MinIO",
+      "Docker",
+    ],
+    linkKind: "internal",
+  },
+  {
+    slug: "alshabaka",
+    featured: true,
+    year: "2024 — 2025",
+    stack: [
+      "NestJS",
+      "TypeScript",
+      "Sequelize",
+      "Socket.IO",
+      "Redis",
+      "Elasticsearch",
+      "Kafka",
+      "MinIO",
+      "Next.js",
+      "Docker",
+    ],
+    link: { href: "https://alshabaka.imn.iq" },
+    linkKind: "live",
+  },
+  {
+    slug: "alhikma",
+    featured: false,
+    year: "2024 — 2025",
+    stack: [
+      "Fastify 5",
+      "TypeScript",
+      "React 19",
+      "Vite",
+      "PostgreSQL",
+      "Socket.IO",
+      "Redis",
+      "Tailwind CSS",
+      "Stripe",
+      "Tiptap",
+    ],
+    link: { href: "https://alhikmaakademie.com" },
+    linkKind: "live",
+  },
+  {
+    slug: "studio-system",
+    featured: true,
+    year: "2025 — Current",
+    stack: [
+      "Fastify 5",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "WebSockets",
+      "React 19",
+      "Vite 7",
+      "TanStack Query",
+      "shadcn/ui",
+    ],
+    linkKind: "internal",
+  },
+  {
+    slug: "studio-client-portal",
+    featured: false,
+    year: "2025 — Current",
+    stack: [
+      "Fastify",
+      "TypeScript",
+      "React 19",
+      "WebSockets",
+      "Framer Motion",
+      "i18n / RTL",
+    ],
+    link: { href: "https://client.thestudioiq.com" },
+    linkKind: "live",
+  },
+  {
+    slug: "studio-website",
+    featured: false,
+    year: "2025",
+    stack: [
+      "React 19",
+      "Vite",
+      "TypeScript",
+      "Tailwind CSS",
+      "Three.js / R3F",
+      "GSAP",
+      "Framer Motion",
+      "Lenis",
+      "i18n / RTL",
+    ],
+    link: { href: "https://thestudioiq.com" },
+    linkKind: "live",
+  },
+  {
+    slug: "alseraj",
+    featured: false,
+    year: "2024",
+    stack: [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Lenis",
+      "Technical SEO",
+    ],
+    link: { href: "https://alseraj.iq" },
+    linkKind: "live",
+  },
+];
 
-  // Detail page fields
-  overview?: string[]
-  pullQuote?: string
-  features?: { title: string; description: string }[]
-  metrics?: { value: string; label: string }[]
-  techStack?: { category: string; items: string[] }[]
-  gallery?: { id: string; alt: string; caption?: string }[]
+export const featuredProjects = projects.filter((p) => p.featured);
 
-  // Raw image references for hero/thumbnail
-  images?: CmsMediaField[]
-}
+export const getProject = (slug: string): Project | undefined =>
+  projects.find((p) => p.slug === slug);
 
-const DEFAULT_GRADIENTS = [
-  "from-primary/20 to-secondary-purple/20",
-  "from-secondary-purple/20 to-palatinate/20",
-  "from-palatinate/20 to-primary/20",
-]
+export const isProjectSlug = (slug: string): slug is ProjectSlug =>
+  projects.some((p) => p.slug === slug);
 
-function safeJsonParse<T>(value: unknown): T | undefined {
-  if (!value) return undefined
-  if (typeof value === "string") {
-    try {
-      return JSON.parse(value)
-    } catch {
-      return undefined
-    }
-  }
-  if (Array.isArray(value) || typeof value === "object") return value as T
-  return undefined
-}
-
-function parseOverview(raw: unknown): string[] | undefined {
-  if (!raw) return undefined
-  if (Array.isArray(raw)) return raw
-  if (typeof raw === "string") {
-    if (raw.includes("<p>")) {
-      return raw
-        .split(/<\/?p[^>]*>/)
-        .map((s) => s.replace(/<[^>]+>/g, "").trim())
-        .filter(Boolean)
-    }
-    return raw
-      .split(/\n\n+/)
-      .map((s) => s.trim())
-      .filter(Boolean)
-  }
-  return undefined
-}
-
-function stripHtml(html: string): string {
-  return html.replace(/<[^>]+>/g, "").trim()
-}
-
-// Map CMS multiselect values to display labels
-const TAG_LABELS: Record<string, string> = {
-  react: "React",
-  rust: "Rust",
-  fastify: "Fastify",
-  "node-js": "Node.js",
-  nestjs: "NestJS",
-  prisma: "Prisma",
-  microservice: "Microservice",
-  tauri: "Tauri",
-  postgresql: "PostgreSQL",
-  typescript: "TypeScript",
-  nextjs: "Next.js",
-  docker: "Docker",
-  redis: "Redis",
-  socketio: "Socket.IO",
-  hls: "HLS",
-  ai: "AI",
-  seo: "SEO",
-  devops: "DevOps",
-  websocket: "WebSocket",
-  "framer-motion": "Framer Motion",
-  rtl: "RTL",
-  i18n: "i18n",
-  expressjs: "Express.js",
-  kafka: "Kafka",
-  drizzle: "Drizzle",
-  bullmq: "BullMQ",
-  opentelemetry: "OpenTelemetry",
-  webauthn: "WebAuthn",
-  saml: "SAML",
-  stripe: "Stripe",
-  twilio: "Twilio",
-  minio: "MinIO",
-  ddd: "DDD",
-}
-
-function formatTag(value: string): string {
-  return TAG_LABELS[value] ?? value
-}
-
-export function transformCmsProject(
-  raw: CmsProject,
-  index: number,
-): Project {
-  return {
-    id: raw.id,
-    slug: raw.slug,
-    title: raw.title,
-    subtitle: raw.subtitle ?? undefined,
-    description:
-      typeof raw.description === "string"
-        ? stripHtml(raw.description)
-        : undefined,
-    role: raw.role ?? undefined,
-    year: raw.year ?? undefined,
-    client: raw.client ?? undefined,
-    tags: (raw.tags ?? []).map(formatTag),
-    gradient:
-      raw.gradient ?? DEFAULT_GRADIENTS[index % DEFAULT_GRADIENTS.length],
-    featured: raw.featured ?? false,
-    liveUrl: raw.live_url ?? undefined,
-    repoUrl: raw.repo_url ?? undefined,
-    overview: parseOverview(raw.overview),
-    pullQuote: raw.pull_quote ?? raw.pullQuote ?? undefined,
-    features: safeJsonParse(raw.features),
-    metrics: safeJsonParse(raw.metrics),
-    techStack: safeJsonParse(raw.tech_stack),
-    gallery: normalizeImages(raw.gallery)?.map((img) => ({
-      id: img.id,
-      alt: img.alt ?? img.filename ?? "Project image",
-      caption: img.caption,
-    })),
-    images: normalizeImages(raw.images),
-  }
-}
+export const projectSlugs = projects.map((p) => p.slug);

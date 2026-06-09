@@ -1,8 +1,0 @@
-export { NodejsIcon } from "./nodejs"
-export { ReactIcon } from "./react"
-export { TypescriptIcon } from "./typescript"
-export { NestjsIcon } from "./nestjs"
-export { RustIcon } from "./rust"
-export { PostgresqlIcon } from "./postgresql"
-export { PrismaIcon } from "./prisma"
-export { GithubIcon, LinkedinIcon, XIcon } from "./social"
