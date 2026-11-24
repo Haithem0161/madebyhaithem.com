@@ -30,3 +30,7 @@ src/routeTree.gen.ts
 
 # CV build: headless Chromium profile dirs
 cv/prof-*
+
+# Local env files; .env.example is the tracked template
+.env*
+!.env.example
