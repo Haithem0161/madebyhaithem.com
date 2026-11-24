@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { projects } from "@/lib/projects";
-import { ProjectCard } from "./project-card";
+import { ProjectIndex } from "./project-index";
 import { SectionShell } from "./section-shell";
 
 export function ProjectsListing() {
@@ -28,11 +28,7 @@ export function ProjectsListing() {
         {t("allSubtitle")}
       </motion.p>
 
-      <div className="grid gap-12 sm:grid-cols-2 sm:gap-x-12 sm:gap-y-16">
-        {projects.map((project, idx) => (
-          <ProjectCard key={project.slug} project={project} index={idx} />
-        ))}
-      </div>
+      <ProjectIndex projects={projects} />
 
       <motion.div
         initial={{ opacity: 0 }}
@@ -43,10 +39,10 @@ export function ProjectsListing() {
         <Link
           href="/"
           data-cursor="magnetic"
-          className="group inline-flex items-center gap-2 self-start text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          className="group inline-flex items-center gap-2 self-start text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
         >
           <ArrowLeft
-            className="size-4 transition-transform duration-300 group-hover:-translate-x-0.5"
+            className="size-4 transition-[translate] duration-200 ease-out group-hover:-translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:translate-x-0.5"
             aria-hidden
           />
           {nav("backHome")}

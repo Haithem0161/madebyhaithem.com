@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown, Download, MoveUpRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { smoothScrollTo } from "@/hooks/use-lenis";
 import { siteConfig } from "@/lib/site";
 
@@ -21,6 +21,7 @@ const reveal = {
 
 export function Hero() {
   const t = useTranslations("Hero");
+  const locale = useLocale();
   return (
     <section
       id="hero"
@@ -92,7 +93,7 @@ export function Hero() {
               />
             </button>
             <a
-              href={siteConfig.cvHref}
+              href={siteConfig.cvHref[locale]}
               download
               className="group inline-flex items-center gap-2 rounded-full border border-foreground/20 px-5 py-3 text-sm font-medium transition-colors hover:border-foreground/60"
               data-cursor="magnetic"

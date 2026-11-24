@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>Haithem Mustafa, Full Stack Engineer, CV</title>
+<link rel="stylesheet" href="cv.css">
+</head>
+<body>
+
+<header>
+  <h1>Haithem Mustafa</h1>
+  <p class="role">Full Stack Engineer</p>
+  <p class="contact">Baghdad, Iraq · <a href="tel:+9647710015981">+964 771 001 5981</a> · <a href="mailto:haithem.m.nadhir@gmail.com">haithem.m.nadhir@gmail.com</a></p>
+  <p class="contact"><a href="https://madebyhaithem.com">madebyhaithem.com</a> · <a href="https://github.com/Haithem0161">github.com/Haithem0161</a> · <a href="https://www.linkedin.com/in/haithem-mustafa-dev/">linkedin.com/in/haithem-mustafa-dev</a></p>
+</header>
+
+<section>
+  <h2>Summary</h2>
+  <p>Backend-focused full stack engineer, 4+ years building and running production systems: TypeScript and Rust services on PostgreSQL, React/Next.js front ends and the Linux servers under them. Work spans banking, healthcare, ride-hailing, <span class="nw">e-learning</span> and media monitoring. Co-founded Rdood, an AI customer-service platform.</p>
+</section>
+
+<section>
+  <h2>Experience</h2>
+
+  <article>
+  <h3>Full Stack Engineer &amp; IT Systems Administrator · Asia Al-Iraq Islamic Bank <span class="meta">· Full-time · Baghdad · Aug 2026 – Present</span></h3>
+  <ul>
+    <li>Built WFIS, the bank’s live internal workflow system: it replaced 27 paper request forms with requests routed through the bank’s org chart, signed with a second factor and kept in a tamper-evident audit trail.</li>
+    <li>Rust (Axum) API with 346 OpenAPI endpoints on a 97-table PostgreSQL schema (SQLx), ORY Kratos/Hydra, Vault, MinIO, ClamAV, OpenTelemetry; React 19 web app (Arabic/English) and Capacitor apps for Android and iPhone.</li>
+    <li>Run WFIS on a two-server failover pair (HPE ProLiant, Pacemaker/Corosync, DRBD sync mirroring, iLO fencing) that switches over in about a minute, with pgBackRest/restic backups; also manage the bank’s network and email server.</li>
+    <li>Built NetAudit, a desktop app (Tauri 2, React, Python) that reads the bank’s device configs over SSH, draws the topology, flags issues and simulates traffic (packet trace, reachability, link failures) with Arabic/English reports.</li>
+    <li>Rebuilt the bank’s public website (asiabank.iq) from WordPress as an Astro site on Cloudflare Workers: Arabic and English, every old URL kept, and an admin CMS with two-factor sign-in.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Backend Team Lead · TORCH <span class="meta">· Full-time · Baghdad · Jun 2025 – Aug 2026</span></h3>
+  <ul>
+    <li>Led the backend team of 1–2 developers and built the core platform: about 20 Fastify 5 services in an Nx monorepo on a Redis event bus, with 380+ Prisma models on PostgreSQL and OpenTelemetry/Prometheus monitoring.</li>
+    <li>Services included auth (RS256 JWT, MFA, WebAuthn, SAML/OpenID SSO), HR (payroll, attendance, leave; ZKTeco biometric devices) and email (IMAP/SMTP); also built the company’s Tauri 2 desktop shell (Rust, React 19).</li>
+    <li>Took over the Alshabaka streaming backend (NestJS, Kafka, Elasticsearch), sped it up and shipped features.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Full Stack Developer · The Studio <span class="meta">· Part-time · Remote · Sep 2025 – Present</span></h3>
+  <ul>
+    <li>Built the internal platform (8 modules incl. CRM, HR, tasks and an IMAP mailbox; Fastify 5, React 19, Prisma, 12 roles, live WebSocket updates, English/French/Arabic) and the client portal (client.thestudioiq.com).</li>
+    <li>Built the company website (thestudioiq.com) in English and Arabic: React 19, Three.js, GSAP scroll animation.</li>
+    <li>Built a browser AR business card for a client: markerless image tracking in Rust compiled to WebAssembly (SIMD), with FAST/BRIEF features, RANSAC and Lucas–Kanade optical flow, drawn with WebGL2.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Full Stack Developer · Alseraj Company <span class="meta">· Full-time · Baghdad · Jun 2024 – May 2025</span></h3>
+  <ul>
+    <li>Built the company website (alseraj.iq; Next.js PWA), client sites and internal tools; ran its servers and deploys.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Project Manager &amp; Web Developer · Blue Company <span class="meta">· Full-time · Remote · Sep 2022 – Jun 2025</span></h3>
+  <ul>
+    <li>Built client websites and web apps (React/Next.js, Laravel, Node.js); led teams of 1–3; ran hosting.</li>
+  </ul>
+  </article>
+</section>
+
+<section>
+  <h2>Projects</h2>
+
+  <article>
+  <h3>Co-founder &amp; Lead Engineer · Rdood <span class="meta">· rdoodplatform.com · 2026 – Present</span></h3>
+  <ul>
+    <li>AI agents that answer businesses’ customer chats on WhatsApp, Instagram, Messenger and Telegram, including in Iraqi Arabic: 10,000+ customer conversations a month.</li>
+    <li>Rust (Axum) backend: 250-table PostgreSQL schema with compile-time-checked SQL (SQLx), 40 modules, 900+ OpenAPI endpoints, tenant isolation, WebSockets with Redis pub/sub, Docker and nginx.</li>
+    <li>Rdood’s own AI agent, built in-house: tool calling, prompt caching, per-call cost tracking and human approval for any action that touches money; pgvector and a Python ML service (Whisper, embeddings, CLIP).</li>
+    <li>Built the Arabic-first marketing site (Astro, GSAP).</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Lead Engineer · AI News Auditor <span class="meta">· newsanalysis.app · 2026 – Present</span></h3>
+  <ul>
+    <li>Watches and listens to Iraqi TV news around the clock, checks every minute against broadcast rules and queues possible breaches for a reviewer, each with its evidence: the clip, the quoted speech or on-screen text, and the rule.</li>
+    <li>Rust (Axum, SQLx) backend on PostgreSQL; a Python (FastAPI) service runs self-hosted models for <span class="nw">speech-to-text</span> (Whisper), Arabic OCR, face recognition (InsightFace) and speaker diarization; Arabic/English React app.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Full Stack Engineer (freelance) · LST Hospital System <span class="meta">· 2026 – Present</span></h3>
+  <ul>
+    <li>Hospital system used by LST staff, built emergency-first: triage, patient queues, appointments, admissions and beds, pharmacy and chronic prescriptions, ambulance trips and home-care visits.</li>
+    <li>Billing on a ledger (invoices, payments, refunds) and insurance (policies, coverage rules, pre-approvals, claims); Fastify 5 and Next.js 16 in Arabic and English, 156 Prisma models on PostgreSQL, 3,249 automated tests (Vitest).</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Backend Developer (freelance) · TAN <span class="meta">· Car marketplace and short-video app · 2025 – Present</span></h3>
+  <ul>
+    <li>Backend for 30,000+ registered users: Fastify and TypeScript, 16 modules, 50-table PostgreSQL schema (Prisma).</li>
+    <li>Video: one-pass HLS transcoding to 360p–1080p in an isolated FFmpeg worker, multipart S3 uploads, Bunny CDN.</li>
+    <li>WebSocket chat with end-to-end encrypted DMs, FCM/APNs push, Redis/BullMQ feed ranking and QiCard payments.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Backend Developer (freelance) · Beeb <span class="meta">· Ride-hailing and parcel delivery · 2025 – 2026</span></h3>
+  <ul>
+    <li>Rust (Axum) backend in 18 modules for a ride-hailing app with 2,100+ registered drivers: PostGIS zone matching, <span class="nw">self-hosted</span> OSRM routing and real-time trip dispatch over WebSockets with Redis pub/sub.</li>
+    <li>Fares by distance, time and zone, scheduled multi-stop trips, a wallet ledger for card and cash, driver onboarding with document checks, and parcel delivery.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Lead Developer · IraqView <span class="meta">· iraqview.com · 2026</span></h3>
+  <ul>
+    <li>Led a team of 3 on a platform where Iraqi people and businesses order design and marketing services and buy a smart digital business card: a nine-state order engine with per-order chat, files, revisions and staged payments.</li>
+    <li>Laravel 13, Inertia and Vue 3, PostgreSQL, Redis, MinIO and Reverb (WebSockets); Arabic, English and Kurdish, IQD and USD; 57 tables and 1,577 automated tests (Pest).</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Full Stack Developer (freelance) · Alhikma Akademie <span class="meta">· alhikmaakademie.com · 2025 – Present</span></h3>
+  <ul>
+    <li>Live Arabic and Quran learning platform with paid subscriptions: multi-level courses with listening, reading, writing and speaking exercises, Quran memorization with spaced repetition, and vocabulary study.</li>
+    <li>Fastify 5 API and React 19 app on a 95-table PostgreSQL database; live chat over Socket.IO with Redis, video upload and streaming (FFmpeg) and scheduled video calls; also run its production server.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Full Stack Engineer (freelance) · Lussano Piano Center <span class="meta">· Baghdad · 2026 – Present, in development</span></h3>
+  <ul>
+    <li>One system to replace the academy’s WordPress site: website, piano course platform, QR and GPS check-ins that unlock the next chapter, booking, a shop with Wayl payments, and an admin that staff run from their phones.</li>
+    <li>Rust (Axum, SQLx) API with 389 OpenAPI endpoints on 86 tables; a Rust media worker turns lessons into AES-encrypted HLS with a forensic watermark per student, so a leaked copy names the account behind it.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>Full Stack Developer (freelance) · Heidi Mind Care, UK <span class="meta">· heidimindcare.co.uk · 2026</span></h3>
+  <ul>
+    <li>Site for a UK therapy practice: online booking from availability rules, Stripe payments, enquiries, a blog and an admin CRM for clients, notes and appointments; Fastify 5 and Next.js 16, in English and Arabic.</li>
+  </ul>
+  </article>
+
+  <p class="more"><b>All my work and projects, with case studies:</b> <a href="https://madebyhaithem.com">madebyhaithem.com</a></p>
+</section>
+
+<section class="lines">
+  <h2>Skills</h2>
+  <p><b>Backend:</b> TypeScript/Node.js (Fastify, NestJS), Rust (Axum), Python (FastAPI), PHP (Laravel), REST/OpenAPI, WebSockets</p>
+  <p><b>AI and ML:</b> LLM agents with tool calling, embeddings and vector search, self-hosted speech-to-text, OCR and face recognition (Whisper, InsightFace, PyTorch, ONNX Runtime)</p>
+  <p><b>Data:</b> PostgreSQL (Prisma, SQLx, PostGIS, pgvector), Redis, BullMQ, MinIO/S3</p>
+  <p><b>Frontend:</b> React 19, Next.js, Vue 3 (Inertia), Astro, TanStack, Tailwind CSS, Three.js, GSAP</p>
+  <p><b>Mobile and desktop:</b> Capacitor (Android, iOS), Tauri 2</p>
+  <p><b>Payments:</b> Stripe, QiCard, Wayl</p>
+  <p><b>Infrastructure:</b> Linux, Docker, Pacemaker/Corosync, DRBD, nginx, Caddy, Cloudflare Workers, FFmpeg/HLS, OpenTelemetry, Prometheus</p>
+  <p><b>Testing:</b> Vitest, Pest</p>
+</section>
+
+<section class="lines">
+  <h2>Languages</h2>
+  <p>Arabic (native) · English (professional working proficiency)</p>
+</section>
+
+<section>
+  <h2>Education</h2>
+  <p><b>BSc Computer Engineering</b> · University of Technology, Baghdad · Jun 2024</p>
+</section>
+
+</body>
+</html>

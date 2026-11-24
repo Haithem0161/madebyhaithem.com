@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState, type MouseEvent } from "react";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
@@ -74,13 +73,10 @@ export function Header() {
           className="group flex items-center"
           data-cursor="magnetic"
         >
-          <Image
-            src="/logo-dark.png"
-            alt={siteConfig.name}
-            width={120}
-            height={120}
-            priority
-            className="size-9 transition-transform duration-500 group-hover:scale-105"
+          {/* A mask in the text colour, so the mark turns cream with the dark wall. */}
+          <span
+            aria-hidden
+            className="size-9 bg-foreground transition-transform duration-500 [mask:url(/logo-dark.png)_center/contain_no-repeat] group-hover:scale-105"
           />
         </button>
 
@@ -108,7 +104,7 @@ function NavButton({
     <button
       type="button"
       onClick={onClick}
-      className="cursor-pointer transition-colors hover:text-foreground"
+      className="cursor-pointer uppercase transition-colors hover:text-foreground"
       data-cursor="magnetic"
     >
       {children}

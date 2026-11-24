@@ -27,3 +27,6 @@ src/routeTree.gen.ts
 *.sw?
 
 .next
+
+# CV build: headless Chromium profile dirs
+cv/prof-*

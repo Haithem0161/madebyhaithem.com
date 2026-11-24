@@ -17,6 +17,8 @@ pnpm build        # Production build (Turbopack)
 pnpm start        # Run production server
 pnpm lint         # ESLint
 pnpm typecheck    # tsc --noEmit
+pnpm cv           # rebuild both CV PDFs from cv/ (Chromium)
+python3 -I scripts/relief.py public/logo-dark.png public/relief   # regenerate the wall tiles
 ```
 
 ## Tech Stack
@@ -25,10 +27,10 @@ pnpm typecheck    # tsc --noEmit
 - **Language:** TypeScript 5.9 (strict)
 - **Runtime:** React 19.2
 - **Styling:** Tailwind CSS v4 (`@tailwindcss/postcss`) + shadcn/ui (`base-nova` preset, `@base-ui/react` primitives, RTL enabled)
-- **3D / WebGL:** Three.js (pinned to 0.171.0 to dodge Clock deprecation warning), `@react-three/fiber` v9, `@react-three/drei` v10
+- **WebGL:** Three.js (pinned to 0.171.0) for the carved-wall background shader only, no React Three Fiber
 - **Smooth scroll:** Lenis (touch + reduced-motion both fall back to native scroll)
 - **i18n:** next-intl 4 (App Router, `[locale]` segment, `src/proxy.ts` middleware, `as-needed` locale prefix)
-- **State:** Zustand v5 (`scene-store` for scroll/mouse/loading signals, no persist)
+- **State:** Zustand v5 (`scene-store` for the preloader's ready signals, no persist)
 - **Server State:** TanStack React Query v5 (SSR-safe singleton + Devtools in dev)
 - **HTTP:** Axios (auth interceptors, env-driven base URL)
 - **Animations:** Framer Motion (entrance + scroll reveals)
@@ -44,12 +46,17 @@ pnpm typecheck    # tsc --noEmit
 
 ```
 .
+├── cv/                                # CV source (en.html, ar.html, print.mjs) -> public/*.pdf via `pnpm cv`
+├── scripts/relief.py                  # carves the H logo into the wall tiles in public/relief (cv2, numpy, PIL)
 ├── messages/                          # next-intl message catalogs
 │   ├── en.json
 │   └── ar.json
 ├── public/
-│   ├── logo.png                       # H logo mark
-│   └── Haithem Mustafa CV.pdf         # CV download (siteConfig.cvHref)
+│   ├── logo.png                       # H logo mark (light); logo-dark.png is the dark one
+│   ├── relief/                        # wall tiles: tile-{a,b,c}{,-half,-mask,-static}.webp (scripts/relief.py)
+│   ├── projects/<slug>/               # case-study screenshots (webp), listed in projects.ts `shots`
+│   ├── Haithem Mustafa CV.pdf         # CV download, English (built by `pnpm cv` from cv/)
+│   └── Haithem Mustafa CV (Arabic).pdf  # CV download, Arabic (siteConfig.cvHref[locale])
 ├── next.config.ts                     # withNextIntl plugin + optimizePackageImports + transpilePackages: three
 ├── postcss.config.mjs                 # @tailwindcss/postcss
 ├── components.json                    # shadcn/ui (base-nova, RTL, RSC)
@@ -64,7 +71,7 @@ pnpm typecheck    # tsc --noEmit
     │   ├── sitemap.ts                 # /sitemap.xml (locale-aware)
     │   └── [locale]/
     │       ├── layout.tsx             # html lang+dir, Fraunces+Inter+Noto Kufi, providers, SiteShell
-    │       ├── page.tsx               # Section composition (Hero/About/Projects/Skills/Education/Contact/Footer)
+    │       ├── page.tsx               # Section composition (Hero/About/Projects/Skills/Contact/Footer)
     │       ├── projects/
     │       │   ├── page.tsx           # /projects listing (all projects)
     │       │   └── [slug]/
@@ -75,30 +82,28 @@ pnpm typecheck    # tsc --noEmit
     ├── components/
     │   ├── ui/                        # shadcn components (add via: pnpx shadcn@latest add <component>)
     │   ├── canvas/
-    │   │   ├── scene.tsx              # R3F Canvas (fixed at z-0, behind content), webglcontextlost recovery
-    │   │   ├── lights.tsx             # ambient + hemisphere + 3 directional, no Environment HDRI
-    │   │   └── particle-field.tsx     # 220 drift particles, AdditiveBlending, scroll-faded ambient atmosphere
+    │   │   ├── wall.ts                # the carved H wall: full-screen shader + cursor/ghost flow map (ported from Lussano)
+    │   │   └── wall-canvas.tsx        # mounts the wall behind the page; setWallDark(); html[data-gl=off] fallback
     │   ├── cursor/cursor.tsx          # custom dot + ring, magnetic on links/buttons/[data-cursor]
     │   ├── preloader/preloader.tsx    # cream splash, traced H, progress, fades on isReady
     │   ├── sections/
     │   │   ├── section-shell.tsx      # eyebrow + display title shared shell
-    │   │   ├── hero.tsx               # "Full stack, end to end." + CTAs
-    │   │   ├── about.tsx              # The backend / The frontend two-up
-    │   │   ├── projects.tsx           # Home featured-projects grid + "All projects" link
-    │   │   ├── project-card.tsx       # Shared project card (home + listing), links to /projects/[slug]
-    │   │   ├── projects-listing.tsx   # /projects grid (all projects)
+    │   │   ├── hero.tsx               # "Hi, I'm Haithem." + CTAs
+    │   │   ├── about.tsx              # lead paragraph, facts, where I've worked
+    │   │   ├── projects.tsx           # home: 6 featured cards, then an index of the rest
+    │   │   ├── project-card.tsx       # featured card with a big lead number
+    │   │   ├── project-index.tsx      # compact project rows (home + /projects), exports rowReveal
+    │   │   ├── projects-listing.tsx   # /projects: every project as index rows
     │   │   ├── skills.tsx             # Skills matrix grouped chips
-    │   │   ├── education.tsx          # Degree + focus areas
-    │   │   ├── contact.tsx            # Big mailto, phone, website, GitHub, LinkedIn, location, CV
+    │   │   ├── contact.tsx            # Big mailto, phone, website, GitHub, LinkedIn, location, CV; turns the wall dark
     │   │   └── footer.tsx
     │   ├── site/
     │   │   ├── header.tsx             # Fixed wordmark + locale switcher
-    │   │   └── site-shell.tsx         # Client wrapper: Lenis, mouse, Cursor, Preloader, Scene
+    │   │   └── site-shell.tsx         # Client wrapper: MotionConfig, Lenis, Cursor, Preloader, WallCanvas
     │   └── locale-switcher.tsx
     ├── hooks/
-    │   ├── use-lenis.ts               # singleton Lenis -> scrollProgress (touch/reduced-motion fallback)
+    │   ├── use-lenis.ts               # singleton Lenis smooth scroll (off for touch and reduced motion)
     │   ├── use-hash-scroll.ts         # scrolls to #section after cross-page nav (e.g. /#about)
-    │   ├── use-mouse-tracking.ts      # pointermove -> scene-store via rAF
     │   └── use-media-query.ts         # SSR-safe useSyncExternalStore wrapper
     ├── i18n/
     │   ├── routing.ts                 # defineRouting (en, ar) + localeDirection map
@@ -108,7 +113,7 @@ pnpm typecheck    # tsc --noEmit
     ├── lib/
     │   ├── api.ts                     # Axios instance (interceptors, env base URL)
     │   ├── env.ts                     # Zod-validated env (server/client schemas)
-    │   ├── projects.ts                # Project[] data (slug/year/stack/link) + featuredProjects/getProject
+    │   ├── projects.ts                # Project[] data (slug/period/stack/link/shots) + featured/other/next; copy lives in messages
     │   ├── query-client.ts            # SSR-safe singleton QueryClient
     │   ├── site.ts                    # siteConfig (email/phone/socials/cv/keywords)
     │   └── utils.ts                   # cn() helper
@@ -117,7 +122,7 @@ pnpm typecheck    # tsc --noEmit
     │   ├── query-provider.tsx
     │   └── theme-provider.tsx
     └── stores/
-        └── scene-store.ts             # zustand: scrollProgress, mouseX/Y, canvas/asset/min ready signals
+        └── scene-store.ts             # zustand: the preloader's ready signals (canvas, assets, min time)
 ```
 
 - **Path alias:** `@/*` → `src/*` (`tsconfig.json`)

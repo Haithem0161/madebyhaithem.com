@@ -36,6 +36,9 @@
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 :root {
@@ -106,6 +109,83 @@
   .text-pretty {
     text-wrap: pretty;
   }
+}
+
+/* The carved wall behind every page (components/canvas/wall-canvas.tsx). It fades in once its tiles are loaded. */
+.wall {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100lvh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s var(--ease-out);
+}
+.wall.on {
+  opacity: 1;
+}
+
+/* Without WebGL2: a still picture of the wall, and a plain charcoal layer for the dark contact section. */
+html[data-gl="off"] body {
+  background:
+    url(/relief/tile-a-static.webp) 0 0 / 50vw 75vw repeat-y,
+    url(/relief/tile-b-static.webp) 50vw 37.5vw / 50vw 75vw repeat-y,
+    var(--background);
+}
+html[data-gl="off"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--background);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease-out);
+}
+html[data-gl="off"][data-wall-dark] body::before {
+  opacity: 1;
+}
+
+/* Behind the contact section the wall turns to charcoal and the site's colours flip with it. The colours are
+   registered so the flip is a short crossfade; :root sets their real values, the initial values only satisfy the syntax. */
+@property --background {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+@property --foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+@property --muted-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+@property --primary {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+@property --border {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+html {
+  transition-property: --background, --foreground, --muted-foreground, --primary, --border;
+  transition-duration: 0.5s;
+  transition-timing-function: var(--ease-out);
+}
+html[data-wall-dark] {
+  --background: oklch(0.18 0.018 60); /* the charcoal text colour */
+  --foreground: oklch(0.972 0.012 80); /* the cream */
+  --muted-foreground: oklch(0.78 0.015 75);
+  --primary: var(--peach);
+  --border: oklch(0.32 0.015 60);
 }
 
 /* Hide native cursor on hover-capable devices when the custom cursor is mounted */

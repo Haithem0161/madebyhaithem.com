@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { ReactNode, Ref } from "react";
 import { cn } from "@/lib/utils";
 
 interface SectionShellProps {
@@ -10,6 +10,7 @@ interface SectionShellProps {
   title: string;
   children: ReactNode;
   className?: string;
+  ref?: Ref<HTMLElement>;
 }
 
 export function SectionShell({
@@ -18,9 +19,11 @@ export function SectionShell({
   title,
   children,
   className,
+  ref,
 }: SectionShellProps) {
   return (
     <section
+      ref={ref}
       id={id}
       className={cn(
         "relative px-5 py-24 sm:px-8 sm:py-32 md:py-40",

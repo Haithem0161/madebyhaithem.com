@@ -2,7 +2,6 @@
 
 import Lenis from "lenis";
 import { useEffect } from "react";
-import { useSceneStore } from "@/stores/scene-store";
 
 let lenisInstance: Lenis | null = null;
 
@@ -37,16 +36,7 @@ export function useLenis() {
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const touch = window.matchMedia("(hover: none)").matches;
-    if (reduced || touch) {
-      const update = () => {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        const p = max > 0 ? window.scrollY / max : 0;
-        useSceneStore.getState().setScrollProgress(p);
-      };
-      update();
-      window.addEventListener("scroll", update, { passive: true });
-      return () => window.removeEventListener("scroll", update);
-    }
+    if (reduced || touch) return;
 
     const lenis = new Lenis({
       duration: 1.2,
@@ -62,14 +52,8 @@ export function useLenis() {
     };
     rafId = requestAnimationFrame(tick);
 
-    const handleScroll = ({ progress }: { progress: number }) => {
-      useSceneStore.getState().setScrollProgress(progress);
-    };
-    lenis.on("scroll", handleScroll);
-
     return () => {
       cancelAnimationFrame(rafId);
-      lenis.off("scroll", handleScroll);
       lenis.destroy();
       lenisInstance = null;
     };

@@ -1,7 +1,7 @@
 {
   "Metadata": {
-    "title": "Haithem Mustafa · Full Stack Developer",
-    "description": "Full stack developer with 4 years of experience building marketing sites, ecommerce platforms, internal business tools, and scalable backend systems. Fastify, NestJS, Rust, React, and Next.js. Baghdad."
+    "title": "Haithem Mustafa · Full Stack Engineer",
+    "description": "Full stack engineer in Baghdad, backend first. I build software people in Iraq use every day: a bank's internal workflows, a hospital system, a ride-hailing backend and an AI that answers customer chats."
   },
   "Common": {
     "loading": "Loading",
@@ -9,337 +9,815 @@
     "retry": "Retry",
     "backHome": "Back to home",
     "downloadCV": "Download CV",
-    "scroll": "Scroll"
+    "scroll": "Scroll",
+    "now": "now"
   },
   "Nav": {
     "home": "Home",
     "about": "About",
     "projects": "Projects",
     "skills": "Skills",
-    "education": "Education",
     "contact": "Contact"
   },
   "Hero": {
-    "eyebrow": "Portfolio · 2026",
-    "tagline1": "Full stack,",
-    "tagline2": "end to end.",
-    "subtitle": "Full Stack Developer · Backend Team Lead. Baghdad.",
-    "intro": "I build complete web solutions, from marketing sites and portfolios to ecommerce platforms, internal tools, and scalable backend systems. UI/UX, API design, database architecture, and deployment.",
-    "ctaContact": "Get in touch",
+    "eyebrow": "Full stack engineer · Baghdad",
+    "tagline1": "Hi, I'm",
+    "tagline2": "Haithem.",
+    "intro": "I build software that people in Iraq use every day: a bank's paperwork, a hospital's emergency room, a ride-hailing app, and an AI that answers shops' customer chats.",
+    "subtitle": "Now at Asia Al-Iraq Islamic Bank · Co-founder of Rdood",
+    "ctaContact": "Say hello",
     "ctaCV": "Download CV"
   },
   "About": {
     "eyebrow": "01 · About",
-    "title": "One developer, the whole stack.",
-    "backendLabel": "The backend",
-    "backendBody": "Four years building production backends in Fastify, NestJS, and Rust over PostgreSQL with Prisma. Real-time WebSocket systems, microservices, HLS media pipelines, Redis / BullMQ job queues, payments, and full-text search. Currently leading a backend team at TORCH: code reviews, architecture, and technical decisions.",
-    "frontendLabel": "The frontend",
-    "frontendBody": "I ship the product side too: React 19 and Next.js with TanStack Query, shadcn/ui, and Framer Motion. Trilingual interfaces with full RTL support, technical SEO, and performance work, from page structure and meta tags to Turbopack and priority hints.",
-    "footnote": "I work the full lifecycle: UI/UX, API design, database architecture, and deployment. Monoliths when it fits, microservices when it doesn't."
+    "title": "A bit about me.",
+    "paragraphs": [
+      "I'm Haithem, a software engineer from Baghdad. I studied Computer Engineering at the University of Technology, and I've been building for the web since 2022.",
+      "Most of my time goes into the backend: the servers, databases and background jobs that keep an app working when lots of people use it at once. I write them in TypeScript or Rust, almost always on PostgreSQL. I build the screens too, and I usually end up running the Linux servers it all lives on.",
+      "Today I work at Asia Al-Iraq Islamic Bank, where I build the bank's internal systems and look after its servers, network and email. Outside the bank, I co-founded Rdood, and I still take on freelance projects."
+    ],
+    "facts": [
+      {
+        "label": "Based in",
+        "value": "Baghdad, Iraq"
+      },
+      {
+        "label": "Studied",
+        "value": "BSc Computer Engineering, University of Technology, 2024"
+      },
+      {
+        "label": "Speaks",
+        "value": "Arabic (native) and English"
+      },
+      {
+        "label": "Building since",
+        "value": "2022"
+      }
+    ],
+    "workTitle": "Where I've worked",
+    "jobs": [
+      {
+        "years": "2026 – now",
+        "role": "Full stack engineer and IT systems administrator",
+        "company": "Asia Al-Iraq Islamic Bank"
+      },
+      {
+        "years": "2025 – 2026",
+        "role": "Backend team lead",
+        "company": "TORCH"
+      },
+      {
+        "years": "2025 – now",
+        "role": "Full stack developer, part-time",
+        "company": "The Studio"
+      },
+      {
+        "years": "2024 – 2025",
+        "role": "Full stack developer",
+        "company": "Alseraj"
+      },
+      {
+        "years": "2022 – 2025",
+        "role": "Project manager and web developer",
+        "company": "Blue Company"
+      }
+    ]
   },
   "Projects": {
-    "eyebrow": "02 · Selected work",
+    "eyebrow": "02 · Work",
     "title": "Things I've built.",
-    "subtitle": "A few systems I've designed, built, and shipped end to end.",
-    "viewAll": "All projects",
+    "subtitle": "Six I'd show you first, then everything else, newest first.",
+    "indexTitle": "Everything else",
+    "viewAll": "All projects on one page",
     "allEyebrow": "Projects",
     "allTitle": "Everything I've built.",
-    "allSubtitle": "Full stack systems, real-time platforms, and the products around them.",
-    "backToProjects": "Back to projects",
-    "overviewLabel": "Overview",
+    "allSubtitle": "Every project, newest first. Each one has a short story: what it is, who uses it, what I built and what was hard.",
+    "backToProjects": "All projects",
+    "summaryLabel": "The short version",
+    "usersLabel": "Who uses it",
+    "builtLabel": "What I built",
+    "hardLabel": "The hard part",
+    "numbersLabel": "In numbers",
+    "screensLabel": "Screens",
+    "stackLabel": "Built with",
     "roleLabel": "Role",
-    "yearLabel": "Year",
-    "stackLabel": "Stack",
-    "buildLabel": "The build",
-    "highlightsLabel": "Highlights",
-    "visitLabel": "Visit site",
-    "appStoreLabel": "On the App Store",
-    "internalLabel": "In development · no public link",
+    "yearLabel": "When",
+    "visitLabel": "Visit the site",
+    "nextLabel": "Next project",
     "items": {
-      "torch-core-backend": {
-        "name": "Torch Core Backend",
-        "tagline": "Microservices platform for a business OS",
-        "role": "Backend Team Lead",
-        "company": "TORCH",
-        "period": "2025 — Current",
-        "summary": "The backend powering Torch's business OS: an Nx monorepo of independently deployable Fastify microservices for HR, payroll, email, authentication, notifications, documents, domains, and more. I lead the backend team here, owning architecture, code reviews, and technical direction.",
-        "build": [
-          "Architected an Nx + pnpm monorepo of ~20 independently deployable Fastify 5 services (auth, HR, email, notifications, documents, domains, vault, automation, and more), with shared DDD and schema packages so services stay consistent without coupling.",
-          "Designed an event-driven core: a shared Redis pub/sub event bus lets services react to each other (auth and domain events fan out to the notification engine) without direct calls.",
-          "Built the HR service as the largest domain — payroll, attendance, leave, and scheduling — over a 130+ model Prisma schema, with ZK Teco biometric device integration.",
-          "Built email as its own service: IMAP/SMTP, real-time inbox push over WebSockets, and split worker processes for sync, send, and domain-sync so heavy mail work never blocks the API.",
-          "Designed the auth service as the central identity hub: RS256 JWT, MFA, WebAuthn, SAML and OpenID, Argon2 hashing, and entity/session management consumed by every other service.",
-          "Built a document center with OCR, e-signatures, retention policies, and templates, and a zero-knowledge vault (encrypted password sync), both backed by MinIO object storage.",
-          "Containerized every service with hardened multi-stage Docker images (non-root, health checks, graceful SIGTERM) and wired in OpenTelemetry traces and Prometheus metrics across the fleet.",
-          "Set up the testing strategy: Vitest, TestContainers (Postgres + Redis), and Pact contract tests so services can evolve independently with confidence."
+      "wfis": {
+        "name": "WFIS",
+        "tagline": "The bank's paper forms, moved online",
+        "company": "Asia Al-Iraq Islamic Bank",
+        "role": "Full stack engineer and sysadmin",
+        "status": "Live on the bank's own network",
+        "summary": "WFIS replaced the paper request forms at Asia Al-Iraq Islamic Bank. A request no longer travels from desk to desk on paper: it follows the bank's own org chart from person to person, gets approved and signed, and ends up in an archive nobody can quietly change. I built it, and I run the servers it lives on.",
+        "users": "Bank staff raise requests at their desks, managers approve them from their phones, and administrators and auditors set it up and check the records.",
+        "built": [
+          "27 of the bank's forms, each printed on the bank's own document layout, in Arabic first with a full English version.",
+          "Routing that follows the real org chart, including deputies, delegations and people acting in someone else's seat. Admins change it on screen, not in code.",
+          "Signatures that ask for a fresh code from an authenticator app, and an audit trail that shows if anything was altered.",
+          "Phone apps for Android and iPhone with push notifications and a document scanner, so managers can approve on the move.",
+          "Two servers in a failover pair, with tested backups and written restore steps."
         ],
-        "highlights": [
-          "~20 Fastify microservices · Nx monorepo",
-          "380+ Prisma models across services",
-          "Event-driven via shared Redis bus",
-          "OpenTelemetry + Prometheus across the fleet"
+        "hard": "Making a form look exactly the same on screen and on paper, in Arabic. Printed forms kept coming out with the wrong typeface or an extra second page, and it looked like a data bug. It wasn't. The bank's template asks for Arial, the server had no Arial and quietly swapped in another font, and Word and LibreOffice disagreed about where a page ends. So I stopped guessing and measured the rendered PDF: which fonts it embedded, where each character landed and how many pages it had. Measuring is what found the real causes.",
+        "shots": [],
+        "numbers": [
+          {
+            "value": "27",
+            "label": "paper forms retired"
+          },
+          {
+            "value": "346",
+            "label": "API endpoints"
+          },
+          {
+            "value": "97",
+            "label": "database tables"
+          },
+          {
+            "value": "79 s",
+            "label": "for the standby server to take over when we cut the power"
+          }
         ]
       },
-      "torch-business-os": {
-        "name": "Torch Business OS",
-        "tagline": "Desktop shell & launcher for the business apps",
-        "role": "Full Stack Developer",
-        "company": "TORCH",
-        "period": "2025 — Current",
-        "summary": "A Tauri 2 desktop app that acts as a unified, authenticated entry point for Torch's business apps. Users discover, install, and run child apps in entity-scoped tabs, with centralized auth and binary distribution managed by the launcher.",
-        "build": [
-          "Built the desktop shell in Tauri 2 with a Rust core (~10k lines) and a React 19 frontend, exposing 40+ typed Rust commands with TypeScript bindings auto-generated via tauri-specta.",
-          "Designed a parent↔child IPC protocol: a TCP server speaking length-delimited MessagePack frames, passing each child app a run ID and port so they can refresh auth, signal readiness, and shut down gracefully.",
-          "Implemented unified auth: login once, store JWT + refresh tokens in the OS keychain, push tokens to child apps over IPC, and refresh in the background so sessions never expire mid-use.",
-          "Built a binary distribution system: download platform-specific app bundles from the CDN with resumable Range requests, verify SHA-256, extract, and run queued installs/updates with exponential backoff.",
-          "Wired the Tauri auto-updater to the distribution API so the launcher keeps itself and its catalog up to date across Linux, Windows, and macOS (x86_64 + aarch64).",
-          "Built process and lifecycle management: child apps run as separate OS processes tracked via PID files and process groups, stay alive in the background across tab switches, and clean up orphans on crash recovery.",
-          "Added an embedded mode where child apps serve a local HTTP UI and render seamlessly inside Business OS tabs, plus entity-scoped tabs so the same app can run per business entity in parallel.",
-          "Built the frontend with React 19, TanStack Query (tuned for native semantics), Zustand, React Router 7, shadcn/ui, and SQLite-backed offline state for sessions, installed apps, and UI."
+      "rdood": {
+        "name": "Rdood",
+        "tagline": "An AI that answers shops' customer chats, in Iraqi Arabic",
+        "company": "Co-founder",
+        "role": "Co-founder and lead engineer",
+        "status": "Live, used by shops in Iraq",
+        "summary": "Rdood (ردود, Arabic for \"replies\") gives online shops in Iraq one inbox for WhatsApp, Instagram, Messenger and Telegram. Its AI agent answers customers in Iraqi Arabic, takes orders and follows up, and the shop's staff can step in whenever they like. I co-founded it and lead the engineering.",
+        "users": "Shop staff answer and watch chats from their phones, owners set the agent up on a computer, and partners can manage several shops at once.",
+        "built": [
+          "Rdood's own AI agent, built in-house: it looks things up and takes actions through tools, and anything that touches money waits for a person to approve it.",
+          "Orders, follow-ups, delivery through local couriers, and WhatsApp campaigns sent through approved templates.",
+          "Voice notes turned into text, and WhatsApp calls the AI can answer.",
+          "Staff apps for Android and iPhone, and a web app for everything else.",
+          "The Arabic-first marketing site, rdoodplatform.com."
         ],
-        "highlights": [
-          "Tauri 2 · Rust core · 40+ typed commands",
-          "MessagePack TCP IPC to child apps",
-          "Unified auth via OS keychain + background refresh",
-          "Resumable, SHA-256-verified app distribution"
+        "hard": "Knowing what the AI costs. Every answer the agent writes costs money, and that money has to land on the right shop's bill. When I checked our development data, about two thirds of the real spend wasn't being recorded at all: eight different places in the code called the AI, and only some of them wrote the cost down. Instead of patching eight places, I moved the metering into the one client every call goes through. Now a call can't happen without knowing which shop it's for, and if writing the bill fails, the customer still gets their reply.",
+        "shots": [
+          "Rdood's home page, Arabic first, for shop owners in Iraq.",
+          "The demo on the home page: the AI agent takes an order in Iraqi Arabic and confirms it.",
+          "The same page on a phone."
+        ],
+        "numbers": [
+          {
+            "value": "10,000+",
+            "label": "customer conversations a month"
+          },
+          {
+            "value": "4",
+            "label": "chat apps in one inbox"
+          },
+          {
+            "value": "250",
+            "label": "database tables"
+          },
+          {
+            "value": "900+",
+            "label": "API endpoints"
+          }
         ]
       },
-      "beeb": {
-        "name": "Beeb",
-        "tagline": "Ride-hailing backend in Rust",
-        "role": "Backend Developer",
+      "lst": {
+        "name": "LST Hospital System",
+        "tagline": "A hospital system built around the emergency room",
         "company": "Freelance",
-        "period": "2025",
-        "summary": "The backend for Beeb, a ride-hailing platform (think Uber / Careem for Baghdad). A single Rust service built on Axum with domain-driven design, real-time trip dispatch, and geospatial matching over PostGIS, serving an admin dashboard and the rider and captain apps.",
-        "build": [
-          "Built the service in Rust with Axum, organized as 14 domain-driven modules (trips, captains, payment, zone, realtime, scheduling, identity, privacy, reports, and more), each split into domain / presentation / infrastructure layers.",
-          "Designed the data layer with raw SQLx (compile-time checked queries) over PostgreSQL with the PostGIS extension — 33 migrations, 33 tables, and 23 enums — using ST_Contains for zone polygon matching and proximity-based dispatch.",
-          "Built real-time trip flow over WebSockets with a Redis pub/sub bridge, pushing live status, location updates, and room membership between riders and captains.",
-          "Implemented the trip lifecycle: base + distance + time fares, per-zone cancellation penalties, scheduled and recurring multi-stop trips, and per-rider fare breakdowns.",
-          "Built the payment layer: a wallet ledger, card and cash methods, and a refund cascade with admin override.",
-          "Built captain onboarding: document upload to MinIO via presigned URLs, an auto-approval engine, and a compliance-based daily activation gate.",
-          "Ran 12 background workers / sweepers — OTP SMS, trip dispatch, force-cancel, room expiry, push via Firebase, location-staleness checks, the WebSocket↔Redis bridge, and more.",
-          "Added JWT + OTP-SMS auth, rate limiting (tower-governor), number-proxy privacy for anonymized rider↔captain calls, OpenAPI/Swagger docs via utoipa, and Docker + systemd deployment.",
-          "Built analytics rollups (revenue by zone, captain leaderboard, cancellation patterns, daily activation) and admin hardening: audit logs, session revocation, and bulk actions."
+        "role": "Full stack engineer",
+        "status": "Live: emergency, pharmacy and warehouse",
+        "summary": "LST is a healthcare provider in Erbil, and this is the system its staff work in. A patient arrives, gets triaged and queued, sees a doctor, gets tests, medicine and a bed if needed, and the bill and the insurance claim are built from what actually happened. It works in Arabic and English, and every role gets the screens its job needs.",
+        "users": "Reception, doctors, nurses, lab and radiology staff, pharmacists, cashiers and warehouse staff, each with their own screens and permissions.",
+        "built": [
+          "The emergency room first: triage, patient queues and live boards that show who is waiting and where.",
+          "Admissions and beds, lab, radiology, physiotherapy, ambulance trips and home-care visits, all hanging off one shared patient visit.",
+          "The pharmacy and chronic prescriptions, tied to the warehouse stock.",
+          "Billing on a ledger (invoices, payments, refunds) and insurance: policies, coverage rules, pre-approvals and claims.",
+          "Arabic and English, a role for every job, and an audit log of who did what."
         ],
-        "highlights": [
-          "Rust + Axum · 14 DDD domains",
-          "PostGIS geospatial dispatch & zones",
-          "Real-time trips over WebSockets + Redis",
-          "12 background workers · wallet & refunds"
+        "hard": "Money and medicine can't be wrong. The stock ledger only ever grows, so a bad movement stays in the books for good, and a double click must never sell the same box twice. So money is kept in whole Iraqi dinars, ledgers can't be edited, and every money or stock write carries a key that makes a repeat harmless. Stock moves inside one database transaction under a lock, and always takes the batch that expires first.",
+        "shots": [
+          "The executive overview: admissions, bed occupancy, insurance claims and low stock on one screen. Demo data.",
+          "A patient arrives at the ER: find or register them, note the complaint and set a triage level from 1 to 5.",
+          "The warehouse: what is in stock, what has run out and what needs reordering. Demo data.",
+          "Users and roles: 19 staff roles, and a grid of what each one is allowed to do."
+        ],
+        "numbers": [
+          {
+            "value": "3,249",
+            "label": "automated tests"
+          },
+          {
+            "value": "156",
+            "label": "data models"
+          },
+          {
+            "value": "42",
+            "label": "backend modules"
+          },
+          {
+            "value": "81",
+            "label": "screens"
+          }
         ]
       },
       "tan": {
         "name": "TAN",
-        "tagline": "Car marketplace & short-video platform",
-        "role": "Backend Developer",
+        "tagline": "A car marketplace built around short videos",
         "company": "Freelance",
-        "period": "2025",
-        "summary": "The backend for a car-marketplace and short-video app. A Fastify and TypeScript service split into 16 modules (listings, reels, chat, payments, calls) over a 50-table PostgreSQL database with Prisma.",
-        "build": [
-          "Split the backend into 16 modules over a 50-table Postgres database with Prisma: listings, reels, chat, payments, calls, and more.",
-          "Built a video pipeline where each upload is transcoded once into 360p / 720p / 1080p HLS. The heavy FFmpeg work runs in its own worker container so it never blocks the API, with retry-or-fail handling per error.",
-          "Videos upload straight to S3 from the browser in parts, so the API never touches raw files. Finished HLS is pushed to S3 / MinIO and served through a Bunny CDN.",
-          "Did real-time chat and notifications over WebSockets, with end-to-end encrypted DMs and push notifications via Firebase and Apple.",
-          "Handled the social feed, likes, comments, follows and blocks, with feed ranking, trending hashtags, and view counts updated by background jobs on Redis / BullMQ.",
-          "Wired up QiCard payments for promoted listings and verified badges, including renewals, refunds, and click / view stats.",
-          "Added full-text search across users, listings, and reels, Arabic / English data throughout, HEIC image support, and the moderation tools (reports, appeals, logs)."
+        "role": "Backend developer",
+        "status": "Live",
+        "summary": "TAN is an app where people in Iraq buy and sell cars, and show them off in short videos. I built the whole backend: listings, the video feed, chat, payments and everything that runs in the background. More than 30,000 people have signed up.",
+        "users": "Car buyers and sellers across Iraq. Dealers pay to promote their listings and to get a verified badge.",
+        "built": [
+          "The video pipeline: phones upload straight to storage in parts, then a separate worker turns each clip into 360p, 720p and 1080p streams served through a CDN.",
+          "Chat and notifications in real time, with end-to-end encrypted direct messages.",
+          "The feed: likes, comments, follows, trending hashtags and a ranking that updates in the background.",
+          "QiCard payments for promoted listings and verified badges, with renewals and refunds.",
+          "Search across people, cars and videos in Arabic and English, plus the reports and appeals moderators need."
         ],
-        "highlights": [
-          "16 modules · 50-table Postgres schema",
-          "One-pass HLS transcoding in an isolated worker",
-          "End-to-end encrypted real-time DMs",
-          "QiCard payments with renewals & refunds"
+        "hard": "Video. Turning a phone clip into streams for every connection speed takes real processing power, and if that work ran inside the API, everyone's app would slow down while one video converted. So uploads go from the phone straight to storage, never through the API, and a separate worker converts each video once, in one pass, then hands the finished stream to the CDN. When a job fails, the worker knows whether to retry or give up, so one broken file can't block the queue.",
+        "shots": [
+          "The admin's listings table: every car for sale, its price, status and views. Demo data.",
+          "Moderating the short videos people post about their cars.",
+          "The admin dashboard: users, listings, videos, payments and open reports at a glance."
+        ],
+        "numbers": [
+          {
+            "value": "30,000+",
+            "label": "people signed up"
+          },
+          {
+            "value": "16",
+            "label": "backend modules"
+          },
+          {
+            "value": "50",
+            "label": "database tables"
+          },
+          {
+            "value": "3",
+            "label": "video qualities from every upload"
+          }
+        ]
+      },
+      "beeb": {
+        "name": "Beeb",
+        "tagline": "Ride-hailing and parcel delivery for Baghdad",
+        "company": "Freelance",
+        "role": "Backend developer",
+        "status": "Launched; my part ended in 2026",
+        "summary": "Beeb is a ride-hailing and parcel delivery app for Baghdad. I wrote its server: the part that prices your trip, finds a driver near you and keeps both phones in sync while the car moves. More than 2,100 drivers have signed up.",
+        "users": "Riders who book trips and send parcels, drivers who take them, and the operations team who watch it all from an admin dashboard.",
+        "built": [
+          "Driver matching on a real map: the city is split into zones, and each request goes to nearby drivers in the right zone.",
+          "Our own routing server, so trip distances and times come from Baghdad's actual roads.",
+          "Live trips: rider and driver see each other's status and position as it changes.",
+          "Fares by distance, time and zone, scheduled trips with several stops, and a wallet for card and cash.",
+          "Driver sign-up with document checks, and parcel delivery on the same system."
+        ],
+        "hard": "Keeping two phones in agreement while a car moves through traffic. Every trip has a rider and a driver, each holding a live connection to the server, and those two connections can land on different server processes. I put Redis in the middle: each update is published once and reaches whichever process holds the other phone. So the rider watches the driver move, and a cancelled trip is cancelled on both screens at once.",
+        "shots": [],
+        "numbers": [
+          {
+            "value": "2,100+",
+            "label": "drivers signed up"
+          },
+          {
+            "value": "18",
+            "label": "modules in one Rust service"
+          },
+          {
+            "value": "12",
+            "label": "background workers"
+          }
+        ]
+      },
+      "news-auditor": {
+        "name": "AI News Auditor",
+        "tagline": "Watches Iraqi TV news around the clock and flags what breaks the rules",
+        "company": "Lead engineer",
+        "role": "Lead engineer",
+        "status": "Working demo, in development",
+        "summary": "AI News Auditor watches and listens to six Iraqi news channels day and night. It writes down what's said, reads the text on screen, recognises faces and voices, and checks every minute against a set of broadcast rules. When something might break a rule, it goes into a short queue for a person to decide, with the evidence attached: the clip, the quoted words and the rule.",
+        "users": "Reviewers who decide each case, supervisors and editors who manage the rules and the people database, and viewers who follow the results.",
+        "built": [
+          "Recording and live speech-to-text for six channels, around the clock, on models we run ourselves.",
+          "Reading on-screen text in Arabic, and matching faces and voices against a database of people.",
+          "A rule engine: simple rules are checked in code, and judgement calls get a quick AI screen, then a stricter check that has to quote its evidence.",
+          "Alerts when a channel goes black, freezes, goes silent or loses its signal, and spotting adverts.",
+          "An Arabic, right-to-left app for reviewers: a case queue, search and a wall of live channels."
+        ],
+        "hard": "Keeping the text in step with the picture. At first the transcript landed anywhere from 41 seconds to almost 7 minutes behind the broadcast, and a channel that fell behind never caught up. I timed every stage and found several small causes instead of one big one: the speech engine was busy with other work, the audio sent to it was heavier than it needed to be, and fixed waits were built into the loop. Smaller audio, overlapping windows (the next piece goes out while the last one is still being read) and a faster machine as the main engine brought it down to 9 to 16 seconds behind live.",
+        "shots": [],
+        "numbers": [
+          {
+            "value": "24/7",
+            "label": "watching six channels"
+          },
+          {
+            "value": "9–16 s",
+            "label": "behind live, down from up to 7 minutes"
+          },
+          {
+            "value": "81",
+            "label": "database tables"
+          }
+        ]
+      },
+      "lussano": {
+        "name": "Lussano Piano Center",
+        "tagline": "A piano academy's website, lessons, bookings and shop in one system",
+        "company": "Freelance",
+        "role": "Full stack engineer",
+        "status": "In development",
+        "summary": "Lussano is a piano academy in Baghdad. I'm building the one system that replaces its WordPress site: the website, a course platform with video lessons, bookings, check-ins at the academy, a shop, and an admin the staff can run from their phones.",
+        "users": "Students (parents make an account for each child), visitors, and staff: teachers, the front desk, editors, the shop and the owner.",
+        "built": [
+          "Video lessons by level and chapter, opened by a subscription, a purchase, a trial or a gift.",
+          "Check-ins at the academy by QR code and GPS: a counted visit unlocks the next chapter.",
+          "Booking with fees, and a shop with delivery fees per governorate, paid through Wayl or in cash.",
+          "The website, with the carved plaster wall that gave this site its background.",
+          "An admin for all of it, with audit logs, and an authenticator app required for every staff sign-in."
+        ],
+        "hard": "Catching whoever leaks a lesson. Each lesson is encoded in two versions that differ in ways you can't see, and every account gets its own mix of the two, chosen by a secret key. Give the tool a leaked recording and it reads the mix back, ranks the accounts it could have come from, and says how likely the match is to be luck. It's honest about its limits too: a still screenshot or a very short clip can't be traced.",
+        "shots": [
+          "Lussano's home page, with the carved plaster wall that rises under the cursor.",
+          "Three ways to learn: at the academy, the online course, and lessons for children.",
+          "The same page on a phone."
+        ],
+        "numbers": [
+          {
+            "value": "389",
+            "label": "API endpoints"
+          },
+          {
+            "value": "86",
+            "label": "database tables"
+          },
+          {
+            "value": "212",
+            "label": "backend tests"
+          }
+        ]
+      },
+      "iraqview": {
+        "name": "IraqView",
+        "tagline": "Order design and marketing work, and get a smart business card",
+        "company": "Lead developer",
+        "role": "Lead developer, team of three",
+        "status": "Live, taking payments",
+        "summary": "IraqView is where people and small businesses in Iraq order design, branding and marketing work, and buy a Smart Digital Card: a profile page with a tap-to-share NFC card. I led the team of three that built it, in Arabic, English and Kurdish, with prices in dinars and dollars.",
+        "users": "Customers ordering work and cards, the designers who deliver it, and the admins who run prices, limits and page copy.",
+        "built": [
+          "An order flow with nine steps from request to delivery, with chat, files, revisions and payment in stages on every order.",
+          "The Smart Card: a public profile page for each person, subscriptions, and a printed NFC card on yearly plans.",
+          "Arabic, English and Kurdish (Sorani), in dinars and dollars, with the exchange rate saved on every payment.",
+          "An admin panel where prices, limits and page copy are data, not code.",
+          "Two-factor sign-in, nightly backups and a restore drill."
+        ],
+        "hard": "A green test suite isn't proof. Ours passed, so I broke the code on purpose to see whether the tests would notice (mutation testing). Too often they didn't: it turned up a finished order that could still be cancelled, and an invoice test that compared the invoice with itself. Both were fixed, and the tests now prove what they claim. QA also caught three quick clicks on Pay charging one instalment three times, before it ever reached a customer.",
+        "shots": [
+          "IraqView's home page: design, branding and marketing orders in one place, followed step by step.",
+          "The same page on a phone."
+        ],
+        "numbers": [
+          {
+            "value": "1,577",
+            "label": "automated tests"
+          },
+          {
+            "value": "57",
+            "label": "database tables"
+          },
+          {
+            "value": "3",
+            "label": "languages: Arabic, English and Kurdish"
+          },
+          {
+            "value": "9",
+            "label": "steps in the order flow"
+          }
+        ]
+      },
+      "heidi": {
+        "name": "Heidi Mind Care",
+        "tagline": "Online booking for a UK therapy practice",
+        "company": "Freelance",
+        "role": "Full stack developer",
+        "status": "Live",
+        "summary": "Heidi Mind Care is a therapy practice in the UK. I built its website: clients read about the services, pick a real open time and book, and the practice runs clients, notes, appointments and the blog from its own admin. It works in English and Arabic.",
+        "users": "The practice's clients, and the practice itself through the admin.",
+        "built": [
+          "A booking flow that shows only real open times, in London time and in the visitor's own.",
+          "Payment through Stripe, confirmation emails, and cancellation by the client.",
+          "An admin for client records, notes, enquiries, availability and manual bookings.",
+          "Service pages, a blog and an FAQ the practice edits itself.",
+          "English and Arabic, with pages search engines can read and proper share previews."
+        ],
+        "hard": "Two people must never book the same hour. Open times are worked out from availability rules rather than stored, so there's no row to lock. When someone starts booking, a 12-minute hold is saved, and the database itself refuses a second hold on the same time. Unpaid holds are released by a background job, a booking is confirmed only when Stripe's payment notice arrives and checks out, and every payment request carries a key, so a retry never charges twice.",
+        "shots": [
+          "The home page: calm colours and one clear next step, booking a session.",
+          "The same page on a phone."
+        ],
+        "numbers": [
+          {
+            "value": "392",
+            "label": "automated tests"
+          },
+          {
+            "value": "12 min",
+            "label": "hold on a time while you pay"
+          },
+          {
+            "value": "2",
+            "label": "languages"
+          }
+        ]
+      },
+      "netaudit": {
+        "name": "NetAudit",
+        "tagline": "A desktop app that reads a network and shows what's wrong with it",
+        "company": "Asia Al-Iraq Islamic Bank",
+        "role": "Full stack engineer",
+        "status": "In use inside the bank, still growing",
+        "summary": "NetAudit helps the bank's IT team understand their own network. It reads each device's configuration, draws the network as a diagram, points out problems with the evidence behind each one, and answers \"what if\" questions: where a packet would go, what can reach what, and what breaks if a link goes down. Reports come out in Arabic and English.",
+        "users": "The bank's IT and network staff, with managers and auditors reading the reports.",
+        "built": [
+          "Importers that turn device configurations and survey files into one model of the network.",
+          "A topology diagram drawn from that model.",
+          "An issue finder that shows the evidence behind every finding.",
+          "A simulator: packet traces, a reachability matrix, and link-failure checks that find single points of failure.",
+          "Reports in Arabic and English (PDF, Excel and HTML), in a desktop app for Windows and Linux."
+        ],
+        "hard": "A tool like this is dangerous if it shows a guess as a fact. So every result says how sure it is: confirmed when two independent sources agree, likely when only one does, and unverified when data is missing. Wherever the model predicts something a device can report about itself, NetAudit compares the two, and a mismatch becomes an issue of its own and lowers trust in that part of the model.",
+        "shots": [],
+        "numbers": [
+          {
+            "value": "3",
+            "label": "levels of certainty on every result"
+          },
+          {
+            "value": "12",
+            "label": "screens"
+          },
+          {
+            "value": "88",
+            "label": "tests on the analysis engine"
+          }
+        ]
+      },
+      "asiabank": {
+        "name": "asiabank.iq",
+        "tagline": "The bank's public website, rebuilt from WordPress",
+        "company": "Asia Al-Iraq Islamic Bank",
+        "role": "Full stack engineer",
+        "status": "Live",
+        "summary": "I rebuilt the bank's public website from WordPress into a fast site made of plain pages, in Arabic and English. Every old address still works, and the bank's staff can change any text or image themselves: they click it on the real page, edit it and press Publish.",
+        "users": "Customers and investors reading about the bank, and staff keeping the site up to date.",
+        "built": [
+          "The whole site, rebuilt with Astro on Cloudflare, with every old WordPress address kept or redirected.",
+          "A new design for the whole site, built around the bank's logo.",
+          "112 document pages (policies, charters and reports) and designed pages for the home page, investors, the Sharia board and services.",
+          "A visual editor: click text or an image on the live page, change it, publish.",
+          "Editor sign-in with an authenticator app, recovery codes and a sign-in history.",
+          "Contact, newsletter and whistleblowing forms that work even without JavaScript, with spam protection."
+        ],
+        "hard": "Letting staff edit a site that is just files. The editor never touches the source. Each edit remembers what its element held, its text or link and its place among similar elements, and when someone presses Publish the site is rebuilt with the edits written in. If a later code change means an edit no longer matches anything, it's flagged and skipped, so it can never land on the wrong part of a page.",
+        "shots": [
+          "The bank's public website, in Arabic and English.",
+          "The same page on a phone."
+        ],
+        "numbers": [
+          {
+            "value": "112",
+            "label": "document pages"
+          },
+          {
+            "value": "103",
+            "label": "old addresses redirected"
+          },
+          {
+            "value": "2",
+            "label": "languages"
+          }
+        ]
+      },
+      "ar-card": {
+        "name": "AR business card",
+        "tagline": "Point your phone at a business card, and a video plays on it",
+        "company": "The Studio",
+        "role": "Full stack developer",
+        "status": "Client demo",
+        "summary": "Point a phone camera at a printed business card and a video appears on it, stuck to the card as if it were printed there, even as you move. There's no app to install: it all runs in the browser. I wrote the tracking myself, in Rust compiled to WebAssembly.",
+        "users": "Built for a client of The Studio, to bring their printed cards to life.",
+        "built": [
+          "A computer-vision tracker in Rust, compiled to WebAssembly with SIMD so it runs fast in a phone's browser.",
+          "Finding the card from corner features (FAST and BRIEF), matched with RANSAC.",
+          "Following the card from frame to frame with optical flow.",
+          "Anchoring against the original card image to stop the video drifting.",
+          "A WebGL2 video overlay, with the QR code as a fallback."
+        ],
+        "hard": "Following a dark, glossy card in a moving hand, in real time, in a browser. Optical flow follows the card from one frame to the next, but small errors add up and the video slowly slides off. The fix compares small patches of the live picture with the original card image and pulls the tracking back into place, in a way that copes with glare sliding across the card.",
+        "shots": [],
+        "numbers": [
+          {
+            "value": "4,900",
+            "label": "lines of Rust"
+          },
+          {
+            "value": "82",
+            "label": "tests"
+          },
+          {
+            "value": "0",
+            "label": "apps to install"
+          }
         ]
       },
       "alhikma": {
         "name": "Alhikma Akademie",
-        "tagline": "Arabic learning & Quran platform",
-        "role": "Full Stack Developer",
+        "tagline": "An online school for Arabic and the Quran",
         "company": "Freelance",
-        "period": "2024 — 2025",
-        "summary": "A full learning platform for Arabic and Quran study: courses, exercises, video lessons, live classes, and chat, with a complete admin back office. A Fastify API and a React 19 frontend over PostgreSQL, with real-time features throughout.",
-        "build": [
-          "Built the platform end to end: a Fastify 5 REST API (45+ route groups, 16 admin modules) and a React 19 + Vite single-page app, styled with Tailwind CSS and fully Arabic / RTL.",
-          "Designed the learning model over PostgreSQL (~60 tables, 40+ data models): multi-level Arabic courses, and exercise types for listening, reading, writing, speaking, grammar, and vocabulary.",
-          "Built the Quran module with surah memorization tracking, spaced-repetition scheduling, and progress analytics per student.",
-          "Built the vocabulary system with Arabic text processing and morphology, example sentences, study sessions, and dictionary management.",
-          "Added real-time features over Socket.IO with a Redis adapter for pub/sub: live chat (with moderation, banned users, canned responses, audit logs), notifications, and scheduled video calls with availability slots.",
-          "Built a video system: upload, ffmpeg processing, streaming, playlists, and categories, plus video-call groups with participant tracking.",
-          "Wired Stripe for subscriptions and payments, Nodemailer for transactional email and newsletter campaigns, and an Anthropic-powered translation cache.",
-          "Built the admin back office: CRUD dashboards for every entity, a notification scheduler with delivery tracking, subscriber management, RBAC (user / moderator / admin), badges, reviews, and audit trails."
+        "role": "Full stack developer",
+        "status": "Live, with paid subscriptions",
+        "summary": "Alhikma Akademie teaches Arabic and the Quran online. I built the platform its students learn on (courses, exercises, live chat with teachers, video lessons and video calls) and the back office the school runs on. I also look after its production server.",
+        "users": "Students on paid subscriptions, their teachers, and the school's admins and moderators.",
+        "built": [
+          "Courses at several levels, with listening, reading, writing and speaking exercises.",
+          "Quran memorization that brings each surah back for review on a spaced-repetition schedule.",
+          "Vocabulary study with example sentences and an Arabic dictionary.",
+          "Live chat with moderation, and scheduled video calls with teachers.",
+          "Video lessons: upload, conversion and streaming."
         ],
-        "highlights": [
-          "Fastify API · React 19 + Vite frontend",
-          "60+ Postgres tables · full LMS domain",
-          "Quran memorization with spaced repetition",
-          "Real-time chat & video calls over Socket.IO"
+        "hard": "Moving a live school off WordPress. The platform started as a set of custom WordPress plugins on MySQL, and students were using it every day, so it couldn't stop while it was rebuilt. I moved it to a new Fastify and PostgreSQL backend one module at a time: the newsletter first, then reviews, chat, courses, videos, the Quran tracker and the rest. The course module, the biggest of them, ran on both databases while its data moved across.",
+        "shots": [
+          "Al-Hikma Akademie's home page, in German, for learning the Quran and Arabic online.",
+          "The same page on a phone."
+        ],
+        "numbers": [
+          {
+            "value": "95",
+            "label": "database tables"
+          }
+        ]
+      },
+      "studio-platform": {
+        "name": "The Studio platform",
+        "tagline": "The system a creative agency runs on, with a portal for its clients",
+        "company": "The Studio",
+        "role": "Full stack developer",
+        "status": "In use; the client portal is live",
+        "summary": "The Studio is a creative agency, and this is the system it runs on: clients and the sales pipeline, HR, tasks, a shared mailbox and admin, in English, French and Arabic. The agency's clients get their own portal, where they request work and follow it as it moves.",
+        "users": "The agency's team, across 12 roles that each see what they need, and its clients, through the portal.",
+        "built": [
+          "A sales pipeline with follow-ups, Google Calendar sync, and CSV import that catches duplicates.",
+          "A shared mailbox on IMAP where new mail shows up live.",
+          "Tasks on Kanban boards, with approvals.",
+          "HR: time off and overtime, with approvals in several steps.",
+          "The client portal: clients pick services, send requests and watch each one move from pending to done, with notes going both ways."
+        ],
+        "hard": "Two kinds of people on one system. Staff and clients sign in to different apps that share the same data, and staff often need to be signed in to both at once, to see what a client sees. So the portal has its own sign-in, separate from the staff one, and both sessions live side by side. Every change a client should see is pushed to them live, on that request's own channel.",
+        "shots": [],
+        "numbers": [
+          {
+            "value": "8",
+            "label": "modules"
+          },
+          {
+            "value": "12",
+            "label": "staff roles"
+          },
+          {
+            "value": "3",
+            "label": "languages: English, French and Arabic"
+          }
+        ]
+      },
+      "torch": {
+        "name": "Torch Business OS",
+        "tagline": "One system to run a company, from payroll to email",
+        "company": "TORCH",
+        "role": "Backend team lead",
+        "status": "Company product",
+        "summary": "TORCH was building one system for running a company: HR and payroll, email, documents, sign-in and more, opened from a single desktop app. I led the backend team and built much of the core: about 20 small services that talk through a shared event bus, plus the desktop app that ties them together.",
+        "users": "A company's staff: HR teams running payroll and attendance, and everyone else reading email, handling documents and signing in once for everything.",
+        "built": [
+          "One sign-in for everything: an identity service with two-factor, passkeys and single sign-on (SAML and OpenID).",
+          "HR: payroll, attendance and leave, reading clock-ins straight from fingerprint devices.",
+          "Email as its own service, with new mail pushed to the inbox as it arrives.",
+          "A desktop app (Tauri, Rust and React) that installs and updates the other apps, signs you in once and shares that sign-in with each of them.",
+          "Tracing and metrics across every service, so a slow request can be followed from start to finish."
+        ],
+        "hard": "Twenty services that mustn't call each other directly. If HR calls Email, which calls Notifications, one slow service drags the rest down with it. Instead, each service announces what happened on a shared Redis event bus (a user signed in, a domain was verified) and the services that care react in their own time. Shared packages keep the shape of every event the same everywhere, so one service can change without breaking the others.",
+        "shots": [],
+        "numbers": [
+          {
+            "value": "~20",
+            "label": "services in one monorepo"
+          },
+          {
+            "value": "380+",
+            "label": "data models"
+          },
+          {
+            "value": "3",
+            "label": "systems for the desktop app: Linux, Windows and macOS"
+          }
         ]
       },
       "alshabaka": {
         "name": "Alshabaka",
-        "tagline": "Streaming platform",
-        "role": "Full Stack Developer",
+        "tagline": "A streaming service for films, series and live TV",
         "company": "TORCH",
-        "period": "2024 — 2025",
-        "summary": "A scalable NestJS monorepo backend with 50+ feature modules and 43+ Sequelize models, plus a trilingual Next.js frontend. I took ownership of the platform's backend, diagnosed issues, optimized performance, and shipped new features.",
-        "build": [
-          "Architected a NestJS monorepo with 50+ feature modules, 43+ Sequelize models, and a multi-client controller pattern serving separate optimized APIs for web and mobile.",
-          "Built a real-time watch-history system over Socket.IO with multi-device sync, offline queuing, and profile-based room isolation, and authored cross-platform client SDKs (TypeScript, React, React Native, Flutter).",
-          "Designed session-based auth with Redis-backed sessions, Passport.js strategies, RBAC, OTP verification, QR-based TV authentication, and a guest-to-registered upgrade flow with device persistence.",
-          "Developed a media pipeline for movies, series, TV, theater, and music with HLS streaming, CDN management, subscription-based access control, and content maturity filtering.",
-          "Built notification infrastructure on Firebase Cloud Messaging with topic-based subscriptions, per-profile dismissals, and multi-platform delivery.",
-          "Containerized the full stack with Docker Compose (PostgreSQL, Redis, Elasticsearch, Kibana, Kafka, MinIO) with hot-reload dev workflows and automated migrations.",
-          "Built the frontend in Next.js 15 with full trilingual support (English, Arabic, Kurdish), RTL layouts, real-time Socket.IO integration, and responsive video playback."
+        "role": "Backend developer",
+        "status": "Live",
+        "summary": "Alshabaka streams films, series, live TV, theatre and music. I took over its backend from another team, made it faster, and kept shipping new features.",
+        "users": "Viewers on the web, on their phones and on smart TVs.",
+        "built": [
+          "Sped up the API and shipped new features on a system that was already live.",
+          "Watch history that follows viewers between their devices in real time.",
+          "Sign-in on a TV by scanning a QR code with your phone.",
+          "Search across the catalogue, with Elasticsearch and events through Kafka.",
+          "Streaming over HLS, with access by subscription and filtering by age rating."
         ],
-        "highlights": [
-          "50+ modules · 43+ models · monorepo",
-          "QR-based TV auth & multi-device sync",
-          "HLS media pipeline with maturity filtering",
-          "Trilingual (EN / AR / KU) with RTL"
-        ]
-      },
-      "studio-system": {
-        "name": "The Studio System",
-        "tagline": "Internal business management platform",
-        "role": "Full Stack Developer",
-        "company": "The Studio",
-        "period": "2025 — Current",
-        "summary": "A full-stack business management platform with 8 integrated modules (CRM, HR, Tasks, Workspaces, Mailbox, Admin, Settings, and a companion Client Portal), built on a Fastify 5 backend with domain-driven design and a React 19 frontend.",
-        "build": [
-          "Built a CRM engine with pipeline stage tracking, stage-history auditing, follow-up scheduling, account analytics, Google Calendar sync, automated CRM ID generation, and bulk CSV import / export with duplicate detection.",
-          "Built a complete email system with IMAP / SMTP integration, multi-account support, IMAP IDLE for real-time inbox push, encrypted credential storage, background cron sync, folder management, attachments, and templates.",
-          "Implemented task management with workspace-based organization, drag-and-drop Kanban boards (dnd-kit), multi-assignee support, approval workflows, and role-based visibility.",
-          "Designed a dual-JWT auth system with httpOnly cookies, automatic token refresh with request queuing, 12-role RBAC with module- and route-level access, and a layered architecture (routes → handlers → services → repositories) with Prisma and TypeBox.",
-          "Engineered real-time WebSocket notifications with per-user broadcasting, exponential-backoff reconnection, heartbeat keep-alive, and automatic TanStack Query cache invalidation.",
-          "Built an HR module with employee management, time-off and overtime workflows with multi-stage approval, and work-schedule management.",
-          "Built the frontend in React 19, Vite 7, TanStack Query, shadcn/ui, Lexical, FullCalendar, and Recharts, with trilingual i18n (EN, FR, AR) and full RTL support."
+        "hard": "Taking over a big system that was already live. Alshabaka had more than 50 modules and viewers on it every day when it came to me, so every fix had to ship without breaking what already worked.",
+        "shots": [
+          "Browsing as a guest: series, films, live channels and music in one catalogue.",
+          "Signing in on a phone, with a phone number or an email."
         ],
-        "highlights": [
-          "8 integrated modules · domain-driven design",
-          "IMAP IDLE real-time mailbox",
-          "Dual-JWT auth · 12-role RBAC",
-          "Trilingual (EN / FR / AR) with RTL"
-        ]
-      },
-      "studio-client-portal": {
-        "name": "The Studio · Client Portal",
-        "tagline": "Customer-facing project portal",
-        "role": "Full Stack Developer",
-        "company": "The Studio",
-        "period": "2025 — Current",
-        "summary": "An external-facing client portal, built as a standalone app inside the same platform, letting customers register, request services, and track project progress in real time, linked directly to the internal team's CRM and task workflows.",
-        "build": [
-          "Implemented a separate auth flow with dedicated portal JWT cookies, enabling dual-session support so staff can be signed into both the admin panel and the client portal at once.",
-          "Built a service-request system where clients pick from a dynamic catalog, submit multi-service requests, and track each through status stages (Pending, In Progress, Review, Completed) with a visual project timeline.",
-          "Developed real-time project updates over per-service-request WebSocket channels, pushing status changes, new notes, and deadline updates to clients instantly.",
-          "Built an interactive onboarding tour with spotlight overlays, guided tooltips, and auto-navigation to walk new clients through the portal on first login.",
-          "Implemented a project detail view with tabbed navigation for notes, timeline history, and service breakdowns, with bidirectional note exchange between clients and the team.",
-          "Built the portal frontend with bilingual support (EN, AR), full RTL layout, Framer Motion animations, and a dashboard for active projects, recent activity, and upcoming deadlines."
-        ],
-        "highlights": [
-          "Dual-session portal auth",
-          "Per-request real-time WebSocket channels",
-          "Guided onboarding tour",
-          "Bilingual (EN / AR) with RTL"
+        "numbers": [
+          {
+            "value": "50+",
+            "label": "modules in the backend"
+          },
+          {
+            "value": "3",
+            "label": "languages: Arabic, English and Kurdish"
+          }
         ]
       },
       "studio-website": {
-        "name": "The Studio · Website",
-        "tagline": "Agency marketing site, design to deploy",
-        "role": "Full Stack Developer",
+        "name": "The Studio website",
+        "tagline": "A creative agency's own website, in English and Arabic",
         "company": "The Studio",
-        "period": "2025",
-        "summary": "The Studio's company website: a fast, animated marketing site for a creative agency, with 3D scenes, scroll-driven motion, and a bilingual (EN / AR) experience. Built as a React 19 + Vite SPA, styled with Tailwind.",
-        "build": [
-          "Built the site as a React 19 + Vite single-page app with the React Compiler enabled, styled with Tailwind CSS and themed via CSS variables.",
-          "Built 3D scenes with Three.js and React Three Fiber: a particle field and an animated 3D logo whose accent colors shift between sections.",
-          "Drove the motion with GSAP ScrollTrigger for section reveals and Framer Motion for component transitions, with Lenis smooth scrolling throughout.",
-          "Made it bilingual (English / Arabic) with full RTL support via react-i18next and lazy-loaded translation namespaces.",
-          "Built the pages — home, services, work, and per-project case studies — with lazy-loaded routes (React Router) and static data ready to swap for a CMS/API.",
-          "Added light / dark / system theming persisted with Zustand, SEO via React Helmet, and a contact form with React Hook Form + Zod.",
-          "Deployed to production on nginx alongside the separate admin CMS and API domains."
+        "role": "Full stack developer",
+        "status": "Live",
+        "summary": "The Studio's website: a 3D logo, a particle field and animation that follows your scroll, in English and Arabic.",
+        "users": "People looking for an agency, and the agency's team showing off its work.",
+        "built": [
+          "A 3D logo and particle field with Three.js, whose colours change from section to section.",
+          "Scroll-driven reveals with GSAP, and smooth scrolling with Lenis.",
+          "English and Arabic, right to left included.",
+          "Home, services, work and a page for every case study.",
+          "Light and dark themes, and a contact form."
         ],
-        "highlights": [
-          "React 19 + Vite SPA · React Compiler",
-          "Three.js / R3F 3D scenes & logo",
-          "GSAP ScrollTrigger + Lenis motion",
-          "Bilingual (EN / AR) with RTL"
+        "hard": "A lot moves on this site: a 3D logo, a particle field and scroll animation, in two languages and two directions. To keep the first load quick, every page and every language loads only when it's needed.",
+        "shots": [
+          "The first view of The Studio's website.",
+          "The same page on a phone."
+        ],
+        "numbers": [
+          {
+            "value": "2",
+            "label": "languages, and two reading directions"
+          }
         ]
       },
       "alseraj": {
-        "name": "Alseraj Company Website",
-        "tagline": "Marketing site, design to deploy",
-        "role": "Full Stack Developer",
+        "name": "Alseraj website",
+        "tagline": "A company website, from design to launch",
         "company": "Alseraj",
-        "period": "2024",
-        "summary": "Alseraj's company website, built from design to deploy with Next.js, React, and Tailwind. A fast, responsive PWA tuned to load quickly on phones and desktop, with the motion, SEO, and content done end to end.",
-        "build": [
-          "Built the site from design to deploy with Next.js, React, and Tailwind.",
-          "Made it a fast, responsive PWA using HTTP/2, Open Graph tags, priority hints, and Turbopack, tuned to load quickly on phones and desktop.",
-          "Added the motion and feel, with page animations in Framer Motion and smooth scrolling via Lenis.",
-          "Did the technical SEO: page structure, meta tags, and speed, to help it rank.",
-          "Deployed it to production with monitoring and an automated deploy setup.",
-          "Wrote the site's content too: the copy, images, and the layout."
+        "role": "Full stack developer",
+        "status": "Live",
+        "summary": "Alseraj's company website. I did all of it: the design, the build, the words on the pages and the launch, and I kept it running afterwards.",
+        "users": "Alseraj's customers, and anyone searching for what it does.",
+        "built": [
+          "A fast website built with Next.js that can be installed like an app and loads quickly on phones.",
+          "Search basics done properly: page structure, meta tags and speed.",
+          "Page animations and smooth scrolling.",
+          "The copy and the layout of every page.",
+          "Launch with monitoring and automatic deploys."
         ],
-        "highlights": [
-          "Design to deploy, solo",
-          "Fast responsive PWA · HTTP/2",
-          "Framer Motion + Lenis",
-          "Technical SEO & monitoring"
-        ]
+        "hard": "",
+        "shots": [
+          "Alseraj's home page.",
+          "The same page on a phone."
+        ],
+        "numbers": []
       }
     }
   },
   "Skills": {
     "eyebrow": "03 · Skills",
     "title": "What I work with.",
-    "groups": {
-      "languages": "Languages",
-      "backend": "Backend & APIs",
-      "frontend": "Frontend",
-      "data": "Data & Infra",
-      "devops": "DevOps & Tooling",
-      "soft": "Strengths",
-      "spoken": "Spoken"
-    },
-    "items": {
-      "languages": ["TypeScript", "JavaScript", "Rust", "PHP", "SQL"],
-      "backend": ["Node.js", "Fastify", "NestJS", "Axum", "WebSockets", "REST APIs", "Microservices"],
-      "frontend": ["React", "Next.js", "TanStack Query", "Tailwind CSS", "shadcn/ui", "Framer Motion"],
-      "data": ["PostgreSQL", "Prisma", "Sequelize", "Redis", "BullMQ", "Elasticsearch", "Kafka"],
-      "devops": ["Docker", "DevOps", "Technical SEO", "S3 / MinIO", "CDN", "CI / CD"],
-      "soft": ["Fast learner", "Team leadership", "Clear communicator", "Ownership"],
-      "spoken": ["Arabic, native", "English, fluent"]
-    }
-  },
-  "Education": {
-    "eyebrow": "04 · Education",
-    "title": "Education.",
-    "degree": "Bachelor of Science in Computer Engineering",
-    "school": "University of Technology, Baghdad",
-    "period": "Baghdad, Iraq",
-    "certsLabel": "Focus",
-    "certs": [
-      "Backend architecture & distributed systems",
-      "Real-time systems & WebSockets",
-      "Database design & performance"
+    "groups": [
+      {
+        "title": "Backend",
+        "note": "Where most of my days go.",
+        "items": [
+          "TypeScript",
+          "Node.js",
+          "Fastify",
+          "NestJS",
+          "Rust",
+          "Axum",
+          "Python",
+          "FastAPI",
+          "PHP",
+          "Laravel",
+          "REST and OpenAPI",
+          "WebSockets"
+        ]
+      },
+      {
+        "title": "Data",
+        "note": "Almost always PostgreSQL, with Redis next to it.",
+        "items": [
+          "PostgreSQL",
+          "Prisma",
+          "SQLx",
+          "PostGIS",
+          "pgvector",
+          "Redis",
+          "BullMQ",
+          "MinIO / S3"
+        ]
+      },
+      {
+        "title": "Frontend",
+        "note": "React for apps, Astro for sites that need to load fast.",
+        "items": [
+          "React 19",
+          "Next.js",
+          "Vue 3",
+          "Astro",
+          "TanStack",
+          "Tailwind CSS",
+          "Three.js",
+          "GSAP"
+        ]
+      },
+      {
+        "title": "AI",
+        "note": "Agents that use tools, and models running on our own servers.",
+        "items": [
+          "Agents with tool calling",
+          "Embeddings and vector search",
+          "Speech to text (Whisper)",
+          "Arabic OCR",
+          "Face recognition (InsightFace)",
+          "PyTorch",
+          "ONNX Runtime"
+        ]
+      },
+      {
+        "title": "Servers",
+        "note": "I usually run what I build.",
+        "items": [
+          "Linux",
+          "Docker",
+          "nginx",
+          "Caddy",
+          "Pacemaker and DRBD failover",
+          "Cloudflare Workers",
+          "FFmpeg and HLS",
+          "OpenTelemetry",
+          "Prometheus"
+        ]
+      },
+      {
+        "title": "Apps, payments and tests",
+        "note": "Phone and desktop apps, local payment gateways, and the tests that keep it all honest.",
+        "items": [
+          "Capacitor (Android, iOS)",
+          "Tauri 2",
+          "Stripe",
+          "QiCard",
+          "Wayl",
+          "Vitest",
+          "Pest"
+        ]
+      }
     ]
   },
   "Contact": {
-    "eyebrow": "05 · Contact",
-    "title": "Let's build something.",
-    "intro": "Open to full-stack and backend work, technical leadership, and consulting collaborations.",
+    "eyebrow": "04 · Contact",
+    "title": "Let's talk.",
+    "intro": "I'm open to full-time roles, freelance projects and hard problems. Email is the quickest way to reach me.",
     "emailLabel": "Email",
     "phoneLabel": "Phone",
     "websiteLabel": "Website",
     "githubLabel": "GitHub",
     "linkedinLabel": "LinkedIn",
-    "locationLabel": "Based in"
+    "locationLabel": "Based in",
+    "location": "Baghdad, Iraq"
   },
   "Footer": {
+    "name": "Haithem Mustafa",
     "rights": "All rights reserved",
-    "builtWith": "Built with Next.js · Baghdad"
+    "builtWith": "Made by Haithem in Baghdad"
   },
   "Preloader": {
     "loading": "Loading"

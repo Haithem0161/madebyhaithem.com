@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>هيثم مصطفى، مهندس برمجيات Full Stack، السيرة الذاتية</title>
+<link rel="stylesheet" href="cv.css">
+</head>
+<body>
+
+<header>
+  <h1>هيثم مصطفى</h1>
+  <p class="role">مهندس برمجيات Full Stack</p>
+  <p class="contact">بغداد، العراق · <bdi dir="ltr"><a href="tel:+9647710015981">+964 771 001 5981</a></bdi> · <bdi><a href="mailto:haithem.m.nadhir@gmail.com">haithem.m.nadhir@gmail.com</a></bdi></p>
+  <p class="contact"><bdi><a href="https://madebyhaithem.com">madebyhaithem.com</a></bdi> · <bdi><a href="https://github.com/Haithem0161">github.com/Haithem0161</a></bdi> · <bdi><a href="https://www.linkedin.com/in/haithem-mustafa-dev/">linkedin.com/in/haithem-mustafa-dev</a></bdi></p>
+</header>
+
+<section>
+  <h2>نبذة</h2>
+  <p>مهندس برمجيات Full Stack يركّز على الأنظمة الخلفية (Backend)، بخبرة تزيد على 4 سنوات في بناء أنظمة الإنتاج وتشغيلها: خدمات TypeScript وRust على PostgreSQL، وواجهات React/Next.js، وخوادم Linux التي تعمل عليها. خبرة في قطاعات المصارف والرعاية الصحية وتطبيقات النقل والتعليم الإلكتروني ورصد الإعلام. شريك مؤسس في ردود (Rdood)، منصة لخدمة العملاء بالذكاء الاصطناعي.</p>
+</section>
+
+<section>
+  <h2>الخبرة العملية</h2>
+
+  <article>
+  <h3>مهندس Full Stack ومسؤول أنظمة تقنية المعلومات · مصرف آسيا العراق الإسلامي <span class="meta">· دوام كامل · بغداد · آب 2026 – حتى الآن</span></h3>
+  <ul>
+    <li>بناء WFIS، نظام سير العمل الداخلي للمصرف الذي يستخدمه الموظفون فعليًا: حلّ محل 27 استمارة طلب ورقية بطلبات تمرّ عبر الهيكل التنظيمي للمصرف، وتُوقَّع بعامل تحقق ثانٍ، وتُحفظ في سجل تدقيق يكشف أي تلاعب.</li>
+    <li>واجهة برمجية بـ <bdi>Rust (Axum)</bdi> فيها 346 نقطة OpenAPI على قاعدة PostgreSQL من 97 جدولًا (SQLx)، مع <bdi>ORY Kratos/Hydra, Vault, MinIO, ClamAV, OpenTelemetry</bdi>؛ وتطبيق ويب React 19 بالعربية والإنجليزية، وتطبيقات Capacitor لأندرويد وآيفون.</li>
+    <li>تشغيل WFIS على خادمَين بتبديل تلقائي عند العطل (HPE ProLiant وPacemaker/Corosync ونسخ متزامن للأقراص بـ DRBD وعزل عبر iLO) يتحوّل خلال دقيقة تقريبًا، مع نسخ احتياطي بـ pgBackRest وrestic؛ إضافةً إلى إدارة شبكة المصرف وخادم البريد.</li>
+    <li>بناء NetAudit، تطبيق سطح مكتب <bdi>(Tauri 2, React, Python)</bdi> يقرأ إعدادات أجهزة الشبكة عبر SSH، ويرسم المخطط، ويكشف المشاكل، ويحاكي حركة البيانات (تتبّع الحزم، قابلية الوصول، تعطّل الروابط) مع تقارير بالعربية والإنجليزية.</li>
+    <li>إعادة بناء الموقع الرسمي للمصرف (asiabank.iq) من WordPress إلى Astro على Cloudflare Workers: بالعربية والإنجليزية، مع الإبقاء على كل الروابط القديمة، ولوحة إدارة محتوى بتسجيل دخول بعاملين.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>قائد فريق Backend · TORCH <span class="meta">· دوام كامل · بغداد · حزيران 2025 – آب 2026</span></h3>
+  <ul>
+    <li>قيادة فريق Backend من مطوّر إلى مطوّرَين، وبناء المنصة الأساسية: نحو 20 خدمة Fastify 5 في مستودع Nx واحد تتواصل عبر ناقل أحداث Redis، مع أكثر من 380 نموذج Prisma على PostgreSQL ومراقبة بـ OpenTelemetry/Prometheus.</li>
+    <li>من الخدمات: المصادقة <bdi>(RS256 JWT, MFA, WebAuthn, SAML/OpenID SSO)</bdi>، والموارد البشرية (الرواتب والحضور والإجازات، وأجهزة بصمة ZKTeco)، والبريد الإلكتروني (IMAP/SMTP)؛ إضافةً إلى واجهة سطح المكتب للشركة بـ <bdi>Tauri 2 (Rust, React 19)</bdi>.</li>
+    <li>استلام الـ Backend الخاص بمنصة البث «الشبكة» <bdi>(NestJS, Kafka, Elasticsearch)</bdi>: تحسين أدائها وإطلاق ميزات جديدة.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>مطوّر Full Stack · The Studio <span class="meta">· دوام جزئي · عن بُعد · أيلول 2025 – حتى الآن</span></h3>
+  <ul>
+    <li>بناء المنصة الداخلية (8 وحدات منها CRM والموارد البشرية والمهام وبريد IMAP؛ <bdi>Fastify 5, React 19, Prisma</bdi>، و12 دورًا للصلاحيات، وتحديثات لحظية عبر WebSockets، بالإنجليزية والفرنسية والعربية) وبوابة العملاء (client.thestudioiq.com).</li>
+    <li>بناء موقع الشركة (thestudioiq.com) بالإنجليزية والعربية: <bdi>React 19, Three.js</bdi> وحركة GSAP مع التمرير.</li>
+    <li>بناء بطاقة أعمال بالواقع المعزز تعمل في المتصفح لأحد العملاء: تتبّع صور بلا علامات بـ Rust مترجمة إلى <bdi>WebAssembly (SIMD)</bdi>، باستخدام <bdi>FAST/BRIEF</bdi> وRANSAC وتدفق بصري بطريقة <bdi>Lucas–Kanade</bdi>، والعرض عبر WebGL2.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>مطوّر Full Stack · شركة السراج <span class="meta">· دوام كامل · بغداد · حزيران 2024 – أيار 2025</span></h3>
+  <ul>
+    <li>بناء موقع الشركة <bdi>(alseraj.iq, Next.js PWA)</bdi> ومواقع العملاء وأدوات داخلية، وإدارة خوادمها وعمليات النشر.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>مدير مشاريع ومطوّر ويب · Blue Company <span class="meta">· دوام كامل · عن بُعد · أيلول 2022 – حزيران 2025</span></h3>
+  <ul>
+    <li>بناء مواقع وتطبيقات ويب للعملاء بـ React/Next.js وLaravel وNode.js، وقيادة فرق من 1 إلى 3 أشخاص، وإدارة الاستضافة والنشر.</li>
+  </ul>
+  </article>
+</section>
+
+<section>
+  <h2>المشاريع</h2>
+
+  <article>
+  <h3>شريك مؤسس ومهندس رئيسي · ردود (Rdood) <span class="meta">· rdoodplatform.com · 2026 – حتى الآن</span></h3>
+  <ul>
+    <li>وكلاء ذكاء اصطناعي يردّون على عملاء الشركات في WhatsApp وInstagram وMessenger وTelegram وباللهجة العراقية: أكثر من 10,000 محادثة شهريًا.</li>
+    <li>Backend بـ <bdi>Rust (Axum)</bdi>: قاعدة PostgreSQL من 250 جدولًا باستعلامات SQL تُفحص وقت الترجمة (SQLx)، و40 وحدة، وأكثر من 900 نقطة OpenAPI، وعزل بيانات كل عميل، وWebSockets مع Redis pub/sub، وDocker وnginx.</li>
+    <li>وكيل ذكاء اصطناعي خاص بردود طُوّر داخليًا: استدعاء الأدوات، والتخزين المؤقت للـ prompt، وتتبّع كلفة كل استدعاء، وموافقة بشرية على أي إجراء يمسّ المال؛ مع pgvector وخدمة تعلّم آلي بـ <bdi>Python (Whisper, embeddings, CLIP)</bdi>.</li>
+    <li>بناء موقع المنصة التعريفي بالعربية أولًا <bdi>(Astro, GSAP)</bdi>.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>مهندس رئيسي · مدقق الأخبار بالذكاء الاصطناعي (AI News Auditor) <span class="meta">· newsanalysis.app · 2026 – حتى الآن</span></h3>
+  <ul>
+    <li>يشاهد نشرات الأخبار على القنوات العراقية ويستمع إليها على مدار الساعة، ويفحص كل دقيقة وفق قواعد البث، ويضع المخالفات المحتملة في قائمة لمراجع بشري، ومع كل حالة دليلها: المقطع، والكلام أو النص الظاهر على الشاشة بنصّه، والقاعدة.</li>
+    <li>Backend بـ <bdi>Rust (Axum, SQLx)</bdi> على PostgreSQL؛ وخدمة <bdi>Python (FastAPI)</bdi> تشغّل نماذج مستضافة ذاتيًا لتحويل الكلام إلى نص (Whisper) وقراءة النص العربي من الصور (OCR) والتعرّف على الوجوه (InsightFace) وتمييز المتحدثين؛ وتطبيق React بالعربية والإنجليزية.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>مهندس Full Stack (عمل حر) · نظام مستشفى LST <span class="meta">· 2026 – حتى الآن</span></h3>
+  <ul>
+    <li>نظام مستشفى يستخدمه موظفو LST، بُني بدءًا من الطوارئ: الفرز، وطوابير المرضى، والمواعيد، والإدخال والأسرّة، والصيدلية ووصفات الأمراض المزمنة، ورحلات الإسعاف، والزيارات المنزلية.</li>
+    <li>الفوترة على دفتر حسابات (فواتير ومدفوعات ومبالغ مستردة) والتأمين (وثائق وقواعد تغطية وموافقات مسبقة ومطالبات)؛ بـ <bdi>Fastify 5, Next.js 16</bdi> بالعربية والإنجليزية، مع 156 نموذج Prisma على PostgreSQL و3,249 اختبارًا آليًا (Vitest).</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>مطوّر Backend (عمل حر) · TAN <span class="meta">· تطبيق سوق سيارات ومقاطع فيديو قصيرة · 2025 – حتى الآن</span></h3>
+  <ul>
+    <li>Backend لأكثر من 30,000 مستخدم مسجّل: Fastify وTypeScript، و16 وحدة، وقاعدة PostgreSQL من 50 جدولًا (Prisma).</li>
+    <li>الفيديو: تحويل HLS بمرور واحد إلى 360p–1080p في عامل FFmpeg معزول، ورفع متعدد الأجزاء إلى S3، والتوزيع عبر Bunny CDN.</li>
+    <li>دردشة WebSocket مع رسائل خاصة مشفّرة من طرف إلى طرف، وإشعارات FCM/APNs، وترتيب المحتوى بـ Redis/BullMQ، والدفع عبر QiCard.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>مطوّر Backend (عمل حر) · Beeb <span class="meta">· تطبيق نقل وتوصيل طرود · 2025 – 2026</span></h3>
+  <ul>
+    <li>Backend بـ <bdi>Rust (Axum)</bdi> من 18 وحدة لتطبيق نقل فيه أكثر من 2,100 سائق مسجّل: مطابقة المناطق بـ PostGIS، وحساب المسارات بخادم OSRM مستضاف ذاتيًا، وتوزيع الرحلات لحظيًا عبر WebSockets مع Redis pub/sub.</li>
+    <li>الأجرة حسب المسافة والوقت والمنطقة، والرحلات المجدولة متعددة المحطات، ومحفظة بدفتر حسابات للدفع بالبطاقة والنقد، وتسجيل السائقين مع التحقق من مستنداتهم، وتوصيل الطرود.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>مطوّر رئيسي · IraqView <span class="meta">· iraqview.com · 2026</span></h3>
+  <ul>
+    <li>قيادة فريق من 3 أشخاص لبناء منصة يطلب منها الأفراد والشركات في العراق خدمات التصميم والتسويق ويشترون بطاقة أعمال رقمية ذكية: محرّك طلبات بتسع حالات، مع محادثة وملفات ومراجعات ودفعات مرحلية لكل طلب.</li>
+    <li>مبنية بـ <bdi>Laravel 13, Inertia, Vue 3, PostgreSQL, Redis, MinIO, Reverb (WebSockets)</bdi>؛ بالعربية والإنجليزية والكردية، وبالدينار والدولار؛ 57 جدولًا و1,577 اختبارًا آليًا (Pest).</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>مطوّر Full Stack (عمل حر) · أكاديمية الحكمة (Alhikma Akademie) <span class="meta">· alhikmaakademie.com · 2025 – حتى الآن</span></h3>
+  <ul>
+    <li>منصة عاملة لتعلّم العربية والقرآن باشتراكات مدفوعة: دورات متعددة المستويات بتمارين استماع وقراءة وكتابة ومحادثة، وحفظ القرآن بالتكرار المتباعد، ودراسة المفردات.</li>
+    <li>واجهة برمجية بـ <bdi>Fastify 5</bdi> وتطبيق React 19 على قاعدة PostgreSQL من 95 جدولًا؛ ومحادثة مباشرة عبر Socket.IO مع Redis، ورفع الفيديو وبثّه (FFmpeg)، ومكالمات فيديو مجدولة؛ إضافةً إلى تشغيل خادم الإنتاج.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>مهندس Full Stack (عمل حر) · مركز لوسانو للبيانو (Lussano) <span class="meta">· بغداد · 2026 – حتى الآن، قيد التطوير</span></h3>
+  <ul>
+    <li>نظام واحد يحلّ محل موقع المركز على WordPress: موقع، ومنصة لدورات البيانو، وتسجيل حضور برمز QR والموقع الجغرافي يفتح الفصل التالي، وحجوزات، ومتجر بالدفع عبر Wayl، ولوحة إدارة يستخدمها الموظفون من هواتفهم.</li>
+    <li>واجهة برمجية بـ <bdi>Rust (Axum, SQLx)</bdi> فيها 389 نقطة OpenAPI على 86 جدولًا؛ وعامل وسائط بـ Rust يحوّل الدروس إلى HLS مشفّر بـ AES مع علامة مائية جنائية لكل طالب، فأي نسخة مسرّبة تكشف الحساب الذي سرّبها.</li>
+  </ul>
+  </article>
+
+  <article>
+  <h3>مطوّر Full Stack (عمل حر) · Heidi Mind Care، المملكة المتحدة <span class="meta">· heidimindcare.co.uk · 2026</span></h3>
+  <ul>
+    <li>موقع لعيادة علاج نفسي في المملكة المتحدة: حجز إلكتروني حسب أوقات التوفّر، ودفع عبر Stripe، واستفسارات، ومدوّنة، ولوحة إدارة للعملاء وملاحظاتهم ومواعيدهم؛ بـ <bdi>Fastify 5, Next.js 16</bdi> بالإنجليزية والعربية.</li>
+  </ul>
+  </article>
+
+  <p class="more"><b>جميع أعمالي ومشاريعي مع دراسات الحالة:</b> <bdi><a href="https://madebyhaithem.com">madebyhaithem.com</a></bdi></p>
+</section>
+
+<section class="lines">
+  <h2>المهارات</h2>
+  <p><b>الأنظمة الخلفية:</b> <bdi>TypeScript/Node.js (Fastify, NestJS), Rust (Axum), Python (FastAPI), PHP (Laravel), REST/OpenAPI, WebSockets</bdi></p>
+  <p><b>الذكاء الاصطناعي وتعلّم الآلة:</b> وكلاء LLM باستدعاء الأدوات، والتضمينات والبحث المتجهي، ونماذج مستضافة ذاتيًا لتحويل الكلام إلى نص وOCR والتعرّف على الوجوه <bdi>(Whisper, InsightFace, PyTorch, ONNX Runtime)</bdi></p>
+  <p><b>البيانات:</b> <bdi>PostgreSQL (Prisma, SQLx, PostGIS, pgvector), Redis, BullMQ, MinIO/S3</bdi></p>
+  <p><b>الواجهات:</b> <bdi>React 19, Next.js, Vue 3 (Inertia), Astro, TanStack, Tailwind CSS, Three.js, GSAP</bdi></p>
+  <p><b>الموبايل وسطح المكتب:</b> <bdi>Capacitor (Android, iOS), Tauri 2</bdi></p>
+  <p><b>الدفع الإلكتروني:</b> <bdi>Stripe, QiCard, Wayl</bdi></p>
+  <p><b>البنية التحتية:</b> <bdi>Linux, Docker, Pacemaker/Corosync, DRBD, nginx, Caddy, Cloudflare Workers, FFmpeg/HLS, OpenTelemetry, Prometheus</bdi></p>
+  <p><b>الاختبارات:</b> <bdi>Vitest, Pest</bdi></p>
+</section>
+
+<section class="lines">
+  <h2>اللغات</h2>
+  <p>العربية (اللغة الأم) · الإنجليزية (مستوى مهني)</p>
+</section>
+
+<section>
+  <h2>التعليم</h2>
+  <p><b>بكالوريوس هندسة الحاسوب</b> · الجامعة التكنولوجية، بغداد · حزيران 2024</p>
+</section>
+
+</body>
+</html>

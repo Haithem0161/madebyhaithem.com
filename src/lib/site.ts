@@ -2,16 +2,12 @@ export const siteConfig = {
   name: "Haithem Mustafa",
   fullName: "Haithem Mustafa",
   shortName: "Haithem Mustafa Portfolio",
-  tagline: "Full stack, end to end.",
-  role: "Full Stack Developer · Backend Team Lead",
-  description:
-    "Haithem Mustafa. Full stack developer with 4 years of experience building marketing sites, ecommerce platforms, internal business tools, and scalable backend systems. Fastify, NestJS, Rust, React, and Next.js, from Baghdad.",
+  role: "Full Stack Engineer",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://madebyhaithem.com",
-  cvHref: "/Haithem Mustafa CV.pdf",
+  cvHref: { en: "/Haithem Mustafa CV.pdf", ar: "/Haithem Mustafa CV (Arabic).pdf" },
   email: "haithem.m.nadhir@gmail.com",
   phone: "+964 771 001 5981",
   phoneHref: "tel:+9647710015981",
-  location: "Baghdad, Iraq",
   socials: {
     github: {
       label: "GitHub",
@@ -33,7 +29,7 @@ export const siteConfig = {
   keywords: [
     "Haithem Mustafa",
     "portfolio",
-    "full stack developer",
+    "full stack engineer",
     "backend developer",
     "Fastify",
     "NestJS",
