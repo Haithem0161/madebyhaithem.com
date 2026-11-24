@@ -181,19 +181,11 @@ html {
   transition-timing-function: var(--ease-out);
 }
 html[data-wall-dark] {
-  --background: oklch(0.18 0.018 60); /* the charcoal text colour */
+  --background: oklch(0.13 0.012 60); /* near black; the wall's ink in wall.ts matches */
   --foreground: oklch(0.972 0.012 80); /* the cream */
   --muted-foreground: oklch(0.78 0.015 75);
   --primary: var(--peach);
   --border: oklch(0.32 0.015 60);
-}
-
-/* Hide native cursor on hover-capable devices when the custom cursor is mounted */
-@media (hover: hover) and (pointer: fine) {
-  html.has-custom-cursor,
-  html.has-custom-cursor * {
-    cursor: none !important;
-  }
 }
 
 /* Reduced motion */

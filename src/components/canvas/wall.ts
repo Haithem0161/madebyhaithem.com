@@ -124,9 +124,9 @@ void main() {
 
   // Behind the contact section: the cream wall inverted onto charcoal, so the carving reads as engraved.
   // It dims to charcoal first, then the inverse rises.
-  vec3 ink = vec3(.137, .114, .094);
-  // Near black the same step in brightness looks smaller, so the inverse is lifted to read as strongly as the cream wall.
-  vec3 night = clamp(ink + (cream - col) * 1.6, 0., 1.);
+  vec3 ink = vec3(.042, .025, .015); // html[data-wall-dark] --background, oklch(0.13 0.012 60)
+  // The plain inverse, not lifted, so the carving reads but the wall stays near black.
+  vec3 night = clamp(ink + cream - col, 0., 1.);
   gl_FragColor = vec4(mix(mix(col, ink, min(uDark * 2., 1.)), night, max(uDark * 2. - 1., 0.)), 1.);
 }
 `;

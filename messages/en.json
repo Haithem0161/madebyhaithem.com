@@ -205,8 +205,8 @@
         ],
         "numbers": [
           {
-            "value": "3,249",
-            "label": "automated tests"
+            "value": "19",
+            "label": "staff roles"
           },
           {
             "value": "156",
@@ -355,10 +355,6 @@
           {
             "value": "86",
             "label": "database tables"
-          },
-          {
-            "value": "212",
-            "label": "backend tests"
           }
         ]
       },
@@ -383,10 +379,6 @@
           "The same page on a phone."
         ],
         "numbers": [
-          {
-            "value": "1,577",
-            "label": "automated tests"
-          },
           {
             "value": "57",
             "label": "database tables"
@@ -423,10 +415,6 @@
         ],
         "numbers": [
           {
-            "value": "392",
-            "label": "automated tests"
-          },
-          {
             "value": "12 min",
             "label": "hold on a time while you pay"
           },
@@ -461,10 +449,6 @@
           {
             "value": "12",
             "label": "screens"
-          },
-          {
-            "value": "88",
-            "label": "tests on the analysis engine"
           }
         ]
       },
@@ -525,10 +509,6 @@
           {
             "value": "4,900",
             "label": "lines of Rust"
-          },
-          {
-            "value": "82",
-            "label": "tests"
           },
           {
             "value": "0",
@@ -817,7 +797,7 @@
   "Footer": {
     "name": "Haithem Mustafa",
     "rights": "All rights reserved",
-    "builtWith": "Made by Haithem in Baghdad"
+    "builtWith": "Made by Haithem"
   },
   "Preloader": {
     "loading": "Loading"
