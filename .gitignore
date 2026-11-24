@@ -34,3 +34,7 @@ cv/prof-*
 # Local env files; .env.example is the tracked template
 .env*
 !.env.example
+
+# Local tool state: the MCP config holds an API key, .memory is the memory plugin's notes
+.mcp.json
+.memory/
